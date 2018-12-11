@@ -1,0 +1,113 @@
+
+= なぜモナドか?
+ifndef::stem[:stem: latexmath]
+ifndef::imagesdir[:imagesdir: ./img/]
+ifndef::source-highlighter[:source-highlighter: highlightjs]
+ifndef::highlightjs-theme:[:highlightjs-theme: solarized-dark]
+
+++++
+<style type="text/css">
+p>code {background-color: #aaaaaa};
+
+th,td {
+    border: solid 0px;  
+}　
+td>code {background-color: #aaaaaa};
+} 
+</style>
+++++
+
+JavaScript上でかなり実用的だから。
+
+上述のとおり、モナドとは関数型プログラミングの一部です。
+
+関数型プログラミングは、プログラミングの複雑性を、以下の２つ
+
+- 値
+- 値でもある関数
+
+の組み合わせ（function composition）で制御します。
+<<ch_06#relation>> 以降で詳しく解説します。
+
+== jQuery
+
+image:https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Logo_jQuery.svg/512px-Logo_jQuery.svg.png[]
+
+いろんな値＆関数が考えられるわけですが、JavaScript世界で超有名なのが、 https://jquery.com/[jQuery]でしょう。jQueryのオフィシャルロゴには _"write less, do more"_ とあり、それまで不十分なAPIにより煩雑だったDOM操作を簡潔な記法で柔軟に操作できる値＆関数を提供し、その実用性の高さから人気を集めました。
+
+_"write less, do more"_　とは、複雑なプログラムをなるだけシンプルに取り扱おうとする関数型プログラミングの唯一にして究極のゴールの具現化そのものであり、一例をあげてみると、
+
+
+[source,js]
+.tryjquery_chaining2
+----
+$("#p1")
+    .css("color", "red")
+    .slideUp(2000)
+    .slideDown(2000);
+----
+
+と、link:https://www.w3schools.com/jquery/jquery_chaining.asp[メソッドチェーンをもって書き連ねる]だけで、link:https://www.w3schools.com/jquery/tryit.asp?filename=tryjquery_chaining2[Demo:こんなこと]ができるようになるとか、当時JavaScriptコミュニティに衝撃を与えました。要するに、この _"write less, do more"_ こそが、関数型プログラミングの真価であり、jQueryはただひとつの、 `$()` というjQueryオブジェクト生成関数と、それにぶら下がる巨大なメソッド群から成立していて使い方自体はシンプルです。
+
+jQueryは値(オブジェクト)＆関数（オブジェクトにぶらさがるメソッド群）のペアです。
+
+jQueryがモナドかどうか？というのはしばしば議論にあがるところですが、jQueryのAPIは巨大なので、その全部がモナドであるわけではないが、そのうちの一部はモナドになっている、というのが答えでしょう。
+
+**jQueryの一部の特性としてモナドの性質を備えている理由はメソッドチェーンを壊さないため**です。
+
+全部がモナドではないが一部は確実にモナドである、という別の事例として、最近のJavaScriptのlink:https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Array[Array]があげられます。これについては次の章で。
+
+== MonadicReact
+
+jQueryは標準DOMのAPIがかなりマシになってきたこととでパフォーマンスの観点からも、jQuery非依存で書こうというトレンドが見られます。さらに仮想DOMのコンポーネント機構をもつReactが登場したことにより、世代交代が起こった感もあります。
+
+Reactをより関数型プログラミングで、という目的でいろんなライブラリがありますが、
+
+https://github.com/hoppinger/MonadicReact
+
+https://www.npmjs.com/package/monadic_react
+
+みたいなReactのモナドラッパーがあります。
+
+Ph.Dを持つ作者が、Medium記事：link:https://medium.com/@giuseppemaggiore/type-safe-monads-and-react-499b4a2f56d7[Type-safe monads and React]で
+__Yet another introduction to monads__とモナドの紹介をしながら「便利でパワフルだ」みたいなことをエンドユーザに向けて書いてますが、とりあえず何が書かれているのかさっぱり理解できない！という人は、でもやっぱり理解したい、となるでしょう。
+
+== Promise
+
+ES6+ 以降で導入された https://developer.mozilla.org/ja/docs/Web/JavaScript/Guide/Using_promises[Promise]も一部モナドっぽいふるまいをします。モナドだと言う人もいますが、モナドではありません。PromiseはjQueryほど巨大なAPIではないので、すべて厳密にモナドであったほうが有用性はあがるはずですが、そうではないので残念です。
+
+Promiseはすでに、ESModule
+
+[NOTE]
+.参考記事
+====
+http://kenokabetech.blogspot.com/2018/09/20189javascriptes-moduleesm.html[2018年9月時点のJavaScriptモジュール(ES Module/ESM)界隈の最新情報、これまでの経緯とこれからの見通しを解説]
+
+https://kentechdoc.blogspot.com/2018/09/es-modulesesm-jdalton.html[明日のES Modulesを今日使おう！(esm ライブラリ開発者 @jdalton による解説記事の翻訳)]
+====
+
+の動的Importの返り値として標準化されるなど、今どきのJavaScriptプログラマにとっては必須事項となってしまいました。Promiseが「モナドっぽい」振る舞いをするが、そうでない振る舞いするときもある、と挙動を把握しておくこと、人に説明できるほど理解しておくことは、Promiseを正しく使いこなすためにも重要だと思います。
+
+== Fluture
+
+image::https://raw.githubusercontent.com/fluture-js/Fluture/HEAD/logo.png[]
+
+https://www.npmjs.com/package/fluture
+
+FantasyLand compliant (monadic) alternative to Promises
+
+
+> Much like Promises, Futures represent the value arising from the success or failure of an asynchronous operation (I/O). Though unlike Promises, Futures are lazy and adhere to the monadic interface.
+
+Promises(ES6+ Promise含む)のオルタナティブ。
+
+npmのデータでは、それなりのパッケージから依存され、それなりのダウンロード数も誇るようです。
+
+Promisesと違ってモナドインターフェイス(monadic interface)になっているよ、と書かれています。
+
+何が違うのか、どんなのメリットがあるのか？そもそもモナド理解してないと意味不明ですよね？
+
+== まとめ
+
+今どきのJavaScriptプログラマならば、モナドくらいは知っておいたほうが良さそうだ。
+

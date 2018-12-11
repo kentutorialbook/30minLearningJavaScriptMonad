@@ -1,0 +1,118 @@
+
+= Promise (ES6+) はモナドか？
+ifndef::stem[:stem: latexmath]
+ifndef::imagesdir[:imagesdir: ./img/]
+ifndef::source-highlighter[:source-highlighter: highlightjs]
+
+ifndef::highlightjs-theme:[:highlightjs-theme: solarized-dark]
+
+++++
+<style type="text/css">
+p>code {background-color: #aaaaaa};
+
+th,td {
+    border: solid 0px;  
+}　
+td>code {background-color: #aaaaaa};
+} 
+</style>
+++++
+
+ES6+ Promiseがモナドだ、としばしば言われますが、モナドではありません。
+
+Promiseは事前想定の多すぎるAPIで使いにくいと思うのですが、事前想定が多い１つの弊害として、構造が限定されてしまっている、ということがあります。
+
+Promiseで `unit` に相当するのは、`Promise.of` ですが、link:https://stackoverflow.com/questions/45210122/why-cant-promise-resolve-be-called-as-a-function/45210249[そのまま置き換えることは出来ない]ようなので、  `Promise.resolve.bind(Promise)` として、
+
+
+
+[source,js]
+.Promise 構造テスト
+----
+const unit = Promise.resolve.bind(Promise);
+
+const p = unit(3); <1>
+const pp = unit(p); <2>
+const ppp = unit(pp) <3>
+
+console.log(p);
+console.log(pp);
+console.log(ppp);
+----
+
+<1> ただのPromiseオブジェクト
+<2> 二重にネストしたPromiseオブジェクト？
+<3> 三重に・・・
+
+
+[source,js]
+.Console
+----
+Promise { 3 }
+Promise { 3 }
+Promise { 3 }
+----
+
+おっと、全部同じ値になってしまいました。
+
+Promiseは、ネストしたPromiseオブジェクトを許容しておらず、ぜんぶ平坦化してしまうようです。
+
+つまり、Promiseは、これ
+
+image::./unitflat1.svg[align="center"]
+
+をやっているわけですが、問題は、endofunctor の `map` に相当する　`then` をする **前** に、問答無用で `flat` かましてるんですね。
+
+結果、裸の値 or Promise１階層の二択しかありません。Promiseでネストした構造をもつことは出来ません。
+
+本稿で何度も例に出てくる数字や文字列は、モノイドでありモナドですが、これらもご存知の通り、内部構造を持てません。
+
+[source,js]
+.Number String 構造テスト
+----
+{
+ const unit = Number;
+
+ const n = unit(1);
+ const nn = unit(n);
+
+ console.log(n);
+ console.log(nn);
+}
+{
+ const unit = String;
+
+ const s = unit("Hello");
+ const ss = unit(s);
+
+ console.log(s);
+ console.log(ss);
+}
+----
+
+[source,js]
+.Console
+----
+1
+1
+Hello
+Hello
+----
+
+しかし、数字と文字列がPromiseと違うのは、構造が自分自身の１種類だけなんですね。Promiseは、別のタイプの裸の値かPromiseの値か２種類。
+
+ネストした数字や文字列っていうのは、（ここで扱っているものに限れば）はなっから存在せず、構造持たない１種類で整合性が取れてますが、Promiseはそうではないので整合性が取れません。
+
+モナドというのは、このように、
+
+image::./unitflat5.svg[align="center"]
+
+自由に階層と構造を指定できる（それか数や文字列のようにそもそも階層が存在しない）ので、ここであえてモナド則を持ち出すまでもなく、Promiseがモナドではない、というのは明らかです。
+
+ネストできるだろうと想定してPromise自身を受け渡す `Promise.then` メソッドを無理やり組むと、それ以前に即座に `flat` かまされているわけですから、タイプエラーが出るでしょう。モナド則（モノイド則）で言うと、Promiseオブジェクトをモナド値としたときの結合法則が成り立ちません。
+
+Promiseがネスト構造の操作を許容しない、ということで得られるメリットとは？ちょっと思いつかないですね。
+
+== まとめ
+
+自由に内部構造（ネスト構造）を持てないオブジェクトはモナドではない。ただし、数字、文字列などは最初から自身でネストしてるような構造(JavaScriptのPrimitive)は除く。それ以外にもさらに何か特別な例外がある可能性までは厳密に検証はしていないが、少なくともPromiseがモナドでないことは明らか。

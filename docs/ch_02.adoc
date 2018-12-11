@@ -1,0 +1,31 @@
+
+= JavaScriptプログラマのためのモナド入門
+ifndef::stem[:stem: latexmath]
+ifndef::imagesdir[:imagesdir: ./img/]
+
+これは、一般的なJavaScriptプログラマのためのモナド入門記事です。
+
+== 対象とする読者
+
+関数型プログラミングをしたいJavaScriptプログラマーでモナドを理解したい人。
+
+義務教育レベルの数学を理解していることが望ましい。
+
+モナドを知りたいと思ってWikipediaやWeb上の解説記事などを漁ってみたが、やっぱりさっぱりわからずに挫折していたところ、たまたまこの記事にたどり着いた人。
+
+関数型プログラミングについて入門したい人は、
+
+
+[TIP]
+.当ブログの入門記事
+====
+https://kentechdoc.blogspot.com/2018/06/day-jsvar-s-0for-var-n-1-n-b-const-s2-1.html[関数型プログラミング超入門]
+====
+
+
+
+とりあえず配列とMapがわかればいいです。
+
+== 本稿のアプローチ
+
+<<ch_01.adoc#whysohard>>をアンチパターンとして最大限留意しています。
