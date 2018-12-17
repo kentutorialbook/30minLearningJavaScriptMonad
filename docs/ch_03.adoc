@@ -81,7 +81,7 @@ Promiseはすでに、ESModule
 [NOTE]
 .参考記事
 ====
-http://kenokabetech.blogspot.com/2018/09/20189javascriptes-moduleesm.html[2018年9月時点のJavaScriptモジュール(ES Module/ESM)界隈の最新情報、これまでの経緯とこれからの見通しを解説]
+https://kentechdoc.blogspot.com/2018/09/20189javascriptes-moduleesm.html[2018年9月時点のJavaScriptモジュール(ES Module/ESM)界隈の最新情報、これまでの経緯とこれからの見通しを解説]
 
 https://kentechdoc.blogspot.com/2018/09/es-modulesesm-jdalton.html[明日のES Modulesを今日使おう！(esm ライブラリ開発者 @jdalton による解説記事の翻訳)]
 ====

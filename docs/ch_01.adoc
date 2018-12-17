@@ -20,4 +20,4 @@ http://homepages.inf.ed.ac.uk/wadler/topics/monads.html[Philip Wadler先生の�
 
 これはFRPの先駆者であるConal Elliott先生もStackOverflowのlink:https://stackoverflow.com/questions/16439025/what-is-so-special-about-monads[モナドの何がそんなに特別なのか？]へのlink:https://stackoverflow.com/a/16444789[回答として、似たようなことを主張している]。
 
-> (Haskellの)Monadタイプクラスへの不釣り合いなまでの大注目度合いは歴史的な幸運にすぎない。彼らはよくIOをモナドを関連づけるが、この２つは独立した有用な概念だ。(関数型プログラミングでの）IOはマジカルで、モナドはそのIOとしょっちゅう関連づけられているので、モナドがマジカルだという錯覚に陥りやすい。
+> (Haskellの)Monadタイプクラスへの不釣り合いなまでの大注目度合いは歴史的な幸運にすぎない。彼らはよくIOとモナドを関連づけるが、この２つは独立した有用な概念だ。(関数型プログラミングでの）IOはマジカルで、モナドはそのIOとしょっちゅう関連づけられているので、モナドがマジカルだという錯覚に陥りやすい。
