@@ -2,18 +2,18 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="generator" content="Asciidoctor 2.0.10">
+<meta name="generator" content="Asciidoctor 1.5.7.1">
 <meta name="description" content="timeline FRP Monad">
 <meta name="keywords" content="monad, JavaScript, ECMAScript, Promise, FRP, timeline">
 <meta name="author" content="岡部　健 / Ken Okabe &lt;kentutorialbook@gmail.com&gt;">
 <title>30分でわかるJavaScriptプログラマのためのモナド入門</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /* Asciidoctor default stylesheet | MIT License | http://asciidoctor.org */
 /* Uncomment @import statement below to use as custom stylesheet */
-@import "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css";
-@import "https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700";
+/*@import "https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700";*/
 article,aside,details,figcaption,figure,footer,header,hgroup,main,nav,section,summary{display:block}
 audio,canvas,video{display:inline-block}
 audio:not([controls]){display:none;height:0}
@@ -51,7 +51,7 @@ textarea{overflow:auto;vertical-align:top}
 table{border-collapse:collapse;border-spacing:0}
 *,*::before,*::after{-moz-box-sizing:border-box;-webkit-box-sizing:border-box;box-sizing:border-box}
 html,body{font-size:100%}
-body{background:#fff;color:rgba(0,0,0,.8);padding:0;margin:0;font-family:"Source Code Pro", "Source Han Serif JP","DejaVu Serif",serif;font-weight:400;font-style:normal;line-height:1;position:relative;cursor:auto;tab-size:4;-moz-osx-font-smoothing:grayscale;-webkit-font-smoothing:antialiased}
+body{background:#fff;color:rgba(0,0,0,.8);padding:0;margin:0;font-family:"Noto Serif","DejaVu Serif",serif;font-weight:400;font-style:normal;line-height:1;position:relative;cursor:auto;tab-size:4;-moz-osx-font-smoothing:grayscale;-webkit-font-smoothing:antialiased}
 a:hover{cursor:pointer}
 img,object,embed{max-width:100%;height:auto}
 object,embed{height:100%}
@@ -431,17 +431,10 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 #footer{background:none}
 #footer-text{color:rgba(0,0,0,.6);font-size:.9em}}
 @media amzn-kf8{#header,#content,#footnotes,#footer{padding:0}}
-
-th,td {
-    border: solid 0px;  
-}　
-
-p>code {background-color: #aaaaaa};
-td>code {background-color: #aaaaaa};
 </style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
-<body class="article toc2 toc-left data-line-1">
+<body class="article toc2 toc-left">
 <div id="header">
 <h1>30分でわかるJavaScriptプログラマのためのモナド入門</h1>
 <div class="details">
@@ -533,37 +526,32 @@ td>code {background-color: #aaaaaa};
 <div id="preamble">
 <div class="sectionbody">
 <style type="text/css">
-th,td {
-    border: solid 0px;
-}
-
-p>code {background-color: #aaaaaa};
-td>code {background-color: #aaaaaa};
-
+p >code {background-color: #aaaaaa};
+td >code {background-color: #aaaaaa};
 </style>
-<div class="paragraph data-line-27">
+<div class="paragraph">
 <p>この記事は</p>
 </div>
-<div class="ulist data-line-29">
+<div class="ulist">
 <ul>
-<li class="data-line-29">
+<li>
 <p><a href="https://ja.wikipedia.org/wiki/%E3%83%A2%E3%83%8A%E3%83%89_(%E5%9C%8F%E8%AB%96)">モナド (圏論)</a></p>
 </li>
-<li class="data-line-30">
+<li>
 <p><a href="https://ja.wikipedia.org/wiki/%E3%83%A2%E3%83%8A%E3%83%89_(%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0)">モナド（プログラミング）</a></p>
 </li>
-<li class="data-line-31">
+<li>
 <p><a href="https://ncatlab.org/nlab/show/monad">monad</a></p>
 </li>
-<li class="data-line-32">
+<li>
 <p><a href="https://ncatlab.org/nlab/show/monad+%28in+computer+science%29">monad (in computer science)</a></p>
 </li>
 </ul>
 </div>
-<div class="paragraph data-line-34">
+<div class="paragraph">
 <p>を解説しています。</p>
 </div>
-<div class="paragraph data-line-36">
+<div class="paragraph">
 <p>「30分でわかる」のは、だいたい、<br>
 <strong>4. モナド(Monad)とは何か？</strong><br>
 の読了までを想定しています。 <br>
@@ -572,45 +560,38 @@ td>code {background-color: #aaaaaa};
 </div>
 </div>
 </div>
-<div class="sect1 data-line-5">
+<div class="sect1">
 <h2 id="_モナドが難しい">1. モナドが難しい？</h2>
 <div class="sectionbody">
-<style type="text/css">
-th,td {
-    border: solid 0px;
-}
-p>code {background-color: #aaaaaa};
-td>code {background-color: #aaaaaa};
-</style>
-<div class="paragraph data-line-18">
+<div class="paragraph">
 <p>巷の解説が混乱に満ちあふれている・・・</p>
 </div>
-<div class="sect2 data-line-21">
+<div class="sect2">
 <h3 id="whysohard">1.1. モナドを理解するのが難しい理由</h3>
-<div class="ulist data-line-23">
+<div class="ulist">
 <ul>
-<li class="data-line-23">
+<li>
 <p><strong>数学と用語問題。</strong>モナドの理論的基盤として圏論があるのは事実。理論的基盤がしっかりしているのはプログラミングという数学的作業において歓迎すべきことではある一方で、他方そのため一般的なプログラマにとってはまず用語に馴染みがない。歴史的に、圏論ベースのモナドを理論から関数型プログラミングに応用されていく過程では、実際、先駆者の間でさえ紆余曲折があったのだが、学習者へは馴染みのない用語を伴って、いきなり高度な数学的概念全開で天下り的に提示されてしまうことが多い。わかっている人、そもそも実用性以上に数学性、理論的側面に興味がある人にとっては知的好奇心を掻き立てられるトピックではあるが、そうでないプログラマにとっては「難しい、とっつきにくい、学習コストが大きすぎて実用性もよくわからない」となることが多い。「わからないの？ならとりあえず、巷の半端な解説より
 <a href="http://homepages.inf.ed.ac.uk/wadler/topics/monads.html">Philip Wadler先生の数々の素晴らしい論文</a>を読んだほうがいい！」という人もいるが、ほとんどの学習者にとって、そういうアドバイスをされる時点で、このアプローチは絶望的である。そもそも彼らには初学者に向けて噛み砕いて教えるつもりはない。そして、実はモナドを理解するために高度な数学の素養は不要。小中高で習った数学レベルで十分だ。</p>
 </li>
-<li class="data-line-26">
+<li>
 <p><strong>逆に過度に理論面を放棄した解説を読んだ結果、余計にわけわからなくなった問題。</strong> モナド解説に限らず科学分野の一般読者向け解説記事でアルアル。比喩、例示という極めて高度な芸術的作業が不十分なため、一瞬わかったような錯覚にさせられはするが、実際はなにもわかっておらず、その後長期間に渡り理解の不整合に苦しむ羽目になる、という不幸なパターン。読者、特にプログラマは馬鹿ではないので、そういう読者の知性を愚弄する真似は努めて避けるべき。小中高レベルの数学で十分ならばちゃんと説明すればいいだけのこと。それができないというのは、説明者自身が理解していない証拠。</p>
 </li>
-<li class="data-line-29">
+<li>
 <p><strong>Haskellに寄りすぎ問題。</strong>歴史的に、圏論のモナドが関数型プログラミングへ応用できることが発見され、論文が発表された際に、使用された言語はHaskellであり、関数型言語としてのHaskellの根源的なフレームワークとして積極的にモナドが導入された。そのためHaskellerにとってはモナドの理解は必須要項であり、情報交換もHaskellのSyntaxをもって活発に行われている。彼らの知識の源泉は主に<a href="https://wiki.haskell.org/Monad">Monad - Haskell Wiki</a>であったり、<a href="https://ja.wikibooks.org/wiki/Haskell/%E5%9C%8F%E8%AB%96#%E3%83%A2%E3%83%8A%E3%83%89">Haskell/圏論#モナド</a>であったり、<a href="http://learnyouahaskell.com/chapters">Learn You a Haskell for Great Good!</a>(無料公開中)（有料日本語訳<a href="https://amzn.to/2TIeoRe">『すごいHaskellたのしく学ぼう!』</a>
 ）であったりして、ほとんどの場合そのHaskellで一般的な用語、Syntaxで語られる。Haskellerにとっては「モナドとはすでに手元にあるもの」であり、手元あるいは、足場となる言語を活用するための学習モティベーションも極めて高い。裏を返すと、Haskellerでないその他大勢のプログラマにとっては以上の事実は逆風となる。</p>
 </li>
-<li class="data-line-33">
+<li>
 <p><strong>複数の新規概念ごっちゃまぜ問題。</strong>モナドが関数型プログラミングに応用される際、学習者にとっては。複数にわたる本来興味深いはずの新規概念があるのだが、それらはほとんどの場合整理されて説明されることはない。たとえば上記のHaskellに寄りすぎ問題により、Haskellの基本的文法とからめて天下り的に <code>do</code> とか <code>IO</code> だ、などとしょっぱなから当たり前のように言われるのだが、これらはモナドを遅延評価、イベント、非同期プログラミング、IO/状態（State）、FRPの概念と合わせて<strong>応用する話</strong>であり、モナドの概念導入段階では本来すべき話ではない。事実モナドの関数型プログラミングへの応用黎明期では、モナドによって入出力（IO）が扱える、とPhilip Wadler先生たちから提案されたのはちょっと後になってからだ。聡明な専門家の間でさえそんな感じだったのだから、IO、それから状態管理への展開はこれはこれでひとつの一大発明であって、モナドの応用シーンとして、面白い別トピックとしてわけて考えたほうがいい。しかし、「モナドが一体何に役立つのか？」という強い要請のために「ほらHaskellではIOやdoで使われてるよ」と言いたい事情もわかる。これは<strong>Haskellに寄りすぎ問題</strong>の弊害でもある。</p>
 </li>
 </ul>
 </div>
-<div class="paragraph data-line-35">
+<div class="paragraph">
 <p>これはFRPの先駆者であるConal Elliott先生もStackOverflowの<a href="https://stackoverflow.com/questions/16439025/what-is-so-special-about-monads">モナドの何がそんなに特別なのか？</a>への<a href="https://stackoverflow.com/a/16444789">回答として、似たようなことを主張している</a>。</p>
 </div>
-<div class="quoteblock data-line-45">
+<div class="quoteblock">
 <blockquote>
-<div class="paragraph data-line-1">
+<div class="paragraph">
 <p>(Haskellの)Monadタイプクラスへの不釣り合いなまでの大注目度合いは歴史的な幸運にすぎない。彼らはよくIOとモナドを関連づけるが、この２つは独立した有用な概念だ。(関数型プログラミングでの）IOはマジカルで、モナドはそのIOとしょっちゅう関連づけられているので、モナドがマジカルだという錯覚に陥りやすい。</p>
 </div>
 </blockquote>
@@ -618,34 +599,27 @@ td>code {background-color: #aaaaaa};
 </div>
 </div>
 </div>
-<div class="sect1 data-line-6">
+<div class="sect1">
 <h2 id="_javascriptプログラマのためのモナド入門">2. JavaScriptプログラマのためのモナド入門</h2>
 <div class="sectionbody">
-<style type="text/css">
-th,td {
-    border: solid 0px;
-}
-p>code {background-color: #aaaaaa};
-td>code {background-color: #aaaaaa};
-</style>
-<div class="paragraph data-line-19">
+<div class="paragraph">
 <p>これは、一般的なJavaScriptプログラマのためのモナド入門記事です。</p>
 </div>
-<div class="sect2 data-line-21">
+<div class="sect2">
 <h3 id="_対象とする読者">2.1. 対象とする読者</h3>
-<div class="paragraph data-line-23">
+<div class="paragraph">
 <p>関数型プログラミングをしたいJavaScriptプログラマーでモナドを理解したい人。</p>
 </div>
-<div class="paragraph data-line-25">
+<div class="paragraph">
 <p>義務教育レベルの数学を理解していることが望ましい。</p>
 </div>
-<div class="paragraph data-line-27">
+<div class="paragraph">
 <p>モナドを知りたいと思ってWikipediaやWeb上の解説記事などを漁ってみたが、やっぱりさっぱりわからずに挫折していたところ、たまたまこの記事にたどり着いた人。</p>
 </div>
-<div class="paragraph data-line-29">
+<div class="paragraph">
 <p>関数型プログラミングについて入門したい人は、</p>
 </div>
-<div class="admonitionblock tip data-line-34">
+<div class="admonitionblock tip">
 <table>
 <tr>
 <td class="icon">
@@ -653,125 +627,127 @@ td>code {background-color: #aaaaaa};
 </td>
 <td class="content">
 <div class="title">当ブログの入門記事</div>
-<div class="paragraph data-line-35">
+<div class="paragraph">
 <p><a href="https://kentechdoc.blogspot.com/2018/06/day-jsvar-s-0for-var-n-1-n-b-const-s2-1.html">関数型プログラミング超入門</a></p>
 </div>
 </td>
 </tr>
 </table>
 </div>
-<div class="paragraph data-line-40">
+<div class="paragraph">
 <p>とりあえず配列とMapがわかればいいです。</p>
 </div>
 </div>
-<div class="sect2 data-line-42">
+<div class="sect2">
 <h3 id="_本稿のアプローチ">2.2. 本稿のアプローチ</h3>
-<div class="paragraph data-line-47">
+<div class="paragraph">
 <p><a href="#whysohard">モナドを理解するのが難しい理由</a>をアンチパターンとして最大限留意しています。</p>
 </div>
 </div>
 </div>
 </div>
-<div class="sect1 data-line-6">
+<div class="sect1">
 <h2 id="_なぜモナドか">3. なぜモナドか?</h2>
 <div class="sectionbody">
 <style type="text/css">
+p>code {background-color: #aaaaaa};
+
 th,td {
     border: solid 0px;
 }
-p>code {background-color: #aaaaaa};
 td>code {background-color: #aaaaaa};
+}
 </style>
-<div class="paragraph data-line-19">
+<div class="paragraph">
 <p>JavaScript上でかなり実用的だから。</p>
 </div>
-<div class="paragraph data-line-21">
+<div class="paragraph">
 <p>上述のとおり、モナドとは関数型プログラミングの一部です。</p>
 </div>
-<div class="paragraph data-line-23">
+<div class="paragraph">
 <p>関数型プログラミングは、プログラミングの複雑性を、以下の２つ</p>
 </div>
-<div class="ulist data-line-25">
+<div class="ulist">
 <ul>
-<li class="data-line-25">
+<li>
 <p>値</p>
 </li>
-<li class="data-line-26">
+<li>
 <p>値でもある関数</p>
 </li>
 </ul>
 </div>
-<div class="paragraph data-line-28">
+<div class="paragraph">
 <p>の組み合わせ（function composition）で制御します。
 <a href="#relation">代数学と関数型プログラミングとオブジェクト指向の用語・記法の相互関係</a> 以降で詳しく解説します。</p>
 </div>
-<div class="sect2 data-line-31">
+<div class="sect2">
 <h3 id="_jquery">3.1. jQuery</h3>
-<div class="paragraph data-line-33">
+<div class="paragraph">
 <p><span class="image"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Logo_jQuery.svg/512px-Logo_jQuery.svg.png" alt="512px Logo jQuery.svg"></span></p>
 </div>
-<div class="paragraph data-line-35">
+<div class="paragraph">
 <p>いろんな値＆関数が考えられるわけですが、JavaScript世界で超有名なのが、 <a href="https://jquery.com/">jQuery</a>でしょう。jQueryのオフィシャルロゴには <em>"write less, do more"</em> とあり、それまで不十分なAPIにより煩雑だったDOM操作を簡潔な記法で柔軟に操作できる値＆関数を提供し、その実用性の高さから人気を集めました。</p>
 </div>
-<div class="paragraph data-line-37">
+<div class="paragraph">
 <p><em>"write less, do more"</em>　とは、複雑なプログラムをなるだけシンプルに取り扱おうとする関数型プログラミングの唯一にして究極のゴールの具現化そのものであり、一例をあげてみると、</p>
 </div>
-<div class="listingblock data-line-42">
+<div class="listingblock">
 <div class="title">tryjquery_chaining2</div>
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="js" class="language-js hljs">$("#p1")
+<pre class="highlightjs highlight"><code class="language-js hljs" data-lang="js">$("#p1")
     .css("color", "red")
     .slideUp(2000)
     .slideDown(2000);</code></pre>
 </div>
 </div>
-<div class="paragraph data-line-49">
+<div class="paragraph">
 <p>と、<a href="https://www.w3schools.com/jquery/jquery_chaining.asp">メソッドチェーンをもって書き連ねる</a>だけで、<a href="https://www.w3schools.com/jquery/tryit.asp?filename=tryjquery_chaining2">Demo:こんなこと</a>ができるようになるとか、当時JavaScriptコミュニティに衝撃を与えました。要するに、この <em>"write less, do more"</em> こそが、関数型プログラミングの真価であり、jQueryはただひとつの、 <code>$()</code> というjQueryオブジェクト生成関数と、それにぶら下がる巨大なメソッド群から成立していて使い方自体はシンプルです。</p>
 </div>
-<div class="paragraph data-line-51">
+<div class="paragraph">
 <p>jQueryは値(オブジェクト)＆関数（オブジェクトにぶらさがるメソッド群）のペアです。</p>
 </div>
-<div class="paragraph data-line-53">
+<div class="paragraph">
 <p>jQueryがモナドかどうか？というのはしばしば議論にあがるところですが、jQueryのAPIは巨大なので、その全部がモナドであるわけではないが、そのうちの一部はモナドになっている、というのが答えでしょう。</p>
 </div>
-<div class="paragraph data-line-55">
+<div class="paragraph">
 <p><strong>jQueryの一部の特性としてモナドの性質を備えている理由はメソッドチェーンを壊さないため</strong>です。</p>
 </div>
-<div class="paragraph data-line-57">
+<div class="paragraph">
 <p>全部がモナドではないが一部は確実にモナドである、という別の事例として、最近のJavaScriptの<a href="https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>があげられます。これについては次の章で。</p>
 </div>
 </div>
-<div class="sect2 data-line-59">
+<div class="sect2">
 <h3 id="_monadicreact">3.2. MonadicReact</h3>
-<div class="paragraph data-line-61">
+<div class="paragraph">
 <p>jQueryは標準DOMのAPIがかなりマシになってきたこととでパフォーマンスの観点からも、jQuery非依存で書こうというトレンドが見られます。さらに仮想DOMのコンポーネント機構をもつReactが登場したことにより、世代交代が起こった感もあります。</p>
 </div>
-<div class="paragraph data-line-63">
+<div class="paragraph">
 <p>Reactをより関数型プログラミングで、という目的でいろんなライブラリがありますが、</p>
 </div>
-<div class="paragraph data-line-65">
+<div class="paragraph">
 <p><a href="https://github.com/hoppinger/MonadicReact" class="bare">https://github.com/hoppinger/MonadicReact</a></p>
 </div>
-<div class="paragraph data-line-67">
+<div class="paragraph">
 <p><a href="https://www.npmjs.com/package/monadic_react" class="bare">https://www.npmjs.com/package/monadic_react</a></p>
 </div>
-<div class="paragraph data-line-69">
+<div class="paragraph">
 <p>みたいなReactのモナドラッパーがあります。</p>
 </div>
-<div class="paragraph data-line-71">
+<div class="paragraph">
 <p>Ph.Dを持つ作者が、Medium記事：<a href="https://medium.com/@giuseppemaggiore/type-safe-monads-and-react-499b4a2f56d7">Type-safe monads and React</a>で
 <em>Yet another introduction to monads</em>とモナドの紹介をしながら「便利でパワフルだ」みたいなことをエンドユーザに向けて書いてますが、とりあえず何が書かれているのかさっぱり理解できない！という人は、でもやっぱり理解したい、となるでしょう。</p>
 </div>
 </div>
-<div class="sect2 data-line-74">
+<div class="sect2">
 <h3 id="_promise">3.3. Promise</h3>
-<div class="paragraph data-line-76">
+<div class="paragraph">
 <p>ES6+ 以降で導入された <a href="https://developer.mozilla.org/ja/docs/Web/JavaScript/Guide/Using_promises">Promise</a>も一部モナドっぽいふるまいをします。モナドだと言う人もいますが、モナドではありません。PromiseはjQueryほど巨大なAPIではないので、すべて厳密にモナドであったほうが有用性はあがるはずですが、そうではないので残念です。</p>
 </div>
-<div class="paragraph data-line-78">
+<div class="paragraph">
 <p>Promiseはすでに、ESModule</p>
 </div>
-<div class="admonitionblock note data-line-82">
+<div class="admonitionblock note">
 <table>
 <tr>
 <td class="icon">
@@ -779,125 +755,127 @@ td>code {background-color: #aaaaaa};
 </td>
 <td class="content">
 <div class="title">参考記事</div>
-<div class="paragraph data-line-83">
+<div class="paragraph">
 <p><a href="https://kentechdoc.blogspot.com/2018/09/20189javascriptes-moduleesm.html">2018年9月時点のJavaScriptモジュール(ES Module/ESM)界隈の最新情報、これまでの経緯とこれからの見通しを解説</a></p>
 </div>
-<div class="paragraph data-line-85">
+<div class="paragraph">
 <p><a href="https://kentechdoc.blogspot.com/2018/09/es-modulesesm-jdalton.html">明日のES Modulesを今日使おう！(esm ライブラリ開発者 @jdalton による解説記事の翻訳)</a></p>
 </div>
 </td>
 </tr>
 </table>
 </div>
-<div class="paragraph data-line-88">
+<div class="paragraph">
 <p>の動的Importの返り値として標準化されるなど、今どきのJavaScriptプログラマにとっては必須事項となってしまいました。Promiseが「モナドっぽい」振る舞いをするが、そうでない振る舞いするときもある、と挙動を把握しておくこと、人に説明できるほど理解しておくことは、Promiseを正しく使いこなすためにも重要だと思います。</p>
 </div>
 </div>
-<div class="sect2 data-line-90">
+<div class="sect2">
 <h3 id="_fluture">3.4. Fluture</h3>
-<div class="imageblock data-line-92">
+<div class="imageblock">
 <div class="content">
 <img src="https://raw.githubusercontent.com/fluture-js/Fluture/HEAD/logo.png" alt="logo">
 </div>
 </div>
-<div class="paragraph data-line-94">
+<div class="paragraph">
 <p><a href="https://www.npmjs.com/package/fluture" class="bare">https://www.npmjs.com/package/fluture</a></p>
 </div>
-<div class="paragraph data-line-96">
+<div class="paragraph">
 <p>FantasyLand compliant (monadic) alternative to Promises</p>
 </div>
-<div class="quoteblock data-line-99">
+<div class="quoteblock">
 <blockquote>
-<div class="paragraph data-line-1">
+<div class="paragraph">
 <p>Much like Promises, Futures represent the value arising from the success or failure of an asynchronous operation (I/O). Though unlike Promises, Futures are lazy and adhere to the monadic interface.</p>
 </div>
 </blockquote>
 </div>
-<div class="paragraph data-line-101">
+<div class="paragraph">
 <p>Promises(ES6+ Promise含む)のオルタナティブ。</p>
 </div>
-<div class="paragraph data-line-103">
+<div class="paragraph">
 <p>npmのデータでは、それなりのパッケージから依存され、それなりのダウンロード数も誇るようです。</p>
 </div>
-<div class="paragraph data-line-105">
+<div class="paragraph">
 <p>Promisesと違ってモナドインターフェイス(monadic interface)になっているよ、と書かれています。</p>
 </div>
-<div class="paragraph data-line-107">
+<div class="paragraph">
 <p>何が違うのか、どんなのメリットがあるのか？そもそもモナド理解してないと意味不明ですよね？</p>
 </div>
 </div>
-<div class="sect2 data-line-109">
+<div class="sect2">
 <h3 id="_まとめ">3.5. まとめ</h3>
-<div class="paragraph data-line-111">
+<div class="paragraph">
 <p>今どきのJavaScriptプログラマならば、モナドくらいは知っておいたほうが良さそうだ。</p>
 </div>
 </div>
 </div>
 </div>
-<div class="sect1 data-line-6">
+<div class="sect1">
 <h2 id="whatsmonad">4. モナド(Monad)とは何か？</h2>
 <div class="sectionbody">
 <style type="text/css">
+p>code {background-color: #aaaaaa};
+
 th,td {
     border: solid 0px;
 }
-p>code {background-color: #aaaaaa};
 td>code {background-color: #aaaaaa};
+}
 </style>
-<div class="quoteblock data-line-20">
+<div class="quoteblock">
 <blockquote>
-<div class="paragraph data-line-1">
+<div class="paragraph">
 <p>Haskellerにとっては「モナドとはすでに手元にあるもの」であり、手元あるいは、足場となる言語を活用するための学習モティベーションも極めて高い。裏を返すと、Haskellerでないその他大勢のプログラマにとっては以上の事実は逆風となる。 <a href="#whysohard">モナドを理解するのが難しい理由</a></p>
 </div>
 </blockquote>
 </div>
-<div class="paragraph data-line-22">
+<div class="paragraph">
 <p>さらに裏を返すと、JavaScriptプログラマにとっては、JavaScriptですでにモナドが実装されていて、使えればそれなりの恩恵にあずかることがすぐできる、となれば、テンションもあがるんじゃないでしょうか？</p>
 </div>
-<div class="paragraph data-line-24">
+<div class="paragraph">
 <p>「全部がモナドではないが一部は確実にモナドである」ってどういう意味？っていうのもここでわかります。</p>
 </div>
-<div class="paragraph data-line-26">
+<div class="paragraph">
 <p>全部がモナドではないが一部は確実にモナドである、という事例として、最近のJavaScriptの<a href="https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>があげられます。</p>
 </div>
-<div class="quoteblock data-line-28">
+<div class="quoteblock">
 <blockquote>
-<div class="paragraph data-line-1">
+<div class="paragraph">
 <p>JavaScript の <code>Array</code> オブジェクトは、配列を構築するためのグローバルオブジェクトで、配列とは複数の要素の集合を格納管理するリスト構造です。</p>
 </div>
 </blockquote>
 </div>
-<div class="paragraph data-line-30">
+<div class="paragraph">
 <p>モナドを紹介するにあたって、<code>Array</code> が優れているのは、</p>
 </div>
-<div class="ulist data-line-32">
+<div class="ulist">
 <ul>
-<li class="data-line-32">
+<li>
 <p>すでに手元にある。すぐに触れる。最新のモダンブラウザやNode.jsならすでに実装済みだ。得体のしれない誰かのモナド実装コードを解読する必要なし。</p>
 </li>
-<li class="data-line-34">
+<li>
 <p>馴染み深い。誰でも知ってる。みんな使える。基本的API。かんたん。</p>
 </li>
-<li class="data-line-36">
+<li>
 <p>見える。コンソール出力したときの値はそのまま値の構造を表している。どうなっているのか一目でわかるので理解も容易。</p>
 </li>
 </ul>
 </div>
-<div class="paragraph data-line-38">
+<div class="paragraph">
 <p>と、まさに早い安いうまいの三拍子揃っています。</p>
 </div>
-<div class="paragraph data-line-41">
+<div class="paragraph">
 <p>まずは、<code>Array</code>　のモナドではない部分を復習して、それからモナドである部分を紹介します。</p>
 </div>
-<div class="sect2 data-line-44">
+<div class="sect2">
 <h3 id="_array_map">4.1. Array.map</h3>
-<div class="paragraph data-line-46">
+<div class="paragraph">
 <p><a href="https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Array/map">Array.map</a>のことは、JavaScriptプログラマなら誰でもよく知っているでしょう。</p>
 </div>
-<div class="paragraph data-line-48">
+<div class="paragraph">
 <p>配列の構造(リスト構造)を保ったまま、値にある関数を適用した結果の値を返す、というメソッド（オブジェクトに紐付いた関数）です。</p>
 </div>
-<div class="paragraph data-line-50">
+<div class="paragraph">
 <p><code>[1, 2, 3, 4, 5]</code>
 に、<br>
 値を2倍する関数<br>
@@ -906,10 +884,10 @@ td>code {background-color: #aaaaaa};
 <code>[2, 4, 6, 8, 10]</code><br>
 が返ってきます。</p>
 </div>
-<div class="listingblock data-line-61">
+<div class="listingblock">
 <div class="title">Array.map.js</div>
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="js" class="language-js hljs">const array1 = [1, 2, 3, 4, 5];
+<pre class="highlightjs highlight"><code class="language-js hljs" data-lang="js">const array1 = [1, 2, 3, 4, 5];
 
 const array2 =
     array1
@@ -918,33 +896,33 @@ const array2 =
 console.log(array2);</code></pre>
 </div>
 </div>
-<div class="listingblock data-line-73">
+<div class="listingblock">
 <div class="title">Console</div>
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="js" class="language-js hljs">[ 2, 4, 6, 8, 10 ]</code></pre>
+<pre class="highlightjs highlight"><code class="language-js hljs" data-lang="js">[ 2, 4, 6, 8, 10 ]</code></pre>
 </div>
 </div>
-<div class="paragraph data-line-78">
+<div class="paragraph">
 <p>ここでポイントは、配列の <code>Array.map</code> 前と後で</p>
 </div>
-<div class="olist arabic data-line-80">
+<div class="olist arabic">
 <ol class="arabic">
-<li class="data-line-80">
+<li>
 <p><strong>構造を保ったまま、要素を１:１で転写(map)する</strong></p>
 </li>
-<li class="data-line-81">
+<li>
 <p><strong>自分自身＝ <code>Array</code> オブジェクトを返してくる</strong></p>
 </li>
 </ol>
 </div>
-<div class="paragraph data-line-83">
+<div class="paragraph">
 <p>ことです。</p>
 </div>
-<div class="paragraph data-line-85">
+<div class="paragraph">
 <p>このような性質のメソッドを持つオブジェクトのことを、圏論の用語では<br>
 <a href="https://ncatlab.org/nlab/show/endofunctor">endofunctor</a>(自己関手)と呼びます。</p>
 </div>
-<div class="admonitionblock caution data-line-90">
+<div class="admonitionblock caution">
 <table>
 <tr>
 <td class="icon">
@@ -952,47 +930,47 @@ console.log(array2);</code></pre>
 </td>
 <td class="content">
 <div class="title">Functor ?? &#8201;&#8212;&#8201;<strong>Haskellに寄りすぎ問題</strong>、再度勃発！</div>
-<div class="paragraph data-line-91">
+<div class="paragraph">
 <p>圏論で、<a href="https://ncatlab.org/nlab/show/functor">functor</a>(関手)の定義は、任意の２つのオブジェクト間の転写(map)をするオブジェクトなので、たとえば、</p>
 </div>
-<div class="paragraph data-line-93">
+<div class="paragraph">
 <p>Array（配列）→Object（オブジェクト）とすると、</p>
 </div>
-<div class="paragraph data-line-95">
+<div class="paragraph">
 <p><code>[1, 2, 3, 4, 5]</code> <br>
 ↓<br>
 <code>{ first: 1, second: 4, third: 6, fourth: 8, fifth: 10 }</code></p>
 </div>
-<div class="paragraph data-line-99">
+<div class="paragraph">
 <p>でも構わないでしょう。</p>
 </div>
-<div class="paragraph data-line-101">
+<div class="paragraph">
 <p>転写(map)先を自分自身である <code>Array</code> に限定した特殊なfunctor(関手)がendofunctor(自己関手)となります。</p>
 </div>
-<div class="paragraph data-line-103">
+<div class="paragraph">
 <p><code>Array.map</code> は、自分自身＝ <code>Array</code> オブジェクトを返してくる、というのは非常に重要な特性があるので、endofunctor(自己関手)で、そこは外せません。しかし、Haskellコミュニティの因習から、単に、functorと呼んでしまうことが多いようです。</p>
 </div>
-<div class="paragraph data-line-105">
+<div class="paragraph">
 <p><a href="https://www.quora.com/Why-is-functor-in-Haskell-defined-like-the-endofunctor-from-category-theory"><strong>Why is functor in Haskell defined like the endofunctor from category theory?</strong></a>(<strong>なぜ、Haskellのfunctorは、圏論のendofunctorみたいな定義になってるの？</strong>)という極めてまっとうな疑問が出て、"Convenience and history." 便利さと歴史的経緯のせいだ。(中略) endofunctorというタイプクラス（型クラス・type class）名よりも、Functorという名前のほうが" much nicer name"だ。正確じゃないかもしれないが機能している・・・<br>
  と、こういったノリです。しかし圏論用語だからとだけ聞かされている初学者にとってはそんなことは知ったことではないわけで、この混乱による質問は定期的に出るようです。</p>
 </div>
-<div class="paragraph data-line-108">
+<div class="paragraph">
 <p>ちなみに、<a href="http://learnyouahaskell.com/chapters">Learn You a Haskell for Great Good!</a>(無料公開中)（有料日本語訳『すごいHaskellたのしく学ぼう!』）にも、endofuntorのことを意味しながらも単にfunctorとだけ書かれています。どうもHaskellコミュニティでは、一部の（わかってる）人達は「タイプクラスの命名のノリのことだから些細だ」という暗黙の了解としながらも、大勢はタイプクラスの名前と圏論用語がごっちゃになったまま伝播し続けているようです。実際に、<strong>圏論のFunctorとプログラミングのFunctorでは【意味】が違う</strong>とまで言い切っている人も見てきているので、今からでも遅くないのでちゃんと直したらどうか？と思うわけです。厳密に定義づけされた圏論用語ぽいので真に受けて聞いていたら、後で「意味が違う」とか「え？ちょっと待て」と思いますよね。いちいち言葉の定義レベルで話が通じなくなるので困るし、大事なことなのでここでちゃんと書いておきます。</p>
 </div>
-<div class="paragraph data-line-110">
+<div class="paragraph">
 <p>プログラマ界隈では、ReferenceTransparency(参照透過性)にしろ、もともとの用語の意味が完全に損なわれた不正確な意味で用語を天下り的に教えられて、その不正確な意味を知っていて当然、のようなことが横行しているので要注意。</p>
 </div>
 </td>
 </tr>
 </table>
 </div>
-<div class="paragraph data-line-114">
+<div class="paragraph">
 <p><code>Array.map</code> メソッドは自分自身＝ <code>Array</code> オブジェクトを返してくる、というendofunctor(自己関手)の特性の良さにより、メソッドチェーンが可能です。</p>
 </div>
-<div class="listingblock data-line-118">
+<div class="listingblock">
 <div class="title">メソッドチェーン</div>
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="js" class="language-js hljs">const array2 =
+<pre class="highlightjs highlight"><code class="language-js hljs" data-lang="js">const array2 =
     array1
         .map(a =&gt; a * 2)
         .map(a =&gt; a + 1);
@@ -1000,19 +978,19 @@ console.log(array2);</code></pre>
 console.log(array2);</code></pre>
 </div>
 </div>
-<div class="listingblock data-line-129">
+<div class="listingblock">
 <div class="title">Console</div>
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="js" class="language-js hljs">[ 3, 5, 7, 9, 11 ]</code></pre>
+<pre class="highlightjs highlight"><code class="language-js hljs" data-lang="js">[ 3, 5, 7, 9, 11 ]</code></pre>
 </div>
 </div>
-<div class="paragraph data-line-133">
+<div class="paragraph">
 <p><code>Array.map</code> のメソッドチェーンでは、まるでパイプラインの中を <code>Array</code> オブジェクトがずっと流れているようで、エコの統一性が保証されています。</p>
 </div>
-<div class="paragraph data-line-135">
+<div class="paragraph">
 <p>jQueryが便利だ、というのも、モナドどうこう言う以前に、ほぼほぼこのendofunctor(自己関手)がもつ関数型的特性とメソッドチェーンのメリットが大きいです。</p>
 </div>
-<div class="admonitionblock note data-line-140">
+<div class="admonitionblock note">
 <table>
 <tr>
 <td class="icon">
@@ -1020,22 +998,22 @@ console.log(array2);</code></pre>
 </td>
 <td class="content">
 <div class="title">入れ子構造</div>
-<div class="paragraph data-line-141">
+<div class="paragraph">
 <p>ただし、構造を保ったまま、といえども、渡す関数を、</p>
 </div>
-<div class="paragraph data-line-143">
+<div class="paragraph">
 <p><code>a &#8658; a * 2</code><br>
 ではなく、<br>
 <code>a &#8658; [a * 2]</code><br>
 とすることで</p>
 </div>
-<div class="listingblock data-line-151">
+<div class="listingblock">
 <div class="title">Console</div>
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="js" class="language-js hljs">[ [ 2 ], [ 4 ], [ 6 ], [ 8 ], [ 10 ] ]</code></pre>
+<pre class="highlightjs highlight"><code class="language-js hljs" data-lang="js">[ [ 2 ], [ 4 ], [ 6 ], [ 8 ], [ 10 ] ]</code></pre>
 </div>
 </div>
-<div class="paragraph data-line-155">
+<div class="paragraph">
 <p>と、各要素の階層を追加することは可能です。</p>
 </div>
 </td>
@@ -1043,46 +1021,46 @@ console.log(array2);</code></pre>
 </table>
 </div>
 </div>
-<div class="sect2 data-line-159">
+<div class="sect2">
 <h3 id="_array_mapと関数型プログラミングの限界">4.2. Array.mapと関数型プログラミングの限界</h3>
-<div class="paragraph data-line-161">
+<div class="paragraph">
 <p>そんなにendofunctor(自己関手)の性質が良いのならば、モナドの立場は？？モナドの意味は？何が良いの、違うの？となるわけですが、ここの差分をきっちり理解しておくことが重要です。</p>
 </div>
-<div class="listingblock data-line-165">
+<div class="listingblock">
 <div class="title">メソッドチェーン</div>
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="js" class="language-js hljs">const array2 =
+<pre class="highlightjs highlight"><code class="language-js hljs" data-lang="js">const array2 =
     array1
         .map(a =&gt; a * 2)
         .map(a =&gt; a + 1);</code></pre>
 </div>
 </div>
-<div class="paragraph data-line-172">
+<div class="paragraph">
 <p>という一連のシークエンスを再利用可能とするために関数化します。</p>
 </div>
-<div class="listingblock data-line-176">
+<div class="listingblock">
 <div class="title">f関数の定義</div>
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="js" class="language-js hljs">const f = array =&gt;
+<pre class="highlightjs highlight"><code class="language-js hljs" data-lang="js">const f = array =&gt;
     array
         .map(a =&gt; a * 2)
         .map(a =&gt; a + 1);</code></pre>
 </div>
 </div>
-<div class="paragraph data-line-184">
+<div class="paragraph">
 <p>関数を利用します。</p>
 </div>
-<div class="listingblock data-line-189">
+<div class="listingblock">
 <div class="title">f関数の利用</div>
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="js" class="language-js hljs">const array1 = [1, 2, 3, 4, 5];
+<pre class="highlightjs highlight"><code class="language-js hljs" data-lang="js">const array1 = [1, 2, 3, 4, 5];
 
 const array2 = f(array1);　<i class="conum" data-value="1"></i><b>(1)</b>
 
 console.log(array2);</code></pre>
 </div>
 </div>
-<div class="colist arabic data-line-197">
+<div class="colist arabic">
 <table>
 <tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
@@ -1090,45 +1068,45 @@ console.log(array2);</code></pre>
 </tr>
 </table>
 </div>
-<div class="listingblock data-line-201">
+<div class="listingblock">
 <div class="title">Console</div>
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="js" class="language-js hljs">[ 3, 5, 7, 9, 11 ]</code></pre>
+<pre class="highlightjs highlight"><code class="language-js hljs" data-lang="js">[ 3, 5, 7, 9, 11 ]</code></pre>
 </div>
 </div>
-<div class="paragraph data-line-206">
+<div class="paragraph">
 <p>想定通りの振る舞いで何の問題もありません。</p>
 </div>
-<div class="paragraph data-line-208">
+<div class="paragraph">
 <p>ただし、これまで、<code>Array</code> 操作は、<code>.map</code> のメソッドチェーンで実現していたのに、<code>f(array1)</code>　とSyntaxが変わったことが気になります。</p>
 </div>
-<div class="quoteblock data-line-211">
+<div class="quoteblock">
 <blockquote>
-<div class="paragraph data-line-1">
+<div class="paragraph">
 <p><code>Array.map</code> のメソッドチェーンでは、まるでパイプラインの中を <code>Array</code> オブジェクトがずっと流れているようで、エコの統一性が保証されています。</p>
 </div>
 </blockquote>
 </div>
-<div class="paragraph data-line-214">
+<div class="paragraph">
 <p>という観点からは。<code>Array.map</code> のメソッドチェーンを再利用するための関数 <code>f</code> を定義したはいいが、この関数を利用するときは、そのメソッドチェーン（パイプライン）の外でやっているので、本当にこの <code>Array</code> エコに合致するのか？その保証がほしいです。</p>
 </div>
-<div class="paragraph data-line-216">
+<div class="paragraph">
 <p>ひとつの方法としては、TypeScriptを使って、定義した関数の入力値/出力値の両方に <code>Array</code> の型付けをして、TypeScriptトランスパイラにチェックさせる方法があり、これは当然推奨されます。</p>
 </div>
-<div class="paragraph data-line-218">
+<div class="paragraph">
 <p>しかしそれでもなお <code>Array.map(f)</code> のメソッドチェーンから飛び出して、<code>f(array1)</code> とSyntaxが変わったエコの不整合さは解消されません。</p>
 </div>
-<div class="paragraph data-line-220">
+<div class="paragraph">
 <p>適用したい関数 <code>f</code> が先きてかっこでくくるのが普通の関数適用、メソッドチェーンでは尻尾に <code>f</code> つけていますね。ここは結構重要で、メソッドチェーンのエレガントさは、チェーンの後に、また中間でも、追加、挿入自由自在なところにあります。</p>
 </div>
-<div class="paragraph data-line-222">
+<div class="paragraph">
 <p>たとえば、複数回連続して、<code>f</code> 適用したい場合、<br>
 <code>f(f(array))</code><br>
 はネストが深くなっていき、可読性も悪く「なんとか地獄」の様相なので<br>
  <code>Array.map(f).map(f)</code><br>
 と連鎖で平らに書けたほうが良いですよね？</p>
 </div>
-<div class="admonitionblock tip data-line-231">
+<div class="admonitionblock tip">
 <table>
 <tr>
 <td class="icon">
@@ -1136,26 +1114,26 @@ console.log(array2);</code></pre>
 </td>
 <td class="content">
 <div class="title">ピンと来た人はご名答</div>
-<div class="paragraph data-line-232">
+<div class="paragraph">
 <p>ES６+Promiseで、「コールバック地獄」から開放される、とか言ってるのも、まさにこの話に対応しています。</p>
 </div>
 </td>
 </tr>
 </table>
 </div>
-<div class="paragraph data-line-235">
+<div class="paragraph">
 <p><code>f</code> というのは、そもそもメソッドチェーンの再利用関数だったので、それを再度、メソッドチェーンの中で使うっていうことなので、メソッドチェーンのネスト・入れ子構造って可能なの？ってお話をしています。</p>
 </div>
-<div class="paragraph data-line-237">
+<div class="paragraph">
 <p>ネスト・入れ子構造っていうのは、関数型プログラミングのお家芸というか、自由自在になんでも組み合わせができてなんぼの関数型プログラミングです。今、関数型プログラミングの限界を試しているところです。我々はどこまで行けるのか？</p>
 </div>
-<div class="paragraph data-line-241">
+<div class="paragraph">
 <p><code>Array.map</code> のメソッドチェーンでいけるかどうか？ダメ元で試してみましょうか。</p>
 </div>
-<div id="challenge" class="listingblock data-line-246">
+<div id="challenge" class="listingblock">
 <div class="title">f関数の利用@map ダメ元</div>
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="js" class="language-js hljs">const array1 = [1, 2, 3, 4, 5];
+<pre class="highlightjs highlight"><code class="language-js hljs" data-lang="js">const array1 = [1, 2, 3, 4, 5];
 
 const array2 =
     array1.map(f);　<i class="conum" data-value="1"></i><b>(1)</b>
@@ -1163,7 +1141,7 @@ const array2 =
 console.log(array2);</code></pre>
 </div>
 </div>
-<div class="colist arabic data-line-255">
+<div class="colist arabic">
 <table>
 <tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
@@ -1171,22 +1149,22 @@ console.log(array2);</code></pre>
 </tr>
 </table>
 </div>
-<div class="listingblock data-line-259">
+<div class="listingblock">
 <div class="title">Console</div>
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="shell" class="language-shell hljs">TypeError: array.map is not a function</code></pre>
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">TypeError: array.map is not a function</code></pre>
 </div>
 </div>
-<div class="paragraph data-line-263">
+<div class="paragraph">
 <p>TypeError つまり型が合いませんでした。</p>
 </div>
-<div class="paragraph data-line-265">
+<div class="paragraph">
 <p>じゃあ、<code>.map</code> 元がとりあえず　<code>Array</code> にだけなるよう　<code>[]</code> でくくって再チャレンジ。</p>
 </div>
-<div class="listingblock data-line-269">
+<div class="listingblock">
 <div class="title">f関数の利用@map 再チャレンジ</div>
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="js" class="language-js hljs">const array1 = [1, 2, 3, 4, 5];
+<pre class="highlightjs highlight"><code class="language-js hljs" data-lang="js">const array1 = [1, 2, 3, 4, 5];
 
 const array2 =
     [array1].map(f);　<i class="conum" data-value="1"></i><b>(1)</b>
@@ -1194,7 +1172,7 @@ const array2 =
 console.log(array2);</code></pre>
 </div>
 </div>
-<div class="colist arabic data-line-278">
+<div class="colist arabic">
 <table>
 <tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
@@ -1202,49 +1180,49 @@ console.log(array2);</code></pre>
 </tr>
 </table>
 </div>
-<div class="listingblock data-line-282">
+<div class="listingblock">
 <div class="title">Console</div>
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="shell" class="language-shell hljs">[ [ 3, 5, 7, 9, 11 ] ]</code></pre>
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">[ [ 3, 5, 7, 9, 11 ] ]</code></pre>
 </div>
 </div>
-<div class="paragraph data-line-286">
+<div class="paragraph">
 <p>いちおう通って <code>Array</code> が出てきました！しかし、残念ながら期待していた <code>[ 3, 5, 7, 9, 11 ]</code> とはならず、ネストした二重の <code>Array</code> になってしまっています。</p>
 </div>
-<div class="paragraph data-line-288">
+<div class="paragraph">
 <p>もうにっちもさっちもいかないので、ここが <code>Array.map</code> の関数型プログラミングでの限界です。</p>
 </div>
-<div class="paragraph data-line-290">
+<div class="paragraph">
 <p><code>Array.map</code> は、自分自身＝ <code>Array</code> を返すというendofunctor(自己関手)の特性があり、メソッドチェーンが出来るのだが、<strong>メソッドチェーンが入れ子構造になると、自身の構造をコントロールできなくなる</strong> のです。</p>
 </div>
-<div class="paragraph data-line-292">
+<div class="paragraph">
 <p>関数型プログラミングにとって、これは結構な大問題だとは思いませんか？</p>
 </div>
 </div>
-<div class="sect2 data-line-294">
+<div class="sect2">
 <h3 id="_array_flat_の登場">4.3. Array.flat の登場</h3>
-<div class="paragraph data-line-296">
+<div class="paragraph">
 <p>ネストした二重の <code>Array</code> を 平坦化するには、その機能をもった <code>Array</code> メソッドが必要になってきます。</p>
 </div>
-<div class="paragraph data-line-298">
+<div class="paragraph">
 <p>モダンブラウザでは、Chrome69/Firefox62などメジャーどころは、ごく最近、2018年9月に入って立て続けに、
 <a href="https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Array/flat">Array.flat</a>を実装しました。</p>
 </div>
-<div class="imageblock data-line-301">
+<div class="imageblock">
 <div class="content">
 <img src="https://kentutorialbook.github.io/30minLearningJavaScriptMonad/img/flat-browser.png" alt="flat browser">
 </div>
 </div>
-<div class="paragraph data-line-303">
+<div class="paragraph">
 <p>Node.jsの最新版でも実装されています。正確なNodeバージョンまでは調査していない。以前までは、これ使いたくても、Polyfillなど使って自前でなんとか拡張する必要があって面倒だったのですが、未だ実験的実装とはいえ歓迎すべきことです。</p>
 </div>
-<div class="paragraph data-line-305">
+<div class="paragraph">
 <p><code>Array.flat</code> メソッドは、その名の通り、ネストした配列構造をフラット化します。</p>
 </div>
-<div class="listingblock data-line-309">
+<div class="listingblock">
 <div class="title">ネストした配列のフラット化</div>
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="js" class="language-js hljs">const arr1 = [1, 2, [3, 4]];
+<pre class="highlightjs highlight"><code class="language-js hljs" data-lang="js">const arr1 = [1, 2, [3, 4]];
 arr1.flat();
 // [1, 2, 3, 4]
 
@@ -1253,22 +1231,22 @@ arr2.flat();
 // [1, 2, 3, 4, [5, 6]]</code></pre>
 </div>
 </div>
-<div class="paragraph data-line-319">
+<div class="paragraph">
 <p>パラメータを指定することで、フラット化するネストの階層を指定できますが、デフォルトでは <code>1</code> で、１階層だけフラット化します。それ以上再帰的に追求しません。そして、この１階層だけフラット化するというデフォルトの挙動が本トピックでは適切な振る舞いなので、そのままにしておきましょう。</p>
 </div>
 </div>
-<div class="sect2 data-line-321">
+<div class="sect2">
 <h3 id="_unit_の定義">4.4. unit の定義</h3>
-<div class="paragraph data-line-323">
+<div class="paragraph">
 <p>JavaScriptは、裸の値を <code>Array</code> にしたり、すでにある配列・要素をさらにネストしたいとは、各々の値を <code>[]</code> でくくればよいだけなので直感的で良いですが、これはれっきとした、値の変換なので、今後のためにちゃんと関数としておきましょう。</p>
 </div>
-<div class="paragraph data-line-325">
+<div class="paragraph">
 <p><code>unit = a &#8658; [a]</code> と定義しておきます。</p>
 </div>
-<div class="listingblock data-line-329">
+<div class="listingblock">
 <div class="title">unit(a) = [a]</div>
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="js" class="language-js hljs">const unit = a =&gt; [a];
+<pre class="highlightjs highlight"><code class="language-js hljs" data-lang="js">const unit = a =&gt; [a];
 
 console.log(
     unit(7)
@@ -1279,78 +1257,78 @@ console.log(
 );</code></pre>
 </div>
 </div>
-<div class="listingblock data-line-343">
+<div class="listingblock">
 <div class="title">Console</div>
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="js" class="language-js hljs">[ 7 ]
+<pre class="highlightjs highlight"><code class="language-js hljs" data-lang="js">[ 7 ]
 [ [ 7 ] ]</code></pre>
 </div>
 </div>
-<div class="paragraph data-line-348">
+<div class="paragraph">
 <p>特に問題ないですね？</p>
 </div>
 </div>
-<div class="sect2 data-line-350">
+<div class="sect2">
 <h3 id="_unit_と_array_flat_の対称性">4.5. unit と Array.flat の対称性</h3>
-<div class="paragraph data-line-352">
+<div class="paragraph">
 <p>なんでわざわざ <code>unit</code> を定義したのか？というと、以下の話をしたいからです。</p>
 </div>
-<div class="paragraph data-line-355">
+<div class="paragraph">
 <p><code>unit</code> と <code>flat</code> を図式化するとこうなります。</p>
 </div>
-<div class="imageblock text-center data-line-357">
+<div class="imageblock" style="text-align: center">
 <div class="content">
 <img src="https://kentutorialbook.github.io/30minLearningJavaScriptMonad/img/unitflat1.svg" alt="unitflat1">
 </div>
 </div>
-<div class="paragraph data-line-359">
+<div class="paragraph">
 <p><strong>どちらも、関数の出力値は、<code>Array</code> 一択</strong> です。ここ重要。</p>
 </div>
-<div class="paragraph data-line-361">
+<div class="paragraph">
 <p>まあ、対称性があるように見えて単純で美しい構造だと思うのですが、これは何気に奥深くて、まるで論理クイズみたいな様相を呈します。</p>
 </div>
-<div class="ulist data-line-363">
+<div class="ulist">
 <ul>
-<li class="data-line-363">
+<li>
 <p><code>unit</code> と <code>flat</code> を眺めると、どうも双方は明らかな対称性があるようだ。</p>
 </li>
-<li class="data-line-364">
+<li>
 <p>双方の関数の出力値は、<code>Array</code> 一択という強い縛りが効いている。</p>
 </li>
-<li class="data-line-365">
+<li>
 <p>ならば、双方は対称にはなりえない。</p>
 </li>
 </ul>
 </div>
-<div class="paragraph data-line-367">
+<div class="paragraph">
 <p>意味わかります？</p>
 </div>
-<div class="paragraph data-line-369">
+<div class="paragraph">
 <p>この界隈では、「コンテナに入れる」「箱に入れる」「箱から出す」「ラップする」「一枚皮を剥く」「カラに入れる」「カラから出す」はたまた「純粋にする」とか「リフト（アップ）」するとかいろんな言い草がありますが、ここでは単純に「階層」の上下関係で上げる、下げると言いましょう。</p>
 </div>
-<div class="paragraph data-line-371">
+<div class="paragraph">
 <p>ここでの絶対的ルールは以下の2つだけです。</p>
 </div>
-<div class="olist arabic data-line-373">
+<div class="olist arabic">
 <ol class="arabic">
-<li class="data-line-373">
+<li>
 <p><code>unit</code> は１階層だけ上げる。（さっき実際そのとおり定義した）</p>
 </li>
-<li class="data-line-375">
+<li>
 <p><code>flat</code> は<em>ネストしていれば</em>１階層だけ下げる。</p>
 </li>
 </ol>
 </div>
-<div class="paragraph data-line-377">
+<div class="paragraph">
 <p>ルール2で <code>flat</code> の<em>ネストしていれば</em>と、しれっと条件分岐をしている部分が、無条件に1階層上げるという <code>unit</code> と非対称です。</p>
 </div>
-<div class="paragraph data-line-379">
+<div class="paragraph">
 <p>たとえば、</p>
 </div>
-<div class="listingblock data-line-383">
+<div class="listingblock">
 <div class="title">Array.flat</div>
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="js" class="language-js hljs">console.log(
+<pre class="highlightjs highlight"><code class="language-js hljs" data-lang="js">console.log(
     [[7]].flat() <i class="conum" data-value="1"></i><b>(1)</b>
 );
 
@@ -1359,7 +1337,7 @@ console.log(
 );</code></pre>
 </div>
 </div>
-<div class="colist arabic data-line-394">
+<div class="colist arabic">
 <table>
 <tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
@@ -1371,14 +1349,14 @@ console.log(
 </tr>
 </table>
 </div>
-<div class="listingblock data-line-398">
+<div class="listingblock">
 <div class="title">Console</div>
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="js" class="language-js hljs">[ 7 ] <i class="conum" data-value="1"></i><b>(1)</b>
+<pre class="highlightjs highlight"><code class="language-js hljs" data-lang="js">[ 7 ] <i class="conum" data-value="1"></i><b>(1)</b>
 [ 7 ] <i class="conum" data-value="2"></i><b>(2)</b></code></pre>
 </div>
 </div>
-<div class="colist arabic data-line-403">
+<div class="colist arabic">
 <table>
 <tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
@@ -1390,76 +1368,76 @@ console.log(
 </tr>
 </table>
 </div>
-<div class="paragraph data-line-406">
+<div class="paragraph">
 <p><code>Array.flat</code> は、もし <code>Array</code> がネストしてたら、１階層下げて <code>Array</code> を返しますが、ネストしていなかったらそのままの <code>Array</code> を返します。最後の配列の皮を剥いで、裸の値 <code>7</code> を返すようなことはありません。</p>
 </div>
-<div class="paragraph data-line-408">
+<div class="paragraph">
 <p>つまり、<code>Array.flat</code> の返り値は必ず <code>Array</code> タイプである、中の値を裸では提供はしません、という基底が保証されています。</p>
 </div>
-<div class="paragraph data-line-410">
+<div class="paragraph">
 <p><code>Array.map</code> はendofunctorで、返り値は必ず <code>Array</code> タイプである、という例のメソッドチェーンのエコの部品としてドハマりしますよね？</p>
 </div>
-<div class="paragraph data-line-412">
+<div class="paragraph">
 <p><code>Array.flat</code>　の仕様あるいは、<code>flat</code> という共通概念の特性は、 <a href="#challenge">f関数の利用@map ダメ元</a>チャレンジの結果、裸の値に <code>.map</code> してしまいタイプエラーが出るような不整合を未然に防止してくれそうです。</p>
 </div>
-<div class="paragraph data-line-414">
+<div class="paragraph">
 <p><code>flat</code> しても基底で止まるように条件分岐でしっかり保証！されたところで、あとは、<code>unit</code> と <code>flat</code> の上下移動の対称性をもって、どの階層にも自由に移動させながら、<code>Array.map</code> メソッドが使えるようになる・・・はずです。</p>
 </div>
-<div class="imageblock text-center data-line-416">
+<div class="imageblock" style="text-align: center">
 <div class="content">
 <img src="https://kentutorialbook.github.io/30minLearningJavaScriptMonad/img/unitflat5.svg" alt="unitflat5">
 </div>
 </div>
-<div class="paragraph data-line-418">
+<div class="paragraph">
 <p>こうしてみると、<code>unit</code> と　<code>flat</code> は概ね対称的ペアだけど非対称だ、というのがよりはっきりわかると思います。</p>
 </div>
-<div class="paragraph data-line-420">
+<div class="paragraph">
 <p>また、エコが破綻する裸の値はまずいですが、ネストした構造が別に悪いわけではありません。ネストした <code>Array</code> を扱いたいのならば、そのネスト構造を扱うことも含め自由にコントロールしながら、<code>Array.map</code> することができる・・・はずです。</p>
 </div>
-<div class="paragraph data-line-422">
+<div class="paragraph">
 <p>要するに、<code>Array.map</code> こいつ単独ではどうも役不足だ。特にメソッドチェーンでネストしたら途端に構造が破綻するので扱いづらくてかなわん・・・ここはひとつ、構造に直接アプローチできる、対になった <code>unit</code> と <code>flat</code> ペアを導入してやって、なおかつ、<code>flat</code> が裸の値を返さないような安全装置つきなら、言うことないだろう・・・そういう理屈（皮算用）が今進行しているわけです。</p>
 </div>
-<div class="paragraph data-line-424">
+<div class="paragraph">
 <p>ああ、紹介が遅れましたが、今話しているこれがモナドです。</p>
 </div>
-<div class="paragraph data-line-426">
+<div class="paragraph">
 <p>世の常として結果論ですが、結果的にこの理屈はうまく機能します。</p>
 </div>
-<div class="paragraph data-line-428">
+<div class="paragraph">
 <p>じゃあ実際どうやって上手く機能するんだ？ってことになるわけですが、ポイントは、モナドっていうのは、関数型プログラマコミュニティ（Haskell）がもてはやす前から、圏論で定義される数学的構造として存在していて、それをどうやって上手く使うのか？っていうのは、また別の話なんですね。だから、特にモナドの紹介をするときにIOだのピュアだの言うのは、完全にお門違いです。</p>
 </div>
-<div class="paragraph data-line-430">
+<div class="paragraph">
 <p>Arrayが自身の構造にアプローチできるモナドになった結果、実際いかに便利になりうるか？というのは、次の章から説明します。</p>
 </div>
 </div>
-<div class="sect2 data-line-434">
+<div class="sect2">
 <h3 id="_モナドmonad">4.6. モナド(Monad)</h3>
-<div class="paragraph data-line-436">
+<div class="paragraph">
 <p>なんのことはない、<code>Array</code> で言えば、普通の <code>Array.map</code> に <code>Array.flat</code> を付け加えたものがモナドになります。 <code>unit</code> というのは、<code>[]</code> なので最初からあるといえばありました。</p>
 </div>
-<div class="paragraph data-line-438">
+<div class="paragraph">
 <p>自身の構造をコントロールしながらマップするためには、</p>
 </div>
-<div class="olist arabic data-line-440">
+<div class="olist arabic">
 <ol class="arabic">
-<li class="data-line-440">
+<li>
 <p>自分自身のオブジェクト <code>Array</code> を返す <code>Array.map</code> がベースとしてある endofunctor　(<code>Array</code> オブジェクト)</p>
 </li>
-<li class="data-line-441">
+<li>
 <p>1階層上げる <code>unit</code></p>
 </li>
-<li class="data-line-442">
+<li>
 <p>(もしネストしていたら)1階層下げる <code>Array.flat</code></p>
 </li>
 </ol>
 </div>
-<div class="paragraph data-line-444">
+<div class="paragraph">
 <p>この <strong>3点全部そろったら</strong> <code>Array</code> は、Arrayモナド(Monad)になります。</p>
 </div>
-<div class="paragraph data-line-446">
+<div class="paragraph">
 <p>念の為に読者へ保証しておきますが、これは、圏論でちゃんと定義づけされているモナド(Monad)のことです。プログラミングのモナドで定義が異なる、という例のトリッキーなアレではありません。</p>
 </div>
-<div class="admonitionblock note data-line-450">
+<div class="admonitionblock note">
 <table>
 <tr>
 <td class="icon">
@@ -1467,112 +1445,112 @@ console.log(
 </td>
 <td class="content">
 <div class="title">圏論(category theory)用語の紹介</div>
-<div class="paragraph data-line-451">
+<div class="paragraph">
 <p>英語版Wikipediaなどでは、</p>
 </div>
-<div class="paragraph data-line-455">
+<div class="paragraph">
 <div class="title">Monad (category theory)</div>
 <p><a href="https://en.wikipedia.org/wiki/Monad_(category_theory" class="bare">https://en.wikipedia.org/wiki/Monad_(category_theory</a>)</p>
 </div>
-<div class="quoteblock data-line-457">
+<div class="quoteblock">
 <blockquote>
-<div class="paragraph data-line-1">
+<div class="paragraph">
 <p>In category theory, a branch of mathematics, a monad is an endofunctor (a functor mapping a category to itself), together with two natural transformations.</p>
 </div>
 </blockquote>
 </div>
 <hr>
-<div class="paragraph data-line-461">
+<div class="paragraph">
 <p>圏論(category theory)では、モナド(monad)とは、自己関手(endofunctor=カテゴリを自身に転写するfunctor)で、2つの自然変換(natural transformations)を伴っている。</p>
 </div>
 <hr>
-<div class="paragraph data-line-465">
+<div class="paragraph">
 <p>などと書かれていますが、圏論用語@日本語では、</p>
 </div>
-<div class="paragraph data-line-467">
+<div class="paragraph">
 <p>\(C\) 上のモナドとは、</p>
 </div>
-<div class="ulist data-line-469">
+<div class="ulist">
 <ul>
-<li class="data-line-469">
+<li>
 <p>自己函手 \(T: C \rightarrow C\)</p>
 </li>
-<li class="data-line-470">
+<li>
 <p>自然変換 \(\eta: Id_C \Rightarrow T\)</p>
 </li>
-<li class="data-line-471">
+<li>
 <p>自然変換 \(\mu: T \circ T \Rightarrow T\)</p>
 </li>
 </ul>
 </div>
-<div class="paragraph data-line-473">
+<div class="paragraph">
 <p>からなる3つ組 \(\langle T, \eta, \mu \rangle\)</p>
 </div>
-<div class="paragraph data-line-475">
+<div class="paragraph">
 <p>などと表記されることが多いです。</p>
 </div>
-<div class="paragraph data-line-477">
+<div class="paragraph">
 <p>逐一、英語 category theroryのことを圏論、endofunctorのことを自己関手、natural transformationを自然変換と和訳してしまった結果、原語以上に難解さを醸し出す効果を持っており、なおかつギリシャ文字が出てきておっと思うわけですが、どう表記されようが、<code>Array</code> モナドについて言えば、</p>
 </div>
-<div class="ulist data-line-479">
+<div class="ulist">
 <ul>
-<li class="data-line-479">
+<li>
 <p>自己関手(endofunctor)は、皆よく知ってる 自分自身(オブジェクト)を返してくる <code>Array.map</code> メソッドをもつ <code>Array</code> オブジェクトのこと</p>
 </li>
-<li class="data-line-481">
+<li>
 <p>\(\eta\)（イータと読む）は、<code>↑</code> に似ていて、 <code>Array</code> を返す <code>unit</code> のこと</p>
 </li>
-<li class="data-line-483">
+<li>
 <p>\(\mu\)(ミューと読む)は、<code>↓</code>　に似ていて、 <code>Array</code> を返す  <code>flat</code> のこと</p>
 </li>
 </ul>
 </div>
-<div class="paragraph data-line-485">
+<div class="paragraph">
 <p>に過ぎないし、それを念頭に式を眺めれば、この\(T\)ってのは <code>Array</code> に対応していて、各関数との関係性が正確に記述されてるなあ、と普通にとわかるはずです。たしかに、</p>
 </div>
-<div class="paragraph data-line-487">
+<div class="paragraph">
 <p>\(C\) 上のモナドとは、とか言ってて、</p>
 </div>
-<div class="stemblock data-line-490">
+<div class="stemblock">
 <div class="content">
 \[T: C \rightarrow C\]
 </div>
 </div>
-<div class="paragraph data-line-495">
+<div class="paragraph">
 <p>と \(T\) (  <code>Array.map</code> つきの <code>Array</code> ) が定義されているのが、気になりますが、この \(C\) は、Category(圏)の頭文字で、ざっくり領域の限定をしています。</p>
 </div>
-<div class="paragraph data-line-497">
+<div class="paragraph">
 <p>ここでなんの領域を限定しているのか？というと、今定義してるモナドの範囲限定していて、今の <code>Arrayモナド</code> が乗っかってる \(C\)の範囲とは、<strong>「JavaScriptの値の全体」</strong> ということに他なりません。だから、<strong> \(C\)は、JavaScript Category(圏)</strong>とでもなんとでも言えば良いんじゃないでしょうか？</p>
 </div>
-<div class="paragraph data-line-499">
+<div class="paragraph">
 <p><strong>「JavaScriptの値の全体」</strong>とはもっと正確にいうと、<code>1</code> やら <code>"Hello"</code> などのすべてのPrimitiveValueさらに、<code>Object.prototype</code> から派生するすべてのオブジェクトのことで、これにたしかに今定義している <code>Array</code> オブジェクトのモナドも乗っかってますよね？</p>
 </div>
-<div class="paragraph data-line-501">
+<div class="paragraph">
 <p><code>Array</code> モナドはendofunctorである \(T\)で、<code>Array.map</code> メソッドにより、\(C \rightarrow C\)と任意のJavaScriptの値を別のJavaScriptの値へマップします。</p>
 </div>
-<div class="paragraph data-line-503">
+<div class="paragraph">
 <p>次に　<code>unit</code> ですが、</p>
 </div>
-<div class="stemblock data-line-506">
+<div class="stemblock">
 <div class="content">
 \[\eta: Id_C \Rightarrow T\]
 </div>
 </div>
-<div class="paragraph data-line-510">
+<div class="paragraph">
 <p>\(C\)上にあるなんかの値（裸の値、それからArray自身も含む）を、\(T\)( <code>Array</code> )に上げて返すという <code>unit</code> の定義になっている。</p>
 </div>
-<div class="paragraph data-line-513">
+<div class="paragraph">
 <p>最後に、<code>flat</code> ですが、</p>
 </div>
-<div class="stemblock data-line-516">
+<div class="stemblock">
 <div class="content">
 \[\mu: T \circ T \Rightarrow T\]
 </div>
 </div>
-<div class="paragraph data-line-520">
+<div class="paragraph">
 <p>\(T\)がもし二重にネストしてたら 一つ階層を下げて \(T\) にして返すという、条件分岐つきの性質を端的に定義しています。</p>
 </div>
-<div class="paragraph data-line-522">
+<div class="paragraph">
 <p><code>flat</code>  (\(\mu\))は、\(TTX \rightarrow TX\) などと表記されることも多く、いちいち各流派の方言につきあうのは大変なんですが、ああ <code>flat</code> のことを言ってるんだなあ、と思っておけばいいです。</p>
 </div>
 </td>
@@ -1580,94 +1558,96 @@ console.log(
 </table>
 </div>
 </div>
-<div class="sect2 data-line-528">
+<div class="sect2">
 <h3 id="conclusion">4.7. まとめ</h3>
-<div class="paragraph data-line-530">
+<div class="paragraph">
 <p>圏論のモナド（monad）の定義をまとめると</p>
 </div>
-<div class="olist arabic data-line-532">
+<div class="olist arabic">
 <ol class="arabic">
-<li class="data-line-532">
+<li>
 <p>ベースとして、オブジェクト自身を返す <code>map</code> メソッドを持つendofunctorとしての特性をもつオブジェクトで、さらに以下の２つの関数（メソッド）がある</p>
 </li>
-<li class="data-line-533">
+<li>
 <p><code>unit</code></p>
 </li>
-<li class="data-line-534">
+<li>
 <p><code>flat</code></p>
 </li>
 </ol>
 </div>
-<div class="paragraph data-line-536">
+<div class="paragraph">
 <p>この３つ組（トリプル）</p>
 </div>
-<div class="stemblock data-line-539">
+<div class="stemblock">
 <div class="content">
 \[(endofunctor, unit, flat)\]
 </div>
 </div>
-<div class="paragraph data-line-543">
+<div class="paragraph">
 <p>をモナドと呼びます。</p>
 </div>
-<div class="paragraph data-line-545">
+<div class="paragraph">
 <p>３つ組（トリプル）、オブジェクト、関数、メソッドという言葉遣い、きちんとした意味、さらに、bicategoryのことなどは、6章 <a href="#relation">代数学と関数型プログラミングとオブジェクト指向の用語・記法の相互関係</a> 以降で詳しく解説します。</p>
 </div>
 </div>
 </div>
 </div>
-<div class="sect1 data-line-6">
+<div class="sect1">
 <h2 id="howto">5. リストモナド(List Monad)のつかいかた</h2>
 <div class="sectionbody">
 <style type="text/css">
+p>code {background-color: #aaaaaa};
+
 th,td {
     border: solid 0px;
 }
-p>code {background-color: #aaaaaa};
 td>code {background-color: #aaaaaa};
+}
 </style>
-<div class="paragraph data-line-21">
+<div class="paragraph">
 <p>モナドの超基本的概念とそれに伴う定義付けは終わったので、あとはそれをどう使うか？です。</p>
 </div>
-<div class="paragraph data-line-23">
+<div class="paragraph">
 <p><code>Array.map</code> に <code>Array.flat</code> 追加してモナドになった <code>Array</code> は、特に <strong>リストモナド(List Monad)</strong>と呼ばれます。</p>
 </div>
-<div class="paragraph data-line-25">
+<div class="paragraph">
 <p>復習しておくと、そもそも、わざわざArrayをモナドにした動機とは、endofunctorだけだと、</p>
 </div>
-<div class="quoteblock data-line-27">
+<div class="quoteblock">
 <blockquote>
-<div class="paragraph data-line-1">
+<div class="paragraph">
 <p>もうにっちもさっちもいかないので、ここが <code>Array.map</code> の関数型プログラミングでの限界です。<code>Array.map</code> は、自分自身＝ <code>Array</code> を返すというEndofunctor(自己関手)の特性があり、メソッドチェーンが出来るのだが、<strong>メソッドチェーンが入れ子構造になると、自身の構造をコントロールできなくなる</strong> のです。</p>
 </div>
 </blockquote>
 </div>
-<div class="paragraph data-line-29">
+<div class="paragraph">
 <p>という、限界突破の目的でした。構造をコントロールできるようになりたい。</p>
 </div>
-<div class="paragraph data-line-31">
+<div class="paragraph">
 <p>あと、メソッドチェーンを入れ子構造になっても統一的に扱いたいという話の流れで、仮に構造コントロールできるようになったとして、そのトレードオフとして別のなにかが出来なくなると、同じ局面でendofunctorとモナドの使い分けが必要ということになってしまいます。こうなるとまた収集がつかなくなるのは目に見えているので、トレードオフは受け入れられません。</p>
 </div>
-<div class="paragraph data-line-33">
+<div class="paragraph">
 <p><strong>モナドは、endofunctorの完全な上位互換であってくれないと使い物にはならない、ということです。上位互換を目指します。</strong></p>
 </div>
-<div class="paragraph data-line-35">
+<div class="paragraph">
 <p>endofunctorとの互換性を担保するだけならば、理屈は簡単で、 <code>unit</code> と <code>flat</code> が対称なので、行って来いで、効果を相殺すれば済むことです。その上、<code>flat</code> はモナドオブジェクト自身の基底にヒットすると、それ以上階層を下げて裸の値を返すことはない安心保証の性質があるので、それだけでも上位互換となるはずです。</p>
 </div>
-<div class="imageblock text-center data-line-38">
+<div class="imageblock" style="text-align: center">
 <div class="content">
 <img src="https://kentutorialbook.github.io/30minLearningJavaScriptMonad/img/unitflat5.svg" alt="unitflat5">
 </div>
 </div>
-<div class="paragraph data-line-41">
+<div class="paragraph">
 <p>実際にこの理論で上手く行くのか？やってみなきゃわからない。やってみよう。</p>
 </div>
-<div class="paragraph data-line-43">
+<div class="paragraph">
 <p>まず、たたき台となる、普通の <code>Array.map</code> だけのパターン</p>
 </div>
-<div class="listingblock data-line-46">
+<div class="listingblock">
 <div class="title">Array.map</div>
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="js" class="language-js hljs">const array1 = [1, 2, 3, 4, 5];
+<pre class="highlightjs highlight"><code class="language-js hljs" data-lang="js">const array1 = [1, 2, 3, 4, 5];
 
 const array2 = array1
     .map(a =&gt; a * 2);
@@ -1675,19 +1655,19 @@ const array2 = array1
 console.log(array2);</code></pre>
 </div>
 </div>
-<div class="listingblock data-line-57">
+<div class="listingblock">
 <div class="title">Console</div>
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="js" class="language-js hljs">[ 2, 4, 6, 8, 10 ]</code></pre>
+<pre class="highlightjs highlight"><code class="language-js hljs" data-lang="js">[ 2, 4, 6, 8, 10 ]</code></pre>
 </div>
 </div>
-<div class="paragraph data-line-61">
+<div class="paragraph">
 <p>想定どおりの挙動です。上位互換となるモナドでも、まったく同じことが出来なければいけません。</p>
 </div>
-<div class="listingblock data-line-65">
+<div class="listingblock">
 <div class="title">Array.map　+ flat</div>
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="js" class="language-js hljs">const unit = a =&gt; [a];
+<pre class="highlightjs highlight"><code class="language-js hljs" data-lang="js">const unit = a =&gt; [a];
 
 const array1 = [1, 2, 3, 4, 5];
 
@@ -1698,7 +1678,7 @@ const array2 = array1
 console.log(array2);</code></pre>
 </div>
 </div>
-<div class="colist arabic data-line-79">
+<div class="colist arabic">
 <table>
 <tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
@@ -1710,36 +1690,36 @@ console.log(array2);</code></pre>
 </tr>
 </table>
 </div>
-<div class="listingblock data-line-83">
+<div class="listingblock">
 <div class="title">Console</div>
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="js" class="language-js hljs">[ 2, 4, 6, 8, 10 ]</code></pre>
+<pre class="highlightjs highlight"><code class="language-js hljs" data-lang="js">[ 2, 4, 6, 8, 10 ]</code></pre>
 </div>
 </div>
-<div class="paragraph data-line-87">
+<div class="paragraph">
 <p>できました。想定した挙動になっています。</p>
 </div>
-<div class="paragraph data-line-89">
+<div class="paragraph">
 <p>さて、重要なポイントとして、<code>unit</code> と　<code>flat</code> で相殺するには単純に考えると複数のパターンが考えられるはずですが、順番として、なぜ、 <code>unit</code> ⇒　<code>flat</code> となっているのでしょうか？</p>
 </div>
-<div class="paragraph data-line-91">
+<div class="paragraph">
 <p>理由:</p>
 </div>
-<div class="olist arabic data-line-93">
+<div class="olist arabic">
 <ol class="arabic">
-<li class="data-line-93">
+<li>
 <p>最後に <code>flat</code> することで、裸の値でないモナドオブジェクトを返すことを保証できる</p>
 </li>
-<li class="data-line-96">
+<li>
 <p>あらじめ <code>unit</code> で構造を自由に指定した上で、<code>flat</code> できる</p>
 </li>
 </ol>
 </div>
-<div class="paragraph data-line-99">
+<div class="paragraph">
 <p>1,2により、相殺して互換性を保つ以上の上位機能が得られます。
 1についてはこれ以上説明は不要でしょうが、２については今から説明していきます。</p>
 </div>
-<div class="admonitionblock tip data-line-104">
+<div class="admonitionblock tip">
 <table>
 <tr>
 <td class="icon">
@@ -1747,38 +1727,38 @@ console.log(array2);</code></pre>
 </td>
 <td class="content">
 <div class="title">unit(a) = [a]</div>
-<div class="paragraph data-line-106">
+<div class="paragraph">
 <p><code>unit(a)</code></p>
 </div>
-<div class="paragraph data-line-108">
+<div class="paragraph">
 <p><code>[a]</code></p>
 </div>
-<div class="paragraph data-line-110">
+<div class="paragraph">
 <p>同じ意味ですが、あきらかに可読性と構造の直感的把握がしやすいのは、 <code>[a]</code> です。</p>
 </div>
-<div class="paragraph data-line-112">
+<div class="paragraph">
 <p>特にネストした構造になると、</p>
 </div>
-<div class="paragraph data-line-114">
+<div class="paragraph">
 <p><code>[ [a] ]</code> は、 <code>unit(unit(a))</code> など煩雑になります。</p>
 </div>
-<div class="paragraph data-line-116">
+<div class="paragraph">
 <p>すでに、<code>unit</code> と　<code>flat</code> の対称性のことは理解出来たと思うので、、特に必要のない限り、<code>unit(a)</code> のことは、単純に　<code>[a]</code> と表記することにします。</p>
 </div>
 </td>
 </tr>
 </table>
 </div>
-<div class="paragraph data-line-123">
+<div class="paragraph">
 <p>メソッドチェーンではどうでしょうか？</p>
 </div>
-<div class="paragraph data-line-125">
+<div class="paragraph">
 <p>まず、たたき台となる、普通の <code>Array.map</code> だけのパターン</p>
 </div>
-<div class="listingblock data-line-128">
+<div class="listingblock">
 <div class="title">Array.map chain</div>
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="js" class="language-js hljs">const array1 = [1, 2, 3, 4, 5];
+<pre class="highlightjs highlight"><code class="language-js hljs" data-lang="js">const array1 = [1, 2, 3, 4, 5];
 
 const array2 = array1
     .map(a =&gt; a * 2)
@@ -1787,19 +1767,19 @@ const array2 = array1
 console.log(array2);</code></pre>
 </div>
 </div>
-<div class="listingblock data-line-140">
+<div class="listingblock">
 <div class="title">Console</div>
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="js" class="language-js hljs">[ 3, 5, 7, 9, 11 ]</code></pre>
+<pre class="highlightjs highlight"><code class="language-js hljs" data-lang="js">[ 3, 5, 7, 9, 11 ]</code></pre>
 </div>
 </div>
-<div class="paragraph data-line-144">
+<div class="paragraph">
 <p>想定どおりの挙動です。上位互換となるモナドでも、まったく同じことが出来なければいけません。</p>
 </div>
-<div class="listingblock data-line-148">
+<div class="listingblock">
 <div class="title">Array.map　+ flat chain</div>
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="js" class="language-js hljs">const array1 = [1, 2, 3, 4, 5];
+<pre class="highlightjs highlight"><code class="language-js hljs" data-lang="js">const array1 = [1, 2, 3, 4, 5];
 
 const array2 = array1
     .map(a =&gt; [a * 2]).flat()
@@ -1808,21 +1788,21 @@ const array2 = array1
 console.log(array2);</code></pre>
 </div>
 </div>
-<div class="listingblock data-line-160">
+<div class="listingblock">
 <div class="title">Console</div>
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="js" class="language-js hljs">[ 3, 5, 7, 9, 11 ]</code></pre>
+<pre class="highlightjs highlight"><code class="language-js hljs" data-lang="js">[ 3, 5, 7, 9, 11 ]</code></pre>
 </div>
 </div>
-<div class="paragraph data-line-164">
+<div class="paragraph">
 <p>問題なく出来ました。</p>
 </div>
-<div class="sect2 data-line-166">
+<div class="sect2">
 <h3 id="_リストモナドでリスト構造をコントロールする">5.1. リストモナドでリスト構造をコントロールする</h3>
-<div class="listingblock data-line-170">
+<div class="listingblock">
 <div class="title">要素の数を増やす</div>
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="js" class="language-js hljs">const array1 = [1, 2, 3, 4, 5];
+<pre class="highlightjs highlight"><code class="language-js hljs" data-lang="js">const array1 = [1, 2, 3, 4, 5];
 
 const array2 = array1
     .map(a =&gt; [a, a])　<i class="conum" data-value="1"></i><b>(1)</b>
@@ -1831,7 +1811,7 @@ const array2 = array1
 console.log(array2);</code></pre>
 </div>
 </div>
-<div class="colist arabic data-line-183">
+<div class="colist arabic">
 <table>
 <tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
@@ -1843,16 +1823,16 @@ console.log(array2);</code></pre>
 </tr>
 </table>
 </div>
-<div class="listingblock data-line-187">
+<div class="listingblock">
 <div class="title">Console</div>
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="js" class="language-js hljs">[ 1, 1, 2, 2, 3, 3, 4, 4, 5, 5 ]</code></pre>
+<pre class="highlightjs highlight"><code class="language-js hljs" data-lang="js">[ 1, 1, 2, 2, 3, 3, 4, 4, 5, 5 ]</code></pre>
 </div>
 </div>
-<div class="listingblock data-line-193">
+<div class="listingblock">
 <div class="title">要素の数を増やしたいわけじゃない、<code>[ [ 1, 1 ], [ 2, 2 ], [ 3, 3 ], [ 4, 4 ], [ 5, 5 ] ]</code> という構造が欲しいので .mapと同じ結果を寄越せ</div>
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="js" class="language-js hljs">const array1 = [1, 2, 3, 4, 5];
+<pre class="highlightjs highlight"><code class="language-js hljs" data-lang="js">const array1 = [1, 2, 3, 4, 5];
 
 const array2 = array1
     .map(a =&gt; [[a, a]])　<i class="conum" data-value="1"></i><b>(1)</b>
@@ -1861,7 +1841,7 @@ const array2 = array1
 console.log(array2);</code></pre>
 </div>
 </div>
-<div class="colist arabic data-line-205">
+<div class="colist arabic">
 <table>
 <tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
@@ -1877,16 +1857,16 @@ console.log(array2);</code></pre>
 </tr>
 </table>
 </div>
-<div class="listingblock data-line-213">
+<div class="listingblock">
 <div class="title">Console</div>
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="js" class="language-js hljs">[ [ 1, 1 ], [ 2, 2 ], [ 3, 3 ], [ 4, 4 ], [ 5, 5 ] ]</code></pre>
+<pre class="highlightjs highlight"><code class="language-js hljs" data-lang="js">[ [ 1, 1 ], [ 2, 2 ], [ 3, 3 ], [ 4, 4 ], [ 5, 5 ] ]</code></pre>
 </div>
 </div>
-<div class="listingblock data-line-221">
+<div class="listingblock">
 <div class="title">要素の数を減らす　奇数のみピックアップ</div>
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="js" class="language-js hljs">const array1 = [1, 2, 3, 4, 5];
+<pre class="highlightjs highlight"><code class="language-js hljs" data-lang="js">const array1 = [1, 2, 3, 4, 5];
 
 const array2 = array1
     .map(a =&gt;
@@ -1898,7 +1878,7 @@ const array2 = array1
 console.log(array2);</code></pre>
 </div>
 </div>
-<div class="colist arabic data-line-237">
+<div class="colist arabic">
 <table>
 <tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
@@ -1918,61 +1898,61 @@ console.log(array2);</code></pre>
 </tr>
 </table>
 </div>
-<div class="listingblock data-line-241">
+<div class="listingblock">
 <div class="title">Console</div>
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="js" class="language-js hljs">[ 1, 3, 5 ]</code></pre>
+<pre class="highlightjs highlight"><code class="language-js hljs" data-lang="js">[ 1, 3, 5 ]</code></pre>
 </div>
 </div>
 </div>
-<div class="sect2 data-line-247">
+<div class="sect2">
 <h3 id="_array_flatmapの登場">5.2. Array.flatMapの登場</h3>
-<div class="paragraph data-line-249">
+<div class="paragraph">
 <p><code>Array.map(f).flat()</code> となるモナドメソッドはendofunctorの上位互換として機能することが確認出来ました。もうこの確定したパターンでは、逐一尻尾に <code>.flat()</code> くっつけて回るのは、付け忘れる可能性だってある、スマートではないし、見通しも悪く、バグの温床にもなりかねません。</p>
 </div>
-<div class="paragraph data-line-251">
+<div class="paragraph">
 <p>そこで、もうこの２つの関数を合成してしまって、ひとつの関数として使い回せたほうが便利ですね。それが関数型プログラミングです。</p>
 </div>
-<div class="paragraph data-line-253">
+<div class="paragraph">
 <p>もちろん合成された関数が <code>Array</code> のメソッドとして実装されていないとまた自前でプロトタイプ拡張とかする羽目になって面倒ですが・・・</p>
 </div>
-<div class="paragraph data-line-255">
+<div class="paragraph">
 <p>ということで、あります。</p>
 </div>
-<div class="paragraph data-line-257">
+<div class="paragraph">
 <p><a href="https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Array/flatMap">Array.flatMap</a></p>
 </div>
-<div class="quoteblock data-line-259">
+<div class="quoteblock">
 <blockquote>
-<div class="paragraph data-line-1">
+<div class="paragraph">
 <p>flatMap() メソッドは、最初にマッピング関数を使用してそれぞれの要素をマップした後、結果を新しい配列内にフラット化します。これは深さ 1 の flatten が続く map と同じですが、flatMap はしばしば有用であり、2 つのメソッドを 1 つにマージするよりもやや効果的です。</p>
 </div>
 </blockquote>
 </div>
-<div class="paragraph data-line-261">
+<div class="paragraph">
 <p><code>Array.flatMap</code> は 最終的に <code>Array.flat</code> する <code>Array.map</code> という合成関数です。</p>
 </div>
-<div class="paragraph data-line-263">
+<div class="paragraph">
 <p><code>Array.flatMap</code> はもちろんモナドのメソッドです。</p>
 </div>
-<div class="paragraph data-line-265">
+<div class="paragraph">
 <p><code>Array</code> 以外のモナドで、既存のものにせよ、自前で何か実装するにせよ、endofunctor の <code>map</code> に <code>flat</code> 合成するというパターンはもう決まりきっているので、多くのモナドの実装では、<code>flat</code> は独立した関数として分離しておらず、<code>flat</code> は、オブジェクト構造の平坦化　\(TTX \rightarrow TX\) という機能として、  <code>flatMap</code> メソッド(概念として。名前は自由。)のコードに組み入れられて渾然一体となっているケースが多いと思います。</p>
 </div>
-<div class="imageblock data-line-270">
+<div class="imageblock">
 <div class="content">
 <img src="https://kentutorialbook.github.io/30minLearningJavaScriptMonad/img/flat-browser.png" alt="flat browser">
 </div>
 </div>
-<div class="paragraph data-line-272">
+<div class="paragraph">
 <p>よく見ると、<code>Array.flat</code> の実装状況と同じで、<code>Array.flat</code> と　<code>Array.flatMap</code>　はふたつセットで各ブラウザへ実装されたっぽいことが推察されます。</p>
 </div>
-<div class="paragraph data-line-274">
+<div class="paragraph">
 <p>Array.map+ flat chain　のコードは <code>Array.flatMap</code> を使って書き換えられます。</p>
 </div>
-<div class="listingblock data-line-278">
+<div class="listingblock">
 <div class="title">Array.flatMap chain</div>
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="js" class="language-js hljs">const array1 = [1, 2, 3, 4, 5];
+<pre class="highlightjs highlight"><code class="language-js hljs" data-lang="js">const array1 = [1, 2, 3, 4, 5];
 
 const array2 = array1
     .flatMap(a =&gt; [a * 2])
@@ -1981,58 +1961,58 @@ const array2 = array1
 console.log(array2);</code></pre>
 </div>
 </div>
-<div class="listingblock data-line-290">
+<div class="listingblock">
 <div class="title">Console</div>
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="js" class="language-js hljs">[ 3, 5, 7, 9, 11 ]</code></pre>
+<pre class="highlightjs highlight"><code class="language-js hljs" data-lang="js">[ 3, 5, 7, 9, 11 ]</code></pre>
 </div>
 </div>
 </div>
-<div class="sect2 data-line-294">
+<div class="sect2">
 <h3 id="_array_flatmapとモナド関数">5.3. Array.flatMapとモナド関数</h3>
-<div class="paragraph data-line-296">
+<div class="paragraph">
 <p><code>Array.flatMap</code> メソッドの成り立ち、仕組みについて、我々はすでに熟知しているはずなので、あとはどう使いこなすか？です。</p>
 </div>
-<div class="paragraph data-line-298">
+<div class="paragraph">
 <p>APIの仕様の天下りではなくて、数学的な特性から自然と振る舞いはわかるはずだし、使い方も見えてくるはずです。</p>
 </div>
-<div class="paragraph data-line-300">
+<div class="paragraph">
 <p>まずベースは、<code>Array.map</code> でこの機能は含まれています。
 次に、<code>Array.flat</code> を合成したので、この機能も含まれています。これにより、要素の増減がコントロールできるようになりました。</p>
 </div>
-<div class="paragraph data-line-303">
+<div class="paragraph">
 <p>さらに <code>Array.flat</code> は、空集合（配列）の <code>[]</code> は要素を削除してしまうので、場合分けすることで、<code>Array.filter</code> の機能もあります。</p>
 </div>
-<div class="paragraph data-line-305">
+<div class="paragraph">
 <p><code>Array.flatMap</code> メソッドをうまく使いこなすことさえできれば、<code>Array.map</code> <code>Array.flat</code> <code>Array.filter</code> が不要になるばかりでなく、これ１つで、なんでもできて、統一的な視点が手に入るはずで、えーっとたしか <code>Array.filter</code> っていうAPIがあったな、どういう仕様だったかな？・・・とか、この要素を削除したいがどうすればわからない、とか、ここの <code>[]</code> 取ってフラットにしたいんだけど、どのAPI使えばいいのかな？とかGoogle検索しながら頭を悩ませる労力から開放される・・・はずです。</p>
 </div>
-<div class="paragraph data-line-307">
+<div class="paragraph">
 <p><code>Array.flatMap</code> メソッドの挙動を司るのが、引数として渡す関数です。したがって、<code>Array.flatMap</code> メソッドを使いこなすとは、この関数を使いこなすことに他なりません。</p>
 </div>
-<div class="paragraph data-line-309">
+<div class="paragraph">
 <p>この関数のことを、理由は後で補足するとして、複数の理由から <strong>モナド関数(monadic functions)</strong>と呼ぶことにしましょう。とりあえずひとつの理由は、モナドメソッドである <code>Array.flatMap</code> の挙動を司るからです。</p>
 </div>
-<div class="paragraph data-line-311">
+<div class="paragraph">
 <p>モナド関数だけ設計すれば、なんでもできる。 モナド関数だけ見れば、何やってるのかわかる。そうなるはずなので、ここではモナド関数を研究する必要があるでしょう。</p>
 </div>
 </div>
-<div class="sect2 data-line-313">
+<div class="sect2">
 <h3 id="_モナド関数の動作確認">5.4. モナド関数の動作確認</h3>
-<div class="paragraph data-line-315">
+<div class="paragraph">
 <p>まず基本的な動作確認をします。</p>
 </div>
 <hr>
-<div class="ulist data-line-319">
+<div class="ulist">
 <ul>
-<li class="data-line-319">
+<li>
 <p><code>Array.map</code> の互換　同じ階層にマップする</p>
 </li>
 </ul>
 </div>
-<div class="listingblock data-line-323">
+<div class="listingblock">
 <div class="title">Array.flatMap</div>
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="js" class="language-js hljs">const array1 = [1, 2, 3, 4, 5];
+<pre class="highlightjs highlight"><code class="language-js hljs" data-lang="js">const array1 = [1, 2, 3, 4, 5];
 
 const array2 = array1
     .flatMap(a =&gt; [a * 2]);　<i class="conum" data-value="1"></i><b>(1)</b>
@@ -2040,7 +2020,7 @@ const array2 = array1
 console.log(array2);</code></pre>
 </div>
 </div>
-<div class="colist arabic data-line-332">
+<div class="colist arabic">
 <table>
 <tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
@@ -2048,24 +2028,24 @@ console.log(array2);</code></pre>
 </tr>
 </table>
 </div>
-<div class="listingblock data-line-336">
+<div class="listingblock">
 <div class="title">Console</div>
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="js" class="language-js hljs">[ 2, 4, 6, 8, 10 ]</code></pre>
+<pre class="highlightjs highlight"><code class="language-js hljs" data-lang="js">[ 2, 4, 6, 8, 10 ]</code></pre>
 </div>
 </div>
 <hr>
-<div class="ulist data-line-342">
+<div class="ulist">
 <ul>
-<li class="data-line-342">
+<li>
 <p><code>Array.map</code> の互換　階層をひとつ上げる</p>
 </li>
 </ul>
 </div>
-<div class="listingblock data-line-346">
+<div class="listingblock">
 <div class="title">Array.flatMap</div>
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="js" class="language-js hljs">const array1 = [1, 2, 3, 4, 5];
+<pre class="highlightjs highlight"><code class="language-js hljs" data-lang="js">const array1 = [1, 2, 3, 4, 5];
 
 const array2 = array1
     .flatMap(a =&gt; [[a * 2]]);　<i class="conum" data-value="1"></i><b>(1)</b>
@@ -2073,7 +2053,7 @@ const array2 = array1
 console.log(array2);</code></pre>
 </div>
 </div>
-<div class="colist arabic data-line-355">
+<div class="colist arabic">
 <table>
 <tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
@@ -2081,24 +2061,24 @@ console.log(array2);</code></pre>
 </tr>
 </table>
 </div>
-<div class="listingblock data-line-359">
+<div class="listingblock">
 <div class="title">Console</div>
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="js" class="language-js hljs">[ [ 2 ], [ 4 ], [ 6 ], [ 8 ], [ 10 ] ]</code></pre>
+<pre class="highlightjs highlight"><code class="language-js hljs" data-lang="js">[ [ 2 ], [ 4 ], [ 6 ], [ 8 ], [ 10 ] ]</code></pre>
 </div>
 </div>
 <hr>
-<div class="ulist data-line-365">
+<div class="ulist">
 <ul>
-<li class="data-line-365">
+<li>
 <p><code>Array.map</code> にない機能　階層をひとつ下げる</p>
 </li>
 </ul>
 </div>
-<div class="listingblock data-line-369">
+<div class="listingblock">
 <div class="title">Array.flatMap</div>
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="js" class="language-js hljs">const array1 = [[1], [2], [3], [4], [5]];
+<pre class="highlightjs highlight"><code class="language-js hljs" data-lang="js">const array1 = [[1], [2], [3], [4], [5]];
 
 const array2 = array1
  .flatMap(a =&gt; a) <i class="conum" data-value="1"></i><b>(1)</b>
@@ -2107,7 +2087,7 @@ const array2 = array1
 console.log(array2);</code></pre>
 </div>
 </div>
-<div class="colist arabic data-line-380">
+<div class="colist arabic">
 <table>
 <tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
@@ -2119,29 +2099,29 @@ console.log(array2);</code></pre>
 </tr>
 </table>
 </div>
-<div class="listingblock data-line-384">
+<div class="listingblock">
 <div class="title">Console</div>
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="js" class="language-js hljs">[ 2, 4, 6, 8, 10 ]</code></pre>
+<pre class="highlightjs highlight"><code class="language-js hljs" data-lang="js">[ 2, 4, 6, 8, 10 ]</code></pre>
 </div>
 </div>
-<div class="admonitionblock tip data-line-390">
+<div class="admonitionblock tip">
 <table>
 <tr>
 <td class="icon">
 <i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
-<div class="paragraph data-line-391">
+<div class="paragraph">
 <p>ES6以降の<a href="https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment">分割代入 (Destructuring assignment)</a>を利用して、</p>
 </div>
-<div class="paragraph data-line-393">
+<div class="paragraph">
 <p><code>.flatMap(([a]) &#8658; [a * 2])</code></p>
 </div>
-<div class="paragraph data-line-395">
+<div class="paragraph">
 <p>とする手法もありえますが、煩雑に見えるし、手法に統一性がないので、ここでは採用しません。</p>
 </div>
-<div class="paragraph data-line-397">
+<div class="paragraph">
 <p>また、分割代入を利用すれば、<code>Array.map</code> でも階層下げは可能ですが、それはあくまで分割代入によって階層が下げられているだけで、<code>Array.map</code> の機能ではありません。</p>
 </div>
 </td>
@@ -2149,17 +2129,17 @@ console.log(array2);</code></pre>
 </table>
 </div>
 <hr>
-<div class="ulist data-line-403">
+<div class="ulist">
 <ul>
-<li class="data-line-403">
+<li>
 <p><code>Array.map</code> にない機能　要素を増やす</p>
 </li>
 </ul>
 </div>
-<div class="listingblock data-line-407">
+<div class="listingblock">
 <div class="title">Array.flatMap</div>
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="js" class="language-js hljs">const array1 = [1, 2, 3, 4, 5];
+<pre class="highlightjs highlight"><code class="language-js hljs" data-lang="js">const array1 = [1, 2, 3, 4, 5];
 
 const array2 = array1
    .flatMap(a =&gt; [a, a * 2]);　<i class="conum" data-value="1"></i><b>(1)</b>
@@ -2167,7 +2147,7 @@ const array2 = array1
 console.log(array2);</code></pre>
 </div>
 </div>
-<div class="colist arabic data-line-416">
+<div class="colist arabic">
 <table>
 <tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
@@ -2175,24 +2155,24 @@ console.log(array2);</code></pre>
 </tr>
 </table>
 </div>
-<div class="listingblock data-line-420">
+<div class="listingblock">
 <div class="title">Console</div>
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="js" class="language-js hljs">[ 1, 2, 2, 4, 3, 6, 4, 8, 5, 10 ]</code></pre>
+<pre class="highlightjs highlight"><code class="language-js hljs" data-lang="js">[ 1, 2, 2, 4, 3, 6, 4, 8, 5, 10 ]</code></pre>
 </div>
 </div>
 <hr>
-<div class="ulist data-line-427">
+<div class="ulist">
 <ul>
-<li class="data-line-427">
+<li>
 <p><code>Array.map</code> にない機能　要素を削除</p>
 </li>
 </ul>
 </div>
-<div class="listingblock data-line-431">
+<div class="listingblock">
 <div class="title">Array.flatMap</div>
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="js" class="language-js hljs">const array1 = [1, 2, 3, 4, 5];
+<pre class="highlightjs highlight"><code class="language-js hljs" data-lang="js">const array1 = [1, 2, 3, 4, 5];
 
 const array2 = array1
    .flatMap(a =&gt; []);　<i class="conum" data-value="1"></i><b>(1)</b>
@@ -2200,7 +2180,7 @@ const array2 = array1
 console.log(array2);</code></pre>
 </div>
 </div>
-<div class="colist arabic data-line-440">
+<div class="colist arabic">
 <table>
 <tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
@@ -2208,39 +2188,39 @@ console.log(array2);</code></pre>
 </tr>
 </table>
 </div>
-<div class="listingblock data-line-444">
+<div class="listingblock">
 <div class="title">Console</div>
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="js" class="language-js hljs">[ ]</code></pre>
+<pre class="highlightjs highlight"><code class="language-js hljs" data-lang="js">[ ]</code></pre>
 </div>
 </div>
 </div>
-<div class="sect2 data-line-448">
+<div class="sect2">
 <h3 id="_モナド関数は必ずモナドを返す">5.5. モナド関数は必ずモナドを返す</h3>
-<div class="paragraph data-line-450">
+<div class="paragraph">
 <p>以上のモナド関数の動作確認から、モナド関数は必ずモナドを返している、ということがわかります。</p>
 </div>
-<div class="quoteblock data-line-452">
+<div class="quoteblock">
 <blockquote>
-<div class="paragraph data-line-1">
+<div class="paragraph">
 <p>階層を１つ下げたいときは、モナド関数の返り値は、<code>[]</code> なしのままで</p>
 </div>
 </blockquote>
 </div>
-<div class="paragraph data-line-455">
+<div class="paragraph">
 <p><code>a &#8658; a</code>　だった！？</p>
 </div>
-<div class="paragraph data-line-457">
+<div class="paragraph">
 <p>と思うかもしれませんが、 元の操作対象となる <code>Array</code>（モナド）は<br>
 <code>[ [1], [2], [3], [4], [5] ]</code> でこのときの入力値 <code>a</code> はその <code>Array</code> の各要素で、たとえば <code>[1]</code> という <code>Array</code> なので、返り値となる　<code>a</code> も同様に <code>Array</code>（モナド）です。</p>
 </div>
-<div class="paragraph data-line-460">
+<div class="paragraph">
 <p>モナド関数は必ずモナドを返すというのが、モナド関数と呼ぶもう一つの理由です。</p>
 </div>
-<div class="paragraph data-line-462">
+<div class="paragraph">
 <p>裏を返せば、モナド関数は、モナドさえ返せばなんであっても構わないでしょう。</p>
 </div>
-<div class="admonitionblock tip data-line-466">
+<div class="admonitionblock tip">
 <table>
 <tr>
 <td class="icon">
@@ -2248,27 +2228,27 @@ console.log(array2);</code></pre>
 </td>
 <td class="content">
 <div class="title">モナドの構成要素となっている関数はすべてモナドを返す</div>
-<div class="ulist data-line-467">
+<div class="ulist">
 <ul>
-<li class="data-line-467">
+<li>
 <p><code>unit</code></p>
 </li>
-<li class="data-line-468">
+<li>
 <p><code>Array.flatMap</code></p>
 </li>
-<li class="data-line-469">
+<li>
 <p>モナド関数</p>
 </li>
 </ul>
 </div>
-<div class="paragraph data-line-471">
+<div class="paragraph">
 <p>モナドの構成要素となっているこれら３つの関数は、3つとも必ずモナドを返す関数であることに注目してください。</p>
 </div>
 </td>
 </tr>
 </table>
 </div>
-<div class="admonitionblock note data-line-477">
+<div class="admonitionblock note">
 <table>
 <tr>
 <td class="icon">
@@ -2276,23 +2256,23 @@ console.log(array2);</code></pre>
 </td>
 <td class="content">
 <div class="title">Array.flatMapは必ずしもモナド関数を要請しない</div>
-<div class="paragraph data-line-478">
+<div class="paragraph">
 <p><code>Array.flatMap</code> メソッドのモナドとしてのポテンシャルを最大限引き出すためには、モナド関数でコントロールする統一的視点で利用するのは言うまでもありませんが、<code>Array.flatMap</code> は必ずしもモナド関数を要請しません。</p>
 </div>
-<div class="paragraph data-line-480">
+<div class="paragraph">
 <p>たとえば、</p>
 </div>
-<div class="ulist data-line-482">
+<div class="ulist">
 <ul>
-<li class="data-line-482">
+<li>
 <p><code>Array.map</code> の互換　同じ階層にマップする</p>
 </li>
 </ul>
 </div>
-<div class="listingblock data-line-486">
+<div class="listingblock">
 <div class="title">Array.flatMap</div>
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="js" class="language-js hljs">const array1 = [1, 2, 3, 4, 5];
+<pre class="highlightjs highlight"><code class="language-js hljs" data-lang="js">const array1 = [1, 2, 3, 4, 5];
 
 const array2 = array1
     .flatMap(a =&gt; a * 2);　<i class="conum" data-value="1"></i><b>(1)</b>
@@ -2300,7 +2280,7 @@ const array2 = array1
 console.log(array2);</code></pre>
 </div>
 </div>
-<div class="colist arabic data-line-495">
+<div class="colist arabic">
 <table>
 <tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
@@ -2308,19 +2288,19 @@ console.log(array2);</code></pre>
 </tr>
 </table>
 </div>
-<div class="listingblock data-line-499">
+<div class="listingblock">
 <div class="title">Console</div>
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="js" class="language-js hljs">[ 2, 4, 6, 8, 10 ]</code></pre>
+<pre class="highlightjs highlight"><code class="language-js hljs" data-lang="js">[ 2, 4, 6, 8, 10 ]</code></pre>
 </div>
 </div>
-<div class="paragraph data-line-503">
+<div class="paragraph">
 <p>タイプエラーが出ることもなく、<code>Array.map</code> と同じ結果が出てきました。なぜでしょうか？</p>
 </div>
-<div class="paragraph data-line-505">
+<div class="paragraph">
 <p><code>a &#8658; a * 2</code> というのは、操作対象が、「ネストしているモナドならば」階層１つ下げたモナド値を返す、というモナド関数となりえますが、今のケースのように操作対象がネストしていないモナドの場合は裸の値を返してしまっているわけでモナド関数ではありません。しかしそれでもタイプエラーが出ないのは、<code>flat</code> の仕様：「モナドオブジェクト基底より下げて裸の値は返さない」という安全装置により、変化せずに、そのままのモナド値が返ってきたのです。</p>
 </div>
-<div class="paragraph data-line-507">
+<div class="paragraph">
 <p>言い換えると、<code>Array.flatMap</code> で単階層限定のモナドを扱いたい場合、意図的に <code>Array.map</code> とまったく同じ非モナド関数で <code>Array.map</code> と互換性のある運用は可能です。メソッドチェーンの組み換え等その他モナドのアドバンテージもそのまま残るはずですが、あくまで統一的なモナド関数によるモナドのコントロール、というパラダイムからは外れているので、そこは好みでしょう。</p>
 </div>
 </td>
@@ -2328,21 +2308,21 @@ console.log(array2);</code></pre>
 </table>
 </div>
 </div>
-<div class="sect2 data-line-513">
+<div class="sect2">
 <h3 id="monadfunction">5.6. モナド関数を設計する</h3>
-<div class="paragraph data-line-515">
+<div class="paragraph">
 <p>モナド関数は、モナドを返せばなんでも自由だという事が判明したので、モナド関数を自由に設計してみます。</p>
 </div>
-<div class="paragraph data-line-517">
+<div class="paragraph">
 <p>まず手始めに、もっとも単純な、何もせずに自分自身を返すモナド関数を作ります。</p>
 </div>
-<div class="paragraph data-line-519">
+<div class="paragraph">
 <p>そして、だいたいモナド関数の感じもつかめてきたので、<code>Array</code> に限定しないモナドでも通用しやすい <code>unit</code> 表記に戻してやります。</p>
 </div>
-<div class="listingblock data-line-523">
+<div class="listingblock">
 <div class="title">モナド関数　identitiy</div>
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="js" class="language-js hljs">const unit = a =&gt; [a]; <i class="conum" data-value="1"></i><b>(1)</b>
+<pre class="highlightjs highlight"><code class="language-js hljs" data-lang="js">const unit = a =&gt; [a]; <i class="conum" data-value="1"></i><b>(1)</b>
 
 const identity = a =&gt; unit(a); <i class="conum" data-value="2"></i><b>(2)</b>
 
@@ -2353,7 +2333,7 @@ const array2 = array1
 console.log(array2);</code></pre>
 </div>
 </div>
-<div class="colist arabic data-line-537">
+<div class="colist arabic">
 <table>
 <tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
@@ -2369,17 +2349,17 @@ console.log(array2);</code></pre>
 </tr>
 </table>
 </div>
-<div class="listingblock data-line-541">
+<div class="listingblock">
 <div class="title">Console</div>
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="js" class="language-js hljs">[ 1, 2, 3, 4, 5 ]</code></pre>
+<pre class="highlightjs highlight"><code class="language-js hljs" data-lang="js">[ 1, 2, 3, 4, 5 ]</code></pre>
 </div>
 </div>
 <hr>
-<div class="listingblock data-line-549">
+<div class="listingblock">
 <div class="title">モナド関数　plus9</div>
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="js" class="language-js hljs">const plus9 = a =&gt; unit(a + 9);   <i class="conum" data-value="1"></i><b>(1)</b>
+<pre class="highlightjs highlight"><code class="language-js hljs" data-lang="js">const plus9 = a =&gt; unit(a + 9);   <i class="conum" data-value="1"></i><b>(1)</b>
 
 const array1 = [1, 2, 3, 4, 5];
 const array2 = array1
@@ -2388,7 +2368,7 @@ const array2 = array1
 console.log(array2);</code></pre>
 </div>
 </div>
-<div class="colist arabic data-line-560">
+<div class="colist arabic">
 <table>
 <tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
@@ -2400,17 +2380,17 @@ console.log(array2);</code></pre>
 </tr>
 </table>
 </div>
-<div class="listingblock data-line-564">
+<div class="listingblock">
 <div class="title">Console</div>
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="js" class="language-js hljs">[ 10, 11, 12, 13, 14 ]</code></pre>
+<pre class="highlightjs highlight"><code class="language-js hljs" data-lang="js">[ 10, 11, 12, 13, 14 ]</code></pre>
 </div>
 </div>
 <hr>
-<div class="listingblock data-line-572">
+<div class="listingblock">
 <div class="title">モナド関数　oddFilter</div>
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="js" class="language-js hljs">const oddFilter = a =&gt;  <i class="conum" data-value="1"></i><b>(1)</b>
+<pre class="highlightjs highlight"><code class="language-js hljs" data-lang="js">const oddFilter = a =&gt;  <i class="conum" data-value="1"></i><b>(1)</b>
     a % 2 === 1         <i class="conum" data-value="2"></i><b>(2)</b>
         ? unit(a)       <i class="conum" data-value="3"></i><b>(3)</b>
         : [];           <i class="conum" data-value="4"></i><b>(4)</b>
@@ -2422,7 +2402,7 @@ const array2 = array1
 console.log(array2);</code></pre>
 </div>
 </div>
-<div class="colist arabic data-line-589">
+<div class="colist arabic">
 <table>
 <tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
@@ -2446,13 +2426,13 @@ console.log(array2);</code></pre>
 </tr>
 </table>
 </div>
-<div class="listingblock data-line-593">
+<div class="listingblock">
 <div class="title">Console</div>
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="js" class="language-js hljs">[ 1, 3, 5 ]</code></pre>
+<pre class="highlightjs highlight"><code class="language-js hljs" data-lang="js">[ 1, 3, 5 ]</code></pre>
 </div>
 </div>
-<div class="admonitionblock tip data-line-599">
+<div class="admonitionblock tip">
 <table>
 <tr>
 <td class="icon">
@@ -2460,28 +2440,28 @@ console.log(array2);</code></pre>
 </td>
 <td class="content">
 <div class="title">自分自身を削除するモナド関数</div>
-<div class="paragraph data-line-600">
+<div class="paragraph">
 <p><code>oddFilter</code> というモナド関数が面白いのは、「空のモナド <code>[]</code> を返すこと」が「自分自身を削除する」という意味になっているところです。</p>
 </div>
-<div class="paragraph data-line-602">
+<div class="paragraph">
 <p>一般的にリストモナド関数 <code>a &#8658; []</code> は自分自身を削除するモナド関数で、データをクリアできます。</p>
 </div>
-<div class="paragraph data-line-604">
+<div class="paragraph">
 <p>モナドが自分自身の構造をコントロールできる、という意味が実感できるでしょうか？</p>
 </div>
-<div class="paragraph data-line-606">
+<div class="paragraph">
 <p>普通の <code>Array.map</code> の配列操作では、仮にメソッドチェーンのタイプエラー問題を克服しながら関数化できたとしても、このような芸当は不可能です。</p>
 </div>
-<div class="paragraph data-line-608">
+<div class="paragraph">
 <p>モナドは、どういったタイプのモナドでも、こういった特異点というか、数字のゼロに対応するような特異なケースでかなりよく振る舞う性質を備えているようです。</p>
 </div>
-<div class="paragraph data-line-610">
+<div class="paragraph">
 <p>たとえば、エラーを特異な値として持つと大きなメリットがあるなど。</p>
 </div>
-<div class="paragraph data-line-612">
+<div class="paragraph">
 <p>Javaで悪名高い頻発するnull pointer exceptionは、このような値がないときの振る舞いを設計の段階で上手く規定できていないことが根本的原因ですが、モナドを積極的に取り入れることで問題の多くは解決するんじゃないでしょうか？</p>
 </div>
-<div class="paragraph data-line-614">
+<div class="paragraph">
 <p>また著者が最近書いたFRPオブジェクトをモナドになるように設計していると、値が <code>undefined</code> になればイベントを発生しない、というデザインに自然になってしまいました。人工的な仕様がオブジェクトの構造を要請するのではなくて、数学的な構造が自然と仕様を要請してしまう、というのは驚くべきことです。</p>
 </div>
 </td>
@@ -2489,10 +2469,10 @@ console.log(array2);</code></pre>
 </table>
 </div>
 <hr>
-<div class="listingblock data-line-623">
+<div class="listingblock">
 <div class="title">モナド関数　メソッドチェーン</div>
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="js" class="language-js hljs">const array1 = [1, 2, 3, 4, 5];
+<pre class="highlightjs highlight"><code class="language-js hljs" data-lang="js">const array1 = [1, 2, 3, 4, 5];
 const array3 = array1
     .flatMap(plus9)      <i class="conum" data-value="1"></i><b>(1)</b>
     .flatMap(oddFilter); <i class="conum" data-value="2"></i><b>(2)</b>
@@ -2500,7 +2480,7 @@ const array3 = array1
 console.log(array3);</code></pre>
 </div>
 </div>
-<div class="colist arabic data-line-633">
+<div class="colist arabic">
 <table>
 <tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
@@ -2512,17 +2492,17 @@ console.log(array3);</code></pre>
 </tr>
 </table>
 </div>
-<div class="listingblock data-line-637">
+<div class="listingblock">
 <div class="title">Console</div>
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="js" class="language-js hljs">[ 11, 13 ]</code></pre>
+<pre class="highlightjs highlight"><code class="language-js hljs" data-lang="js">[ 11, 13 ]</code></pre>
 </div>
 </div>
 <hr>
-<div class="listingblock data-line-645">
+<div class="listingblock">
 <div class="title">モナド関数　メソッドチェーンでモナド関数合成</div>
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="js" class="language-js hljs">const plus9oddFilter = a =&gt;   <i class="conum" data-value="1"></i><b>(1)</b>
+<pre class="highlightjs highlight"><code class="language-js hljs" data-lang="js">const plus9oddFilter = a =&gt;   <i class="conum" data-value="1"></i><b>(1)</b>
     unit(a)                   <i class="conum" data-value="2"></i><b>(2)</b>
         .flatMap(plus9)       <i class="conum" data-value="3"></i><b>(3)</b>
         .flatMap(oddFilter);  <i class="conum" data-value="4"></i><b>(4)</b>
@@ -2534,7 +2514,7 @@ const array4 = array1
 console.log(array4);</code></pre>
 </div>
 </div>
-<div class="colist arabic data-line-663">
+<div class="colist arabic">
 <table>
 <tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
@@ -2558,192 +2538,194 @@ console.log(array4);</code></pre>
 </tr>
 </table>
 </div>
-<div class="listingblock data-line-667">
+<div class="listingblock">
 <div class="title">Console</div>
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="js" class="language-js hljs">[ 11, 13 ]</code></pre>
+<pre class="highlightjs highlight"><code class="language-js hljs" data-lang="js">[ 11, 13 ]</code></pre>
 </div>
 </div>
-<div class="paragraph data-line-671">
+<div class="paragraph">
 <p>モナド関数の設計も合成もすべて、<code>Array.flatMap</code> メソッド1本で実現していることに注目してください。</p>
 </div>
 </div>
-<div class="sect2 data-line-674">
+<div class="sect2">
 <h3 id="_まとめ_2">5.7. まとめ</h3>
-<div class="paragraph data-line-676">
+<div class="paragraph">
 <p>モナドは、<code>map</code> メソッドに <code>flat</code> メソッドを追加したオブジェクト。</p>
 </div>
-<div class="paragraph data-line-678">
+<div class="paragraph">
 <p><code>map</code> と <code>flat</code> を合成したのが、<code>flatMap</code> で当然これもモナドのメソッド。</p>
 </div>
-<div class="paragraph data-line-680">
+<div class="paragraph">
 <p>JavaScriptの <code>Array.flatMap</code> でリストモナドに触れるので慣れよう。</p>
 </div>
-<div class="paragraph data-line-682">
+<div class="paragraph">
 <p>モナドは構造がコントロールできるので、メリット多数。</p>
 </div>
-<div class="paragraph data-line-684">
+<div class="paragraph">
 <p>メソッドチェーンがネストしても壊れない堅牢な構造。</p>
 </div>
-<div class="paragraph data-line-686">
+<div class="paragraph">
 <p><code>Array.flatMap</code> は、<code>Array.map</code> の上位互換。これ一本で何でも出来るようになる。</p>
 </div>
-<div class="paragraph data-line-689">
+<div class="paragraph">
 <p>モナド関数の構成のことだけ気にしていれば良い。</p>
 </div>
-<div class="paragraph data-line-691">
+<div class="paragraph">
 <p><code>Array.map</code> で消耗するのはもうやめよう。</p>
 </div>
 </div>
 </div>
 </div>
-<div class="sect1 data-line-7">
+<div class="sect1">
 <h2 id="relation">6. 代数学と関数型プログラミングとオブジェクト指向の用語・記法の相互関係</h2>
 <div class="sectionbody">
 <style type="text/css">
+p>code {background-color: #aaaaaa};
+
 th,td {
     border: solid 0px;
 }
-p>code {background-color: #aaaaaa};
 td>code {background-color: #aaaaaa};
+}
 </style>
-<div class="paragraph data-line-20">
+<div class="paragraph">
 <p>この章では、今まで棚上げしてきた、モヤモヤしていたものをスッキリさせることを目指します。</p>
 </div>
-<div class="exampleblock data-line-23">
+<div class="exampleblock">
 <div class="content">
-<div class="paragraph data-line-24">
+<div class="paragraph">
 <p>関数型プログラミングは、プログラミングの複雑性を、以下の２つ</p>
 </div>
-<div class="ulist data-line-26">
+<div class="ulist">
 <ul>
-<li class="data-line-26">
+<li>
 <p>値</p>
 </li>
-<li class="data-line-27">
+<li>
 <p>値でもある関数</p>
 </li>
 </ul>
 </div>
-<div class="paragraph data-line-29">
+<div class="paragraph">
 <p>の組み合わせ（function composition）で制御します。</p>
 </div>
 <hr>
-<div class="paragraph data-line-33">
+<div class="paragraph">
 <p>メソッドチェーンをもって書き連ねるだけで、Demo:こんなことができるようになる</p>
 </div>
 <hr>
-<div class="paragraph data-line-37">
+<div class="paragraph">
 <p>jQueryは値(オブジェクト)＆関数（オブジェクトにぶらさがるメソッド群）のペアです。</p>
 </div>
 </div>
 </div>
-<div class="paragraph data-line-40">
+<div class="paragraph">
 <p>なとど書いていますが、これは若干問題があります。多数の意味が曖昧な言葉、定義がはっきりしない、その正体についてはJavaScriptや関数型プログラミングとオブジェクト指向プログラミングで出て来がちな複数の文脈で暗黙の了解に委ねられている用語が散見されます。</p>
 </div>
-<div class="ulist data-line-42">
+<div class="ulist">
 <ul>
-<li class="data-line-42">
+<li>
 <p>値</p>
 </li>
-<li class="data-line-43">
+<li>
 <p>関数</p>
 </li>
-<li class="data-line-44">
+<li>
 <p>オブジェクト</p>
 </li>
-<li class="data-line-45">
+<li>
 <p>メソッド</p>
 </li>
 </ul>
 </div>
-<div class="paragraph data-line-47">
+<div class="paragraph">
 <p>オブジェクト・メソッドについては明らかに出自がオブジェクト指向の用語です。</p>
 </div>
-<div class="paragraph data-line-49">
+<div class="paragraph">
 <p>値、関数については、関数型ぽいが、同時にオブジェクト指向でも使われたりする。</p>
 </div>
-<div class="paragraph data-line-51">
+<div class="paragraph">
 <p>JavaScriptは良かれ悪しかれ「マルチパラダイムプログラミング」言語なので、こういうわけのわからない状況に至ってもまあ仕方はないですが、特に関数型プログラミングを導入する際に曖昧さと混乱を引きずったままでゴリ押ししてしまうことが多いです。</p>
 </div>
-<div class="paragraph data-line-53">
+<div class="paragraph">
 <p>用語は違うのに、数学的対象としては同じものを指し示していたりすることで、概念の重複、冗長性、曖昧さが生じてしまっています。</p>
 </div>
-<div class="sect2 data-line-55">
+<div class="sect2">
 <h3 id="_二項演算とは小学１２年の算数からの復習">6.1. 二項演算とは　小学１/２年の算数からの復習</h3>
-<div class="paragraph data-line-57">
+<div class="paragraph">
 <p>そこでとりあえず、根底となるプロトコルである数学の記法についてまず整理しておきましょう。</p>
 </div>
-<div class="paragraph data-line-59">
+<div class="paragraph">
 <p>数学と言ってもたいしたことはない、小学１/２年の算数レベルのお話です。</p>
 </div>
-<div class="stemblock data-line-62">
+<div class="stemblock">
 <div class="content">
 \[1 + 2 = 3\]
 </div>
 </div>
-<div class="stemblock data-line-67">
+<div class="stemblock">
 <div class="content">
 \[1 \times 2 = 2\]
 </div>
 </div>
-<div class="paragraph data-line-71">
+<div class="paragraph">
 <p>これは初等数学で真っ先に習う
 <a href="https://ja.wikipedia.org/wiki/%E7%AE%97%E8%A1%93#%E5%9B%9B%E5%89%87%E6%BC%94%E7%AE%97">四則演算</a>のうち「加算」と「乗算」です。</p>
 </div>
-<div class="paragraph data-line-74">
+<div class="paragraph">
 <p>またさらに一般化、抽象化して、「2つの数から新たな数を決定する演算」のことを <a href="https://ja.wikipedia.org/wiki/%E4%BA%8C%E9%A0%85%E6%BC%94%E7%AE%97">二項演算</a>と呼びます。要するに<strong>演算のパラメータが２つあったらそれは二項演算</strong>。また、２つのパラメータの中間に <code>+</code> 、<code>-</code> などの演算子を置くのを <a href="https://ja.wikipedia.org/wiki/%E4%B8%AD%E7%BD%AE%E8%A8%98%E6%B3%95">中置記法</a>と呼びます。</p>
 </div>
-<div class="paragraph data-line-76">
+<div class="paragraph">
 <p>パラメータが１個ならば、 <a href="https://ja.wikipedia.org/wiki/%E5%8D%98%E9%A0%85%E6%BC%94%E7%AE%97">単項演算</a> で、中学で習う平方根の演算子、ルートを使って</p>
 </div>
-<div class="stemblock data-line-79">
+<div class="stemblock">
 <div class="content">
 \[\sqrt9 = 3\]
 </div>
 </div>
-<div class="paragraph data-line-83">
+<div class="paragraph">
 <p>となりますね。</p>
 </div>
 </div>
-<div class="sect2 data-line-85">
+<div class="sect2">
 <h3 id="_演算は関数として捉えられる">6.2. 演算は関数として捉えられる</h3>
-<div class="paragraph data-line-87">
+<div class="paragraph">
 <p>パラメータの文字が出た時点でお察しですが、以上の演算は関数として解釈できます。</p>
 </div>
-<div class="paragraph data-line-89">
+<div class="paragraph">
 <p>単項演算は、パラメータが１個なので、</p>
 </div>
-<div class="listingblock data-line-93">
+<div class="listingblock">
 <div class="title">Math.sqrt</div>
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="js" class="language-js hljs">Math.sqrt(9) //3</code></pre>
+<pre class="highlightjs highlight"><code class="language-js hljs" data-lang="js">Math.sqrt(9) //3</code></pre>
 </div>
 </div>
-<div class="paragraph data-line-97">
+<div class="paragraph">
 <p>二項演算は、パラメータが2個なので、</p>
 </div>
-<div class="listingblock data-line-101">
+<div class="listingblock">
 <div class="title">plus</div>
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="js" class="language-js hljs">const plus = (a) =&gt; (b) =&gt; (a + b);
+<pre class="highlightjs highlight"><code class="language-js hljs" data-lang="js">const plus = (a) =&gt; (b) =&gt; (a + b);
 
 plus(1)(2) //3</code></pre>
 </div>
 </div>
 </div>
-<div class="sect2 data-line-108">
+<div class="sect2">
 <h3 id="withobjectmethod">6.3. オブジェクト指向のメソッドでは</h3>
-<div class="paragraph data-line-110">
+<div class="paragraph">
 <p>ここであえて復習するつもりもありませんが、オブジェクト指向のメソッドとは、オブジェクトに紐付いた関数のことですね。</p>
 </div>
-<div class="paragraph data-line-112">
+<div class="paragraph">
 <p>JavaScriptの数値はカッコ（）で囲んでやると、 <a href="https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Number">Numberオブジェクト</a>になるので、<code>Number.prototype</code> へ新たに <code>plus</code> メソッドを追加します。</p>
 </div>
-<div id="NumberPlus" class="listingblock data-line-118">
+<div id="NumberPlus" class="listingblock">
 <div class="title">Number(a).plus(b)</div>
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="js" class="language-js hljs">Object.defineProperty(
+<pre class="highlightjs highlight"><code class="language-js hljs" data-lang="js">Object.defineProperty(
     Number.prototype,
     "plus", {
         value: function (b) {
@@ -2752,207 +2734,207 @@ plus(1)(2) //3</code></pre>
     });</code></pre>
 </div>
 </div>
-<div class="listingblock data-line-131">
+<div class="listingblock">
 <div class="title">(1).plus(2) === 3</div>
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="js" class="language-js hljs">(1).plus(2) //3</code></pre>
+<pre class="highlightjs highlight"><code class="language-js hljs" data-lang="js">(1).plus(2) //3</code></pre>
 </div>
 </div>
-<div class="ulist data-line-135">
+<div class="ulist">
 <ul>
-<li class="data-line-135">
+<li>
 <p>オブジェクト自身の値 <code>this = 1</code></p>
 </li>
-<li class="data-line-136">
+<li>
 <p>メソッド <code>plus</code> 関数</p>
 </li>
-<li class="data-line-137">
+<li>
 <p>パラメータ <code>2</code></p>
 </li>
 </ul>
 </div>
-<div class="paragraph data-line-139">
+<div class="paragraph">
 <p>二項演算（中置記法）</p>
 </div>
-<div class="stemblock data-line-142">
+<div class="stemblock">
 <div class="content">
 \[1 + 2\]
 </div>
 </div>
-<div class="paragraph data-line-146">
+<div class="paragraph">
 <p>は、JavaScriptのオブジェクトとメソッドで書けます。</p>
 </div>
-<div class="stemblock data-line-149">
+<div class="stemblock">
 <div class="content">
 \[(1).plus(2)\]
 </div>
 </div>
-<div class="paragraph data-line-153">
+<div class="paragraph">
 <p>そして、このように、値(オブジェクト)＆関数（オブジェクトにぶらさがるメソッド）のペアで書くのは非常に優れているんですね。</p>
 </div>
-<div class="paragraph data-line-155">
+<div class="paragraph">
 <p>jQueryのメソッドチェーンのことを思い出しましょう。</p>
 </div>
-<div class="stemblock data-line-159">
+<div class="stemblock">
 <div class="content">
 \[1 + 2 + 5 + 9\]
 </div>
 </div>
-<div class="paragraph data-line-163">
+<div class="paragraph">
 <p>は、そのまま、</p>
 </div>
-<div class="stemblock data-line-166">
+<div class="stemblock">
 <div class="content">
 \[(1).plus(2).plus(5).plus(9)\]
 </div>
 </div>
-<div class="paragraph data-line-170">
+<div class="paragraph">
 <p>と、メソッドチェーンで自然に書けてしまう。</p>
 </div>
-<div class="admonitionblock tip data-line-173">
+<div class="admonitionblock tip">
 <table>
 <tr>
 <td class="icon">
 <i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
-<div class="paragraph data-line-174">
+<div class="paragraph">
 <p>逆に言うと、メソッドチェーンは、代数のなんらかの二項演算の連鎖をコード上に表現しているにすぎません。そして後からでてきますが、これはendofunctorやモナドにも当てはまります。</p>
 </div>
 </td>
 </tr>
 </table>
 </div>
-<div class="paragraph data-line-177">
+<div class="paragraph">
 <p>オブジェクトにぶらさがるメソッドではない普通の関数の形式</p>
 </div>
-<div class="stemblock data-line-180">
+<div class="stemblock">
 <div class="content">
 \[plus(1)(2)\]
 </div>
 </div>
-<div class="paragraph data-line-183">
+<div class="paragraph">
 <p>ではこううまくは行きません。</p>
 </div>
-<div class="stemblock data-line-186">
+<div class="stemblock">
 <div class="content">
 \[plus(plus(plus(1)(2))(5))(9)\]
 </div>
 </div>
-<div class="paragraph data-line-190">
+<div class="paragraph">
 <p>「なんとか地獄」と名前がつきそうな感じです。</p>
 </div>
-<div class="paragraph data-line-192">
+<div class="paragraph">
 <p>JavaScriptがマルチパラダイムで、オブジェクト指向のメソッド形式で書けるおかげで、<strong>任意の二項演算、つまりパラメータを２つとる関数は、特別な定義不要で、その関数名（メソッド名）のまま中置記法が実現できてしまう</strong>という予期しない副産物（棚ぼた）です。</p>
 </div>
 </div>
-<div class="sect2 data-line-194">
+<div class="sect2">
 <h3 id="_値と演算は常に組ペアで存在する">6.4. 値と演算は常に組（ペア）で存在する</h3>
-<div class="quoteblock data-line-196">
+<div class="quoteblock">
 <blockquote>
-<div class="paragraph data-line-1">
+<div class="paragraph">
 <p>抽象代数学におけるマグマ（英語: magma）または亜群（あぐん、groupoid）は、演算によって定義される種類の基本的な代数的構造であり、<strong>集合 M とその上の二項演算 M × M → M からなる組をいう</strong>。マグマ M における二項演算は M において閉じていることは要求するが、それ以外の何らの公理も課すものではない。
 <a href="https://ja.wikipedia.org/wiki/%E3%83%9E%E3%82%B0%E3%83%9E_(%E6%95%B0%E5%AD%A6)">マグマ(数学)</a></p>
 </div>
 </blockquote>
 </div>
-<div class="paragraph data-line-199">
+<div class="paragraph">
 <p>基本的な代数構造において、演算だけ独立して存在していることはありません。必ず演算のターゲットとなる値の集合と組（ペア）として存在しています。</p>
 </div>
-<div class="paragraph data-line-201">
+<div class="paragraph">
 <p>たとえば、 四則演算のうち「加算」は演算対象となるデータとは加算可能な数値ですよね？文字列であったり、なにかの画像データではありません。</p>
 </div>
-<div class="paragraph data-line-203">
+<div class="paragraph">
 <p><em>抽象代数学</em> とか <em>代数的構造</em> とか言われると、つい数値のことを連想しがちなのですが、</p>
 </div>
-<div class="quoteblock data-line-205">
+<div class="quoteblock">
 <blockquote>
-<div class="paragraph data-line-1">
+<div class="paragraph">
 <p>マグマ M における二項演算は M において閉じていることは要求するが、それ以外の何らの公理も課すものではない。</p>
 </div>
 </blockquote>
 </div>
-<div class="paragraph data-line-207">
+<div class="paragraph">
 <p>とあるとおり、なんの制約もありません。</p>
 </div>
-<div class="paragraph data-line-209">
+<div class="paragraph">
 <p>値が文字列ならば、その組となる、文字列というデータを演算するための二項演算は自由に定義可能だし、実際JavaScriptには、 <a href="https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>プロトタイプオブジェクトと、それ専用の二項演算子が実装されています。</p>
 </div>
-<div class="listingblock data-line-214">
+<div class="listingblock">
 <div class="title">Hello world</div>
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="js" class="language-js hljs">"Hello" + " " + "world"  //Hello world</code></pre>
+<pre class="highlightjs highlight"><code class="language-js hljs" data-lang="js">"Hello" + " " + "world"  //Hello world</code></pre>
 </div>
 </div>
-<div class="paragraph data-line-218">
+<div class="paragraph">
 <p>文字列データを二項演算するときの <code>+</code> は文字列の接続処理で、数値データを二項演算する <code>+</code> の加算処理とは意味が異なります。<strong>値と演算は常に組（ペア）で存在するのであって、演算子の単独では意味を成しません</strong>。</p>
 </div>
-<div class="paragraph data-line-220">
+<div class="paragraph">
 <p>そしてこれは、まさに<strong>オブジェクトとメソッドの関係に合致</strong>しており、二項演算の連続的操作が、そのまま上手くオブジェクトのメソッドチェーンで書けてしまう理論的背景が納得できます。</p>
 </div>
-<div class="paragraph data-line-222">
+<div class="paragraph">
 <p>関数型プログラミングで、値、関数というとき、暗黙に組（ペア）となる相手がいます(プログラムで処理されないデータは意味がない)。そして、静的型付けの仕組み（JavaScriptならTypeScriptを使えばいい）などで、この値と関数の組（ペア）性を保証していきます。</p>
 </div>
-<div class="paragraph data-line-224">
+<div class="paragraph">
 <p>しかし、繰り返し、これはまったく想定外のことですが、関数型プログラミングであっても、オブジェクト指向のオブジェクトとメソッドという組は、値（データ）と演算（関数）が組となる二項演算を定義する代数構造と解釈することで極めて有用です。</p>
 </div>
 </div>
-<div class="sect2 data-line-226">
+<div class="sect2">
 <h3 id="_まとめ_3">6.5. まとめ</h3>
-<div class="paragraph data-line-228">
+<div class="paragraph">
 <p>二項演算をベースに考える。</p>
 </div>
-<div class="admonitionblock note data-line-232">
+<div class="admonitionblock note">
 <table>
 <tr>
 <td class="icon">
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-<div class="paragraph data-line-234">
+<div class="paragraph">
 <p>マグマ（英語: magma）または亜群（あぐん、groupoid）は、演算によって定義される種類の基本的な代数的構造であり、集合 M とその上の二項演算 M * M → M からなる組をいう。</p>
 </div>
-<div class="paragraph data-line-236">
+<div class="paragraph">
 <p>値と演算は常に組（ペア）で存在するのであって、演算子の単独では意味を成しません。</p>
 </div>
 <hr>
-<div class="paragraph data-line-240">
+<div class="paragraph">
 <p>と、逐一書くのも面倒なので、今後マグマという組（ペア）は</p>
 </div>
-<div class="stemblock data-line-243">
+<div class="stemblock">
 <div class="content">
 \[(M, ∗)\]
 </div>
 </div>
-<div class="paragraph data-line-249">
+<div class="paragraph">
 <p>と書くことにします。</p>
 </div>
-<div class="paragraph data-line-251">
+<div class="paragraph">
 <p>演算 <code>*</code> はワイルドカードです。二項演算 M ∗ M → M  ならなんでも良い。</p>
 </div>
-<div class="paragraph data-line-253">
+<div class="paragraph">
 <p>たとえば、二項演算が<strong>自然数の足し算</strong>と定まれば、ワイルドカード <code>*</code> は <code>+</code> になります。</p>
 </div>
-<div class="stemblock data-line-256">
+<div class="stemblock">
 <div class="content">
 \[(自然数,+)\]
 </div>
 </div>
-<div class="paragraph data-line-261">
+<div class="paragraph">
 <p>二項演算が<strong>自然数の掛け算</strong>と定まれば、</p>
 </div>
-<div class="stemblock data-line-264">
+<div class="stemblock">
 <div class="content">
 \[(自然数,\times)\]
 </div>
 </div>
-<div class="paragraph data-line-268">
+<div class="paragraph">
 <p>繰り返し念の為ですが、代数構造といえども、対象となるデータは、数値に限りません。</p>
 </div>
-<div class="paragraph data-line-270">
+<div class="paragraph">
 <p>二項演算が<strong>文字列の接続</strong>と定まれば、ワイルドカード <code>*</code> は <code>+</code> になります。</p>
 </div>
-<div class="stemblock data-line-273">
+<div class="stemblock">
 <div class="content">
 \[(文字列,+)\]
 </div>
@@ -2961,35 +2943,35 @@ plus(1)(2) //3</code></pre>
 </tr>
 </table>
 </div>
-<div class="paragraph data-line-280">
+<div class="paragraph">
 <p>マグマ(M, ∗) はプログラムの世界にそのまま展開できて、</p>
 </div>
-<div class="paragraph data-line-282">
+<div class="paragraph">
 <p><code>M</code> = 値、データ、オブジェクト</p>
 </div>
-<div class="paragraph data-line-284">
+<div class="paragraph">
 <p><code>*</code> = 二項演算、パラメータ２つの関数、メソッド</p>
 </div>
-<div class="paragraph data-line-286">
+<div class="paragraph">
 <p>と言うように、データと処理の組、つまり<strong>データ処理</strong>のことだと解釈できます。</p>
 </div>
-<div class="stemblock data-line-289">
+<div class="stemblock">
 <div class="content">
 \[1 + 2 + 5 + 9\]
 </div>
 </div>
-<div class="paragraph data-line-293">
+<div class="paragraph">
 <p>という二項演算の連続的操作は、そのまま、</p>
 </div>
-<div class="stemblock data-line-296">
+<div class="stemblock">
 <div class="content">
 \[(1).plus(2).plus(5).plus(9)\]
 </div>
 </div>
-<div class="paragraph data-line-300">
+<div class="paragraph">
 <p>とオブジェクトのメソッドチェーンとして表現できる。</p>
 </div>
-<table class="tableblock frame-all grid-all stretch data-line-305">
+<table class="tableblock frame-all grid-all stretch">
 <caption class="title">Table 1. 代数、関数型、オブジェクト指向のイディオム</caption>
 <colgroup>
 <col style="width: 33.3333%;">
@@ -3017,114 +2999,116 @@ plus(1)(2) //3</code></pre>
 </div>
 </div>
 </div>
-<div class="sect1 data-line-6">
+<div class="sect1">
 <h2 id="_モノイドmonoid">7. モノイド(Monoid)</h2>
 <div class="sectionbody">
 <style type="text/css">
+p>code {background-color: #aaaaaa};
+
 th,td {
     border: solid 0px;
 }
-p>code {background-color: #aaaaaa};
 td>code {background-color: #aaaaaa};
+}
 </style>
-<div class="paragraph data-line-19">
+<div class="paragraph">
 <p>モノイドは、理解するのが簡単、しかし奥が深く、モナドと同じかそれ以上に関数型プログラミングで応用局面もあり実用性が高いという、費用対効果（コスパ）抜群の品質の高いプログラミングの部品となりうるものです。</p>
 </div>
-<div class="paragraph data-line-21">
+<div class="paragraph">
 <p>だいたい、モナドを知りたいのなら、同時にモノイドを知っておくべきなのは当たり前のことなのですが、ここまでモナド偏重でモノイドについてはあまり語られないのは、<a href="#whysohard">モナドを理解するのが難しい理由</a>の事情が原因です。</p>
 </div>
-<div class="sect2 data-line-23">
+<div class="sect2">
 <h3 id="_単位元">7.1. 単位元</h3>
-<div class="paragraph data-line-25">
+<div class="paragraph">
 <p>また、小学１年算数を復習すると、</p>
 </div>
-<div class="stemblock data-line-28">
+<div class="stemblock">
 <div class="content">
 \[1 + 1\]
 </div>
 </div>
-<div class="paragraph data-line-32">
+<div class="paragraph">
 <p>みたいな足し算を最初に学びます。</p>
 </div>
-<div class="paragraph data-line-34">
+<div class="paragraph">
 <p>子供というか、我々大人でも、脳は、すでに馴染みがある事象の延長・拡張でしか「理解する」というのは無理で、まず最初は、具体的な物質である「数え棒」「おはじき」を渡されて、徐々に数学的な抽象的概念に慣らされていきます。</p>
 </div>
-<div class="paragraph data-line-36">
+<div class="paragraph">
 <p>どういう数学なのかというと、<strong>（正の）自然数全体のなす加法の二項演算</strong>ですよね。一番シンプルなパターンです。</p>
 </div>
-<div class="paragraph data-line-38">
+<div class="paragraph">
 <p>このとき、 <code>+</code> は、<strong>（正の）自然数全体</strong> と組（ペア）となる<strong>二項演算</strong>としてしっかりと定義されています。</p>
 </div>
-<div class="paragraph data-line-40">
+<div class="paragraph">
 <p>児童が<strong>（正の）自然数全体のなす加法の二項演算</strong>という抽象的作業に慣らされたところで大事件が起こります。</p>
 </div>
 <hr>
-<div class="paragraph data-line-45">
+<div class="paragraph">
 <p><a href="https://ja.wikibooks.org/wiki/%E5%B0%8F%E5%AD%A6%E6%A0%A1%E7%AE%97%E6%95%B0/1%E5%AD%A6%E5%B9%B4#%E3%82%BC%E3%83%AD_0"><strong>ゼロ 0</strong></a></p>
 </div>
-<div class="paragraph data-line-47">
+<div class="paragraph">
 <p><em>1 から 1 を ひいた かず を ゼロ と いいます。 ゼロ は 0 と かきます。</em></p>
 </div>
-<div class="paragraph data-line-49">
+<div class="paragraph">
 <p><em>0は、なにも、ない　かず です。</em></p>
 </div>
-<div class="paragraph data-line-51">
+<div class="paragraph">
 <p><em>だから、 かず に 0 を たしても、 かわりません。</em></p>
 </div>
-<div class="paragraph data-line-53">
+<div class="paragraph">
 <p><em>たとえば</em></p>
 </div>
-<div class="paragraph data-line-55">
+<div class="paragraph">
 <p><em>7+0=7</em>
 <em>「なな たす ゼロ は（わ） なな」です。</em></p>
 </div>
 <hr>
-<div class="stemblock data-line-61">
+<div class="stemblock">
 <div class="content">
 \[7 + 0 = 7\]
 </div>
 </div>
-<div class="paragraph data-line-66">
+<div class="paragraph">
 <p>ゼロの発明は、数学史の飛躍の一つで、5世紀ごろのインド文明
 で数字としてのゼロが発明されたのも数学が生まれてから2000年くらい経過した後ですし、ヨーロッパで広まったのは、中世を経てルネサンスのさらに後のニュートンの時代ですから、人類の数学史を考えると結構最近の発明だと言えます。</p>
 </div>
-<div class="paragraph data-line-69">
+<div class="paragraph">
 <p>それなのに、さらっと小１の児童にゼロの概念をさも当たり前のように伝えるのですから、教育というものの凄まじさを実感できます。</p>
 </div>
-<div class="paragraph data-line-71">
+<div class="paragraph">
 <p>数の体系が</p>
 </div>
-<div class="paragraph data-line-73">
+<div class="paragraph">
 <p><strong>（正の）自然数全体</strong></p>
 </div>
-<div class="paragraph data-line-75">
+<div class="paragraph">
 <p>↓</p>
 </div>
-<div class="paragraph data-line-77">
+<div class="paragraph">
 <p><strong>（ゼロを含む）自然数全体</strong></p>
 </div>
-<div class="paragraph data-line-79">
+<div class="paragraph">
 <p>にしれっと拡張されてしまいました。</p>
 </div>
-<div class="paragraph data-line-81">
+<div class="paragraph">
 <p>そして、ここで誤魔化されてはならないのが、同じ記号　<code>+</code> であっても、ゲームのルールが異なる、ということ。</p>
 </div>
-<div class="paragraph data-line-83">
+<div class="paragraph">
 <p><strong>二項演算</strong>というのは、必ず、演算対象と組（ペア）となってはじめて意味がある定義が成されるはずだったので、</p>
 </div>
-<div class="paragraph data-line-85">
+<div class="paragraph">
 <p><strong>（正の）自然数全体のなす加法の二項演算</strong></p>
 </div>
-<div class="paragraph data-line-87">
+<div class="paragraph">
 <p>↓</p>
 </div>
-<div class="paragraph data-line-89">
+<div class="paragraph">
 <p><strong>（ゼロを含む）自然数全体のなす加法の二項演算</strong></p>
 </div>
-<div class="paragraph data-line-91">
+<div class="paragraph">
 <p>と、二項演算も同時に更新されてしまいました。</p>
 </div>
-<div class="admonitionblock tip data-line-96">
+<div class="admonitionblock tip">
 <table>
 <tr>
 <td class="icon">
@@ -3132,48 +3116,48 @@ td>code {background-color: #aaaaaa};
 </td>
 <td class="content">
 <div class="title">単位元の添加</div>
-<div class="paragraph data-line-97">
+<div class="paragraph">
 <p>こういう正の自然数に更に「ゼロの後乗せ」してゼロを含む自然数に拡張する、同時に組（ペア）になっているはずの二項演算子も更新することを、単位元の添加と言います。</p>
 </div>
-<div class="paragraph data-line-99">
+<div class="paragraph">
 <p><a href="https://ja.wikipedia.org/wiki/%E5%8D%98%E4%BD%8D%E5%85%83#%E6%80%A7%E8%B3%AA">単位元#性質</a></p>
 </div>
-<div class="paragraph data-line-101">
+<div class="paragraph">
 <p><em>マグマ (M, ∗) が与えられたとき、M に M のどの元とも異なる新たな元 1 を付け加えた集合 M1 := M ∪ {1} で</em></p>
 </div>
-<div class="paragraph data-line-103">
+<div class="paragraph">
 <p><em>任意の a ∈ M1 に対して a * 1 = 1 * a = a</em>
 <em>と定めて、M の演算 ∗ を M1 上に延長することにより、元 1 を M1 の ∗ に関する単位元とすることができる。この (M1, ∗) を (M, ∗) の 1-添加という。</em></p>
 </div>
-<div class="paragraph data-line-106">
+<div class="paragraph">
 <p><em>もし、M がもともと ∗ に関する単位元 e を持っていたとしても、e は M1 上ではもはや ∗ に関する単位元ではない。</em></p>
 </div>
 </td>
 </tr>
 </table>
 </div>
-<div class="paragraph data-line-115">
+<div class="paragraph">
 <p>こういう、「だから、 かず に 0 を たしても、 かわりません。」というような、ある対象を演算しても不変になるような対象を
 <a href="https://ja.wikipedia.org/wiki/%E5%8D%98%E4%BD%8D%E5%85%83">
 単位元</a>と言います。</p>
 </div>
-<div class="paragraph data-line-119">
+<div class="paragraph">
 <p>ここで「かず」とは書かずに「対象」とか書いたのは、演算も単位元も、べつに数に限らないからです。</p>
 </div>
 <hr>
-<div class="quoteblock data-line-123">
+<div class="quoteblock">
 <blockquote>
-<div class="paragraph data-line-1">
+<div class="paragraph">
 <p>数学、とくに抽象代数学において、単位元（たんいげん, 英: identity element）あるいは中立元（ちゅうりつげん, 英: neutral element）は、二項演算を備えた集合の特別な元で、ほかのどの元もその二項演算による単位元との結合の影響を受けない。</p>
 </div>
 </blockquote>
 </div>
-<div class="paragraph data-line-125">
+<div class="paragraph">
 <p><a href="https://ja.wikipedia.org/wiki/%E5%8D%98%E4%BD%8D%E5%85%83">
 単位元</a></p>
 </div>
 <hr>
-<div class="admonitionblock warning data-line-132">
+<div class="admonitionblock warning">
 <table>
 <tr>
 <td class="icon">
@@ -3181,134 +3165,134 @@ td>code {background-color: #aaaaaa};
 </td>
 <td class="content">
 <div class="title">単位元を表す記号</div>
-<div class="paragraph data-line-133">
+<div class="paragraph">
 <p>「単位元」は、<strong>identity element</strong>から、</p>
 </div>
-<div class="ulist data-line-135">
+<div class="ulist">
 <ul>
-<li class="data-line-135">
+<li>
 <p>identity</p>
 </li>
-<li class="data-line-136">
+<li>
 <p>e</p>
 </li>
 </ul>
 </div>
-<div class="paragraph data-line-138">
+<div class="paragraph">
 <p>あるいは「中立元」<strong>neutral element</strong>の頭文字<strong>n</strong>に似ている（と筆者は思っている）</p>
 </div>
-<div class="ulist data-line-140">
+<div class="ulist">
 <ul>
-<li class="data-line-140">
+<li>
 <p>η　（エータ、イータ、イタ）</p>
 </li>
 </ul>
 </div>
-<div class="paragraph data-line-142">
+<div class="paragraph">
 <p>と表記されることが多いですが、本稿では、とっつきやすさを重視して、</p>
 </div>
-<div class="paragraph data-line-144">
+<div class="paragraph">
 <p><strong>e</strong>と表記することにします。</p>
 </div>
-<div class="paragraph data-line-146">
+<div class="paragraph">
 <p>ただし、後々まったく同じ数学的対象なのに、後から、単位元のことを、identityと書かれたり、ηと書かれたり、場合によっては <code>unit</code> だの　<code>return</code>　だの本質ではないところの用語の使い回しで、モナド界隈特有の混乱を極めるので、それは心の準備が必要です。</p>
 </div>
 </td>
 </tr>
 </table>
 </div>
-<div class="sect3 data-line-150">
+<div class="sect3">
 <h4 id="_左右の単位元">7.1.1. 左右の単位元</h4>
-<div class="paragraph data-line-153">
+<div class="paragraph">
 <p>加法の単位元 <code>e</code> は <code>0</code> で、</p>
 </div>
-<div class="stemblock data-line-155">
+<div class="stemblock">
 <div class="content">
 \[0 + 7 = 7 = 7 + 0\]
 </div>
 </div>
-<div class="paragraph data-line-159">
+<div class="paragraph">
 <p>乗法の単位元 <code>e</code> は <code>1</code> で、</p>
 </div>
-<div class="stemblock data-line-161">
+<div class="stemblock">
 <div class="content">
 \[1 \times 7 = 7 = 7 \times 1\]
 </div>
 </div>
-<div class="paragraph data-line-165">
+<div class="paragraph">
 <p>文字列の単位元 <code>e</code> は <code>""</code>  となります。</p>
 </div>
-<div class="stemblock data-line-167">
+<div class="stemblock">
 <div class="content">
 \["" + "Hello" = "Hello" = "Hello" + ""\]
 </div>
 </div>
 </div>
-<div class="sect3 data-line-171">
+<div class="sect3">
 <h4 id="_結合法則">7.1.2. 結合法則</h4>
-<div class="stemblock data-line-174">
+<div class="stemblock">
 <div class="content">
 \[(a + b) + c = a + (b + c)\]
 </div>
 </div>
-<div class="stemblock data-line-179">
+<div class="stemblock">
 <div class="content">
 \[(a \times b) \times c = a \times (b \times c)\]
 </div>
 </div>
-<div class="stemblock data-line-184">
+<div class="stemblock">
 <div class="content">
 \[("Hello" + "\space") + "world" = "Hello" + ("\space" + "world")\]
 </div>
 </div>
-<div class="paragraph data-line-188">
+<div class="paragraph">
 <p>このように</p>
 </div>
-<div class="olist arabic data-line-190">
+<div class="olist arabic">
 <ol class="arabic">
-<li class="data-line-190">
+<li>
 <p><strong>左右の単位元 e がある</strong></p>
 </li>
-<li class="data-line-192">
+<li>
 <p><strong>結合法則が成り立つ</strong></p>
 </li>
 </ol>
 </div>
-<div class="paragraph data-line-194">
+<div class="paragraph">
 <p>代数構造のことを、モノイド(monoid)と呼びます。</p>
 </div>
-<div class="paragraph data-line-196">
+<div class="paragraph">
 <p>ちなみに、四則演算の仲間でも引き算と割り算は、モノイドにはなりません、念の為。</p>
 </div>
 </div>
 </div>
-<div class="sect2 data-line-198">
+<div class="sect2">
 <h3 id="_なぜモノイドと結合法則が重要なのか">7.2. なぜモノイドと結合法則が重要なのか？</h3>
-<div class="paragraph data-line-200">
+<div class="paragraph">
 <p>モノイド(monoid)だの「結合法則」だの言われると、理屈は単純でも、仰々しい天下り説明ぽくて、なんでそんなことが必要なのか？と思いがちなので説明します。</p>
 </div>
-<div class="paragraph data-line-202">
+<div class="paragraph">
 <p>モノイドは、構造として対称性があって、適当に組み合わせても不変性があるので、関数型プログラミングの部品としては優れています。</p>
 </div>
-<div class="paragraph data-line-204">
+<div class="paragraph">
 <p>部品の組み合わせということで、たとえばLEGOブロックを考えてみると、組み立て順序は自由なはずです。ある部分を先に組み立てて、別の部分を組み立て、それらをまた組み合わせる。これがもし、aとbは先に組み立てなければいけない、bとcを先に組み立てたものに後からaを組み合わせても、別物になるから！となると面倒なことになります。</p>
 </div>
-<div class="paragraph data-line-206">
+<div class="paragraph">
 <p>USBデバイスを考えてみましょう。USBハブやら組み合わせ自由で、その接続する順番は気にする必要はないですよね？組み合わせは組み合わせです。順序によって構造に違いは生まれません。</p>
 </div>
-<div class="paragraph data-line-208">
+<div class="paragraph">
 <p>ちなみに、LEGOブロックの組み立て、USBデバイスの接続も二項演算です。小１の授業でやられたみたいに、何も組み立てない、何も接続しない、というゲームのルールを追加したならば、二項演算しても何も影響を及ばなさい単位元の添加したってことなので、それまで考えていた組み立ての意味とは異なるでしょうが、そういうモノイドになります。</p>
 </div>
-<div class="paragraph data-line-211">
+<div class="paragraph">
 <p><strong>結合法則が成り立つ</strong> というのは、法則によってプログラマが縛られたり、法則を満たすように留意事項増える、ということではありません。まったくその逆で、法則によって、こういった組み合わせ順序は自由、という自由度、柔軟性、堅牢性がある部品、という保証があるということです。言い換えると、使いやすい基準をパスしている品質の高い部品だということ。</p>
 </div>
-<div class="paragraph data-line-213">
+<div class="paragraph">
 <p>プログラミングはただでさえ、複雑で、何も考えないでやると、どんどん複雑になっていってコントロール不能、デバッグ不可能になっていきますよね？なるだけ構造はシンプルに維持しておきたいのです。</p>
 </div>
-<div class="paragraph data-line-215">
+<div class="paragraph">
 <p>この部品はモノイドなので、組み合わせの自由度が高い、逆に、モノイドじゃないので、どんどん構造が増えていって面倒なことになるな・・・という認識が持てるのと持てないとでは大きな違いです。<strong>この部品はモノイドであることは事前に十分確認済みなので、このメソッド（二項演算）まわりで予期しない振る舞いをして、バグが出るはずはない、と確信を持ってスルーできるのはかなり大きいメリットですよね？</strong></p>
 </div>
-<div class="admonitionblock tip data-line-223">
+<div class="admonitionblock tip">
 <table>
 <tr>
 <td class="icon">
@@ -3316,66 +3300,66 @@ td>code {background-color: #aaaaaa};
 </td>
 <td class="content">
 <div class="title">モノイドは３つ組</div>
-<div class="quoteblock data-line-225">
+<div class="quoteblock">
 <blockquote>
-<div class="paragraph data-line-1">
+<div class="paragraph">
 <p>マグマ（英語: magma）または亜群（あぐん、groupoid）は、演算によって定義される種類の基本的な代数的構造であり、集合 M とその上の二項演算 M * M → M からなる組をいう。</p>
 </div>
 </blockquote>
 </div>
-<div class="quoteblock data-line-227">
+<div class="quoteblock">
 <blockquote>
-<div class="paragraph data-line-1">
+<div class="paragraph">
 <p>値と演算は常に組（ペア）で存在するのであって、演算子の単独では意味を成しません。</p>
 </div>
 </blockquote>
 </div>
-<div class="paragraph data-line-229">
+<div class="paragraph">
 <p>でしたが、マグマ(M,∗)でも特に、</p>
 </div>
-<div class="olist arabic data-line-231">
+<div class="olist arabic">
 <ol class="arabic">
-<li class="data-line-231">
+<li>
 <p><strong>左右の単位元 e がある</strong></p>
 </li>
-<li class="data-line-233">
+<li>
 <p><strong>結合法則が成り立つ</strong></p>
 </li>
 </ol>
 </div>
-<div class="paragraph data-line-235">
+<div class="paragraph">
 <p>がモノイドです。モノイドのことは、</p>
 </div>
-<div class="stemblock data-line-238">
+<div class="stemblock">
 <div class="content">
 \[(M,e,*)\]
 </div>
 </div>
-<div class="paragraph data-line-242">
+<div class="paragraph">
 <p>と書くことにしましょう。</p>
 </div>
-<div class="paragraph data-line-244">
+<div class="paragraph">
 <p>組（ペア）から３つ組（トリプル）になったのがポイントです。</p>
 </div>
-<div class="paragraph data-line-246">
+<div class="paragraph">
 <p>具体的な二項演算が定まったときは、</p>
 </div>
-<div class="stemblock data-line-249">
+<div class="stemblock">
 <div class="content">
 \[(自然数,0, +)\]
 </div>
 </div>
-<div class="stemblock data-line-254">
+<div class="stemblock">
 <div class="content">
 \[(自然数,1,\times)\]
 </div>
 </div>
-<div class="stemblock data-line-259">
+<div class="stemblock">
 <div class="content">
 \[(文字列,"", +)\]
 </div>
 </div>
-<div class="paragraph data-line-263">
+<div class="paragraph">
 <p>というようになります。</p>
 </div>
 </td>
@@ -3383,125 +3367,125 @@ td>code {background-color: #aaaaaa};
 </table>
 </div>
 </div>
-<div class="sect2 data-line-268">
+<div class="sect2">
 <h3 id="_単一のタイプで自己完結">7.3. 単一のタイプで自己完結</h3>
-<div class="paragraph data-line-270">
+<div class="paragraph">
 <p>モノイドは</p>
 </div>
-<div class="stemblock data-line-273">
+<div class="stemblock">
 <div class="content">
 \[自然数 + 自然数 = 自然数\]
 </div>
 </div>
-<div class="stemblock data-line-278">
+<div class="stemblock">
 <div class="content">
 \[自然数 \times 自然数 = 自然数\]
 </div>
 </div>
-<div class="stemblock data-line-283">
+<div class="stemblock">
 <div class="content">
 \[文字列 + 文字列 = 文字列\]
 </div>
 </div>
-<div class="stemblock data-line-288">
+<div class="stemblock">
 <div class="content">
 \[レゴブロック + レゴブロック = レゴブロック\]
 </div>
 </div>
-<div class="stemblock data-line-293">
+<div class="stemblock">
 <div class="content">
 \[USBデバイス + USBデバイス = USBデバイス\]
 </div>
 </div>
-<div class="paragraph data-line-298">
+<div class="paragraph">
 <p>というようにすべて、ただ一種類のタイプで自己完結している二項演算の世界です。</p>
 </div>
-<div class="paragraph data-line-300">
+<div class="paragraph">
 <p>モノイドは連続的に接続可能で、自然数の加法の二項演算の場合、</p>
 </div>
-<div class="stemblock data-line-303">
+<div class="stemblock">
 <div class="content">
 \[1 + 2 + 3 = 6\]
 </div>
 </div>
-<div class="paragraph data-line-307">
+<div class="paragraph">
 <p>という二項演算の連続的操作は、そのまま、</p>
 </div>
-<div class="stemblock data-line-310">
+<div class="stemblock">
 <div class="content">
 \[(1).plus(2).plus(3) = 6\]
 </div>
 </div>
-<div class="paragraph data-line-314">
+<div class="paragraph">
 <p>と<a href="#withobjectmethod">オブジェクト指向のメソッドでは</a>、メソッドチェーンとして表現できます。</p>
 </div>
 </div>
-<div class="sect2 data-line-316">
+<div class="sect2">
 <h3 id="_arrayリスト配列はモノイド">7.4. Array（リスト・配列）は、モノイド</h3>
-<div class="paragraph data-line-318">
+<div class="paragraph">
 <p>Array（リスト・配列）は、モノイドです。</p>
 </div>
-<div class="stemblock data-line-321">
+<div class="stemblock">
 <div class="content">
 \[(Array,[\space],concat)\]
 </div>
 </div>
-<div class="sect3 data-line-326">
+<div class="sect3">
 <h4 id="_array_concat_メソッドという二項演算">7.4.1. Array.concat メソッドという二項演算</h4>
-<div class="stemblock data-line-328">
+<div class="stemblock">
 <div class="content">
 \[[1,2].concat([3]).concat([4,5]) = [1,2,3,4,5]\]
 </div>
 </div>
-<div class="quoteblock data-line-334">
+<div class="quoteblock">
 <div class="title"><a href="https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Array/concat">Array.concat</a></div>
 <blockquote>
-<div class="paragraph data-line-1">
+<div class="paragraph">
 <p>concat() メソッドは、配列に他の配列や値をつないでできた新しい配列を返します。</p>
 </div>
 </blockquote>
 </div>
 </div>
-<div class="sect3 data-line-336">
+<div class="sect3">
 <h4 id="_array_concat_メソッドで不変の左右の単位元_eとは">7.4.2. Array.concat メソッドで不変の左右の単位元 eとは？</h4>
-<div class="stemblock data-line-339">
+<div class="stemblock">
 <div class="content">
 \[[\space].concat([1,2])\]
 </div>
 </div>
-<div class="stemblock data-line-343">
+<div class="stemblock">
 <div class="content">
 \[= [1,2]\]
 </div>
 </div>
-<div class="stemblock data-line-347">
+<div class="stemblock">
 <div class="content">
 \[=[1,2].concat([\space])\]
 </div>
 </div>
-<div class="paragraph data-line-351">
+<div class="paragraph">
 <p><code>Array.concat</code> メソッドを二項演算 <code>*</code> と再び捉え直すと、</p>
 </div>
-<div class="stemblock data-line-354">
+<div class="stemblock">
 <div class="content">
 \[[\space]*[1,2] = [1,2] = [1,2]*[\space]\]
 </div>
 </div>
-<div class="paragraph data-line-358">
+<div class="paragraph">
 <p>と、Arrayモノイドの左右の単位元 e は <code>[ ]</code> 。</p>
 </div>
 </div>
-<div class="sect3 data-line-363">
+<div class="sect3">
 <h4 id="_array_concat_は結合法則を満たす">7.4.3. Array.concat は結合法則を満たす</h4>
-<div class="stemblock data-line-366">
+<div class="stemblock">
 <div class="content">
 \[[1,2] * [3] * [4,5] = [1,2,3,4,5] = [1,2] * ( [3] * [4,5] )\]
 </div>
 </div>
-<div class="listingblock data-line-373">
+<div class="listingblock">
 <div class="title">Array Monoid</div>
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="js" class="language-js hljs">const array1 =
+<pre class="highlightjs highlight"><code class="language-js hljs" data-lang="js">const array1 =
     [1, 2]
         .concat([3]) <i class="conum" data-value="1"></i><b>(1)</b>
         .concat([4, 5]); <i class="conum" data-value="2"></i><b>(2)</b>
@@ -3509,7 +3493,7 @@ td>code {background-color: #aaaaaa};
 console.log(array1);</code></pre>
 </div>
 </div>
-<div class="colist arabic data-line-384">
+<div class="colist arabic">
 <table>
 <tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
@@ -3521,16 +3505,16 @@ console.log(array1);</code></pre>
 </tr>
 </table>
 </div>
-<div class="listingblock data-line-388">
+<div class="listingblock">
 <div class="title">Console</div>
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="js" class="language-js hljs">[ 1, 2, 3, 4, 5 ]</code></pre>
+<pre class="highlightjs highlight"><code class="language-js hljs" data-lang="js">[ 1, 2, 3, 4, 5 ]</code></pre>
 </div>
 </div>
-<div class="listingblock data-line-395">
+<div class="listingblock">
 <div class="title">Array Monoid 結合法則</div>
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="js" class="language-js hljs">const array1 =
+<pre class="highlightjs highlight"><code class="language-js hljs" data-lang="js">const array1 =
     [1, 2].concat(　<i class="conum" data-value="1"></i><b>(1)</b>
         [3].concat([4, 5]) <i class="conum" data-value="2"></i><b>(2)</b>
     );
@@ -3538,7 +3522,7 @@ console.log(array1);</code></pre>
 console.log(array1);</code></pre>
 </div>
 </div>
-<div class="colist arabic data-line-406">
+<div class="colist arabic">
 <table>
 <tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
@@ -3550,23 +3534,23 @@ console.log(array1);</code></pre>
 </tr>
 </table>
 </div>
-<div class="listingblock data-line-410">
+<div class="listingblock">
 <div class="title">Console</div>
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="js" class="language-js hljs">[ 1, 2, 3, 4, 5 ]</code></pre>
+<pre class="highlightjs highlight"><code class="language-js hljs" data-lang="js">[ 1, 2, 3, 4, 5 ]</code></pre>
 </div>
 </div>
-<div class="paragraph data-line-414">
+<div class="paragraph">
 <p>と結合順序を変えても結果は変わりません。</p>
 </div>
 </div>
 </div>
-<div class="sect2 data-line-417">
+<div class="sect2">
 <h3 id="_まとめ_4">7.5. まとめ</h3>
-<div class="paragraph data-line-419">
+<div class="paragraph">
 <p>モノイドは関数型プログラミングで役立つし、理解しておくのは重要。この章はただの紹介にすぎず、もっと充実すべく加筆が必要。</p>
 </div>
-<div class="admonitionblock tip data-line-423">
+<div class="admonitionblock tip">
 <table>
 <tr>
 <td class="icon">
@@ -3574,10 +3558,10 @@ console.log(array1);</code></pre>
 </td>
 <td class="content">
 <div class="title">Array.flatMapと似ている？</div>
-<div class="paragraph data-line-425">
+<div class="paragraph">
 <p>モノイドの結合法則から、<code>Array.concat</code> のメソッドチェーンを組み替えてネストしても同じ結果を出す、という光景は、モナドである <code>Array.flatMap</code> のメソッドチェーンの組み換えとネストの実現ととても似ています。</p>
 </div>
-<div class="paragraph data-line-427">
+<div class="paragraph">
 <p>次の章ではそこを追求してスッキリさせましょう。</p>
 </div>
 </td>
@@ -3587,266 +3571,268 @@ console.log(array1);</code></pre>
 </div>
 </div>
 </div>
-<div class="sect1 data-line-6">
+<div class="sect1">
 <h2 id="_モノイドとモナドの関係">8. モノイドとモナドの関係</h2>
 <div class="sectionbody">
 <style type="text/css">
+p>code {background-color: #aaaaaa};
+
 th,td {
     border: solid 0px;
 }
-p>code {background-color: #aaaaaa};
 td>code {background-color: #aaaaaa};
+}
 </style>
-<div class="paragraph data-line-19">
+<div class="paragraph">
 <p>だいたい、モノイドとモナドは名前が似すぎています。何らかの密接な関係性がきっとあるのでしょう。</p>
 </div>
-<div class="paragraph data-line-21">
+<div class="paragraph">
 <p>ここでは、まず Arrayモノイドと Arrayモナドの根本的な差を確認してから、関係性をみていきます。</p>
 </div>
-<div class="sect2 data-line-23">
+<div class="sect2">
 <h3 id="_モノイドは２つの単一のタイプの間の二項演算">8.1. モノイドは２つの単一のタイプの間の二項演算</h3>
-<div class="paragraph data-line-25">
+<div class="paragraph">
 <p><code>Array.concat</code> を二項演算とするArrayモノイド（３つ組）</p>
 </div>
-<div class="stemblock data-line-28">
+<div class="stemblock">
 <div class="content">
 \[(Array,[\space],concat)\]
 </div>
 </div>
-<div class="paragraph data-line-32">
+<div class="paragraph">
 <p>は、</p>
 </div>
-<div class="stemblock data-line-35">
+<div class="stemblock">
 <div class="content">
 \[[1,2].concat([3]).concat([4,5])\]
 </div>
 </div>
-<div class="listingblock data-line-41">
+<div class="listingblock">
 <div class="title">Array.concat chain</div>
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="js" class="language-js hljs">[1, 2]
+<pre class="highlightjs highlight"><code class="language-js hljs" data-lang="js">[1, 2]
     .concat([3])
     .concat([4, 5])</code></pre>
 </div>
 </div>
-<div class="paragraph data-line-47">
+<div class="paragraph">
 <p>とメソッドチェーンで書けます。</p>
 </div>
-<div class="ulist data-line-49">
+<div class="ulist">
 <ul>
-<li class="data-line-49">
+<li>
 <p>任意の <code>Array</code> の値を <code>a</code></p>
 </li>
-<li class="data-line-51">
+<li>
 <p><code>Array.concat</code> メソッドを二項演算子 <code>*</code></p>
 </li>
 </ul>
 </div>
-<div class="paragraph data-line-53">
+<div class="paragraph">
 <p>と置き換えてやれば、</p>
 </div>
-<div class="stemblock data-line-56">
+<div class="stemblock">
 <div class="content">
 \[a_{1} * a_{2} = a_{3}\]
 </div>
 </div>
-<div class="paragraph data-line-60">
+<div class="paragraph">
 <p>が基本形で、連鎖できるのだから、</p>
 </div>
-<div class="stemblock data-line-63">
+<div class="stemblock">
 <div class="content">
 \[a_{1} * a_{2} *  ...\]
 </div>
 </div>
-<div class="paragraph data-line-67">
+<div class="paragraph">
 <p>という形になっています。</p>
 </div>
-<div class="stemblock data-line-71">
+<div class="stemblock">
 <div class="content">
 \[1 + 2 = 3\]
 </div>
 </div>
-<div class="stemblock data-line-75">
+<div class="stemblock">
 <div class="content">
 \[1 + 2 + ...\]
 </div>
 </div>
-<div class="paragraph data-line-79">
+<div class="paragraph">
 <p>と同じことです、念の為。</p>
 </div>
-<div class="paragraph data-line-81">
+<div class="paragraph">
 <p><code>Array.concat</code> は２つのパラメータをとり、１つの返り値がありますが、すべて３つとも同一のタイプで閉じた世界の二項演算です。</p>
 </div>
 </div>
-<div class="sect2 data-line-84">
+<div class="sect2">
 <h3 id="bicategory">8.2. モナドはモナド値とモナド関数の間の二項演算</h3>
-<div class="paragraph data-line-86">
+<div class="paragraph">
 <p><code>Array.flatMap</code> を二項演算とするArrayモナド（リストモナド）は、</p>
 </div>
-<div class="listingblock data-line-90">
+<div class="listingblock">
 <div class="title">Array.flatMap chain</div>
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="js" class="language-js hljs">[1, 2, 3, 4, 5]
+<pre class="highlightjs highlight"><code class="language-js hljs" data-lang="js">[1, 2, 3, 4, 5]
     .flatMap(a =&gt; [a * 2])
     .flatMap(a =&gt; [a + 1])</code></pre>
 </div>
 </div>
-<div class="paragraph data-line-96">
+<div class="paragraph">
 <p>とメソッドチェーンで書けます。同じように</p>
 </div>
-<div class="ulist data-line-98">
+<div class="ulist">
 <ul>
-<li class="data-line-98">
+<li>
 <p>任意の <code>Array</code> の値を <code>a</code></p>
 </li>
-<li class="data-line-100">
+<li>
 <p><code>Array.concat</code> メソッドを二項演算子 <code>*</code></p>
 </li>
-<li class="data-line-102">
+<li>
 <p>モナドが返り値と規定される関数を <code>f</code></p>
 </li>
 </ul>
 </div>
-<div class="paragraph data-line-104">
+<div class="paragraph">
 <p>と置き換えてやれば、</p>
 </div>
-<div class="stemblock data-line-107">
+<div class="stemblock">
 <div class="content">
 \[a_{1} * f = a_{2}\]
 </div>
 </div>
-<div class="paragraph data-line-111">
+<div class="paragraph">
 <p>が基本形で、連鎖できるのだから、</p>
 </div>
-<div class="stemblock data-line-114">
+<div class="stemblock">
 <div class="content">
 \[a * f_{1} * f_{2} * ...\]
 </div>
 </div>
-<div class="paragraph data-line-118">
+<div class="paragraph">
 <p>という形になっています。</p>
 </div>
-<div class="paragraph data-line-120">
+<div class="paragraph">
 <p>モノイドのように、２つのパラメータ、１つの返り値、すべて３つとも同一のタイプで閉じた世界だ、というのとは根本的に異なります。</p>
 </div>
-<div class="paragraph data-line-122">
+<div class="paragraph">
 <p>Arrayモナドのメソッドである <code>Array.flatMap</code> は</p>
 </div>
-<div class="olist arabic data-line-124">
+<div class="olist arabic">
 <ol class="arabic">
-<li class="data-line-124">
+<li>
 <p><code>Array</code> の値 <code>a</code></p>
 </li>
-<li class="data-line-125">
+<li>
 <p>モナド関数 <code>f</code></p>
 </li>
 </ol>
 </div>
-<div class="paragraph data-line-127">
+<div class="paragraph">
 <p>と二つの異なるタイプの間の二項演算です。</p>
 </div>
-<div class="paragraph data-line-131">
+<div class="paragraph">
 <p><a href="#whatsmonad">モナド(Monad)とは何か？</a>で、</p>
 </div>
-<div class="quoteblock data-line-133">
+<div class="quoteblock">
 <blockquote>
-<div class="paragraph data-line-1">
+<div class="paragraph">
 <p>A monad in a bicategory K というのは、とりあえず置いときましょう</p>
 </div>
 </blockquote>
 </div>
-<div class="paragraph data-line-135">
+<div class="paragraph">
 <p>の <code>bicategory</code> (2つのカテゴリ)とか書かれていたのは、このことです。</p>
 </div>
 </div>
-<div class="sect2 data-line-138">
+<div class="sect2">
 <h3 id="_モナドはモノイドなのか">8.3. モナドはモノイドなのか？</h3>
-<div class="paragraph data-line-140">
+<div class="paragraph">
 <p>まあ、上記のとおり、モノイドは単一タイプの二項演算で、モナドは二つの異なるタイプの二項演算と根本的に異なるので、答えは<em>NO</em>のように思えますが、見方によっては<em>YES</em>・・・みたいなことにはならないでしょうか？</p>
 </div>
-<div class="paragraph data-line-142">
+<div class="paragraph">
 <p>そういえば、<a href="#whatsmonad">モナド(Monad)とは何か？</a>の<a href="#conclusion">まとめ</a>に、</p>
 </div>
-<div class="admonitionblock note data-line-145">
+<div class="admonitionblock note">
 <table>
 <tr>
 <td class="icon">
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-<div class="paragraph data-line-146">
+<div class="paragraph">
 <p>圏論のモナド（monad）の定義をまとめると</p>
 </div>
-<div class="olist arabic data-line-148">
+<div class="olist arabic">
 <ol class="arabic">
-<li class="data-line-148">
+<li>
 <p>ベースとして、オブジェクト自身を返す <code>map</code> メソッドを持つendofunctorとしての特性をもつオブジェクトで、さらに以下の２つの関数（メソッド）がある</p>
 </li>
-<li class="data-line-149">
+<li>
 <p><code>unit</code></p>
 </li>
-<li class="data-line-150">
+<li>
 <p><code>flat</code></p>
 </li>
 </ol>
 </div>
-<div class="paragraph data-line-152">
+<div class="paragraph">
 <p>この３つ組（トリプル）</p>
 </div>
-<div class="stemblock data-line-155">
+<div class="stemblock">
 <div class="content">
 \[(endofunctor, unit, flat)\]
 </div>
 </div>
-<div class="paragraph data-line-159">
+<div class="paragraph">
 <p>をモナドと呼びます。</p>
 </div>
 </td>
 </tr>
 </table>
 </div>
-<div class="paragraph data-line-162">
+<div class="paragraph">
 <p>と厳密な圏論のモナド定義がありましたが、<code>flat</code> はすでにモナド二項演算として関数合成されてしまって今は、<code>flatMap</code> となっていたのでした。</p>
 </div>
-<div class="sect3 data-line-164">
+<div class="sect3">
 <h4 id="_モナドの単位元">8.3.1. モナドの単位元</h4>
-<div class="paragraph data-line-166">
+<div class="paragraph">
 <p>では今度は、<code>Array.flatMap</code> を二項演算とするArrayモナドを、
 <code>Array.concat</code> を二項演算とするArrayモノイド（３つ組）</p>
 </div>
-<div class="stemblock data-line-169">
+<div class="stemblock">
 <div class="content">
 \[(Array,[\space],concat)\]
 </div>
 </div>
-<div class="paragraph data-line-173">
+<div class="paragraph">
 <p>のように、モノイドの観点から捉えられないか？</p>
 </div>
-<div class="stemblock data-line-176">
+<div class="stemblock">
 <div class="content">
 \[(Array,\]
 </div>
 </div>
-<div class="stemblock data-line-180">
+<div class="stemblock">
 <div class="content">
 \[flatMapの左右単位元,\]
 </div>
 </div>
-<div class="stemblock data-line-184">
+<div class="stemblock">
 <div class="content">
 \[flatMap)\]
 </div>
 </div>
-<div class="paragraph data-line-189">
+<div class="paragraph">
 <p>とならないか？</p>
 </div>
-<div class="paragraph data-line-191">
+<div class="paragraph">
 <p><strong>flatMapの左右単位元</strong> の候補として手元に唯一残っている部品は、<code>flatMap</code> に合成されてしまった <code>flat</code> と対になる関数 <code>unit</code> (<code>a &#8658; [a]</code>) です。</p>
 </div>
-<div class="paragraph data-line-193">
+<div class="paragraph">
 <p>Arrayモノイドの <code>Array.concat</code> メソッドで確認したことは以下です。</p>
 </div>
-<div class="admonitionblock note data-line-198">
+<div class="admonitionblock note">
 <table>
 <tr>
 <td class="icon">
@@ -3854,39 +3840,39 @@ td>code {background-color: #aaaaaa};
 </td>
 <td class="content">
 <div class="title">Array.concat メソッドの二項演算と単位元</div>
-<div class="paragraph data-line-199">
+<div class="paragraph">
 <p><code>Array.concat</code> メソッドで不変の左右の単位元 eとして、</p>
 </div>
-<div class="stemblock data-line-202">
+<div class="stemblock">
 <div class="content">
 \[[\space].concat([1,2])\]
 </div>
 </div>
-<div class="stemblock data-line-206">
+<div class="stemblock">
 <div class="content">
 \[= [1,2]\]
 </div>
 </div>
-<div class="stemblock data-line-210">
+<div class="stemblock">
 <div class="content">
 \[=[1,2].concat([\space])\]
 </div>
 </div>
-<div class="paragraph data-line-214">
+<div class="paragraph">
 <p><code>Array.concat</code> メソッドを二項演算 <code>*</code> と再び捉え直すと、</p>
 </div>
-<div class="stemblock data-line-217">
+<div class="stemblock">
 <div class="content">
 \[[\space]*[1,2] = [1,2] = [1,2]*[\space]\]
 </div>
 </div>
-<div class="paragraph data-line-221">
+<div class="paragraph">
 <p>と、Arrayモノイドの左右の単位元 e は <code>[ ]</code> だから、</p>
 </div>
-<div class="paragraph data-line-223">
+<div class="paragraph">
 <p>モノイド（３つ組）</p>
 </div>
-<div class="stemblock data-line-226">
+<div class="stemblock">
 <div class="content">
 \[(Array,[\space],concat)\]
 </div>
@@ -3895,91 +3881,91 @@ td>code {background-color: #aaaaaa};
 </tr>
 </table>
 </div>
-<div class="paragraph data-line-231">
+<div class="paragraph">
 <p><strong>flatMapの左右単位元</strong> が <code>unit</code></p>
 </div>
-<div class="stemblock data-line-234">
+<div class="stemblock">
 <div class="content">
 \[(Array,unit,flatMap)\]
 </div>
 </div>
-<div class="paragraph data-line-238">
+<div class="paragraph">
 <p>だと証明するためには、これをリバースエンジニアリングしていければいいでしょう。多分。</p>
 </div>
-<div class="paragraph data-line-240">
+<div class="paragraph">
 <p><code>Array.flatMap</code> メソッドを二項演算 <code>*</code> と再び捉え直すと、</p>
 </div>
-<div class="stemblock data-line-243">
+<div class="stemblock">
 <div class="content">
 \[unit*[1,2] = [1,2] = [1,2]*unit\]
 </div>
 </div>
-<div class="paragraph data-line-247">
+<div class="paragraph">
 <p>としたいところですが、これではタイプエラーになります。</p>
 </div>
-<div class="paragraph data-line-249">
+<div class="paragraph">
 <p><code>Array.flatMap</code> は</p>
 </div>
-<div class="olist arabic data-line-251">
+<div class="olist arabic">
 <ol class="arabic">
-<li class="data-line-251">
+<li>
 <p><code>Array</code> の値 <code>a</code></p>
 </li>
-<li class="data-line-252">
+<li>
 <p>モナド関数 <code>f</code></p>
 </li>
 </ol>
 </div>
-<div class="paragraph data-line-254">
+<div class="paragraph">
 <p>と二つの異なるタイプの間の二項演算</p>
 </div>
-<div class="stemblock data-line-256">
+<div class="stemblock">
 <div class="content">
 \[a_{1} * f = a_{2}\]
 </div>
 </div>
-<div class="paragraph data-line-259">
+<div class="paragraph">
 <p>で、右辺はこのタイプで合致しますが、左辺は、最初に <code>Array</code> の値 <code>a</code> が入るべきところ、<code>unit</code> 関数になっているのでタイプが合いません。</p>
 </div>
-<div class="paragraph data-line-261">
+<div class="paragraph">
 <p>逆に、モナド関数 <code>f</code> を使っても</p>
 </div>
-<div class="stemblock data-line-264">
+<div class="stemblock">
 <div class="content">
 \[unit*f = f = f*unit\]
 </div>
 </div>
-<div class="paragraph data-line-268">
+<div class="paragraph">
 <p>同じ理由で左右タイプエラーになります。</p>
 </div>
-<div class="paragraph data-line-271">
+<div class="paragraph">
 <p>なので、すべての項において、この二項演算に合うようにパラメータと返り値のタイプを合わせます。</p>
 </div>
-<div class="stemblock data-line-274">
+<div class="stemblock">
 <div class="content">
 \[unit(a)*f = f(a) = f(a)*unit\]
 </div>
 </div>
-<div class="paragraph data-line-278">
+<div class="paragraph">
 <p>これが本当に成立していれば、<strong>flatMapの左右単位元</strong> は <code>unit</code> だと言えそうです。</p>
 </div>
-<div class="paragraph data-line-280">
+<div class="paragraph">
 <p>二項演算 <code>*</code> をまた <code>Array.flatMap</code> メソッドに戻して、具体的な値を決め打ちして挙動を検証してみます。</p>
 </div>
-<div class="stemblock data-line-283">
+<div class="stemblock">
 <div class="content">
 \[a = [1,2]\]
 </div>
 </div>
-<div class="stemblock data-line-288">
+<div class="stemblock">
 <div class="content">
 \[f(a) = 適当なモナド関数\]
 </div>
 </div>
-<div class="listingblock data-line-294">
+<div class="listingblock">
 <div class="title">Array Monad 左右単位元</div>
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="js" class="language-js hljs">const unit = a =&gt; [a];
+<pre class="highlightjs highlight"><code class="language-js hljs" data-lang="js">const unit = a =&gt; [a];
 
 const a = [1, 2];
 const f = a =&gt;
@@ -3994,7 +3980,7 @@ console.log(center);
 console.log(right);</code></pre>
 </div>
 </div>
-<div class="colist arabic data-line-313">
+<div class="colist arabic">
 <table>
 <tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
@@ -4014,40 +4000,40 @@ console.log(right);</code></pre>
 </tr>
 </table>
 </div>
-<div class="listingblock data-line-317">
+<div class="listingblock">
 <div class="title">Console</div>
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="js" class="language-js hljs">[ 1, 5, 2, 10 ]
+<pre class="highlightjs highlight"><code class="language-js hljs" data-lang="js">[ 1, 5, 2, 10 ]
 [ 1, 5, 2, 10 ]
 [ 1, 5, 2, 10 ]</code></pre>
 </div>
 </div>
-<div class="paragraph data-line-323">
+<div class="paragraph">
 <p>本当に成立したので、<strong>flatMapの左右単位元</strong> は <code>unit</code> だと言えそうです。</p>
 </div>
 </div>
-<div class="sect3 data-line-325">
+<div class="sect3">
 <h4 id="_モナドの結合法則">8.3.2. モナドの結合法則</h4>
-<div class="paragraph data-line-327">
+<div class="paragraph">
 <p>あとモノイドの重要な特性として、結合法則を満たしている、というのがあります。</p>
 </div>
-<div class="paragraph data-line-329">
+<div class="paragraph">
 <p>単一タイプ(a,b,c)間の二項演算 <code>*</code> をもつモノイドの結合法則は、</p>
 </div>
-<div class="stemblock data-line-332">
+<div class="stemblock">
 <div class="content">
 \[(a * b) * c = a * b * c = a * (b * c)\]
 </div>
 </div>
-<div class="paragraph data-line-336">
+<div class="paragraph">
 <p>モナド値 a とモナド関数(f, g)の２タイプ間の二項演算 <code>*</code> をもつモナドの結合法則では、</p>
 </div>
-<div class="stemblock data-line-340">
+<div class="stemblock">
 <div class="content">
 \[(a * f) * g = a * f * g = a * (a \Rightarrow a * f * g)\]
 </div>
 </div>
-<div class="admonitionblock tip data-line-346">
+<div class="admonitionblock tip">
 <table>
 <tr>
 <td class="icon">
@@ -4055,50 +4041,50 @@ console.log(right);</code></pre>
 </td>
 <td class="content">
 <div class="title">モナド合成関数 fg</div>
-<div class="stemblock data-line-348">
+<div class="stemblock">
 <div class="content">
 \[a * f = a\]
 </div>
 </div>
-<div class="paragraph data-line-351">
+<div class="paragraph">
 <p>(二項演算の後ろに来るのは必ずモナド関数だ)
 という制約があるため、右辺の結合では、先に</p>
 </div>
-<div class="stemblock data-line-354">
+<div class="stemblock">
 <div class="content">
 \[a \Rightarrow a * f * g\]
 </div>
 </div>
-<div class="paragraph data-line-357">
+<div class="paragraph">
 <p>と、モナド関数の合成をしていることに留意してください。</p>
 </div>
-<div class="paragraph data-line-359">
+<div class="paragraph">
 <p>合成モナド関数 <code>fg</code></p>
 </div>
-<div class="stemblock data-line-361">
+<div class="stemblock">
 <div class="content">
 \[fg = a \Rightarrow a * f * g\]
 </div>
 </div>
-<div class="paragraph data-line-364">
+<div class="paragraph">
 <p>と置き換えた上で、結合法則を書き直せば、</p>
 </div>
-<div class="stemblock data-line-367">
+<div class="stemblock">
 <div class="content">
 \[(a * f) * g = a * f * g = a * fg\]
 </div>
 </div>
-<div class="paragraph data-line-371">
+<div class="paragraph">
 <p>となります。</p>
 </div>
 </td>
 </tr>
 </table>
 </div>
-<div class="listingblock data-line-379">
+<div class="listingblock">
 <div class="title">Array Monad 結合法則</div>
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="js" class="language-js hljs">{
+<pre class="highlightjs highlight"><code class="language-js hljs" data-lang="js">{
  const array1 =
   [1, 2, 3]    <i class="conum" data-value="1"></i><b>(1)</b>
    .flatMap(a =&gt; [a * 2])  <i class="conum" data-value="1"></i><b>(1)</b>
@@ -4119,7 +4105,7 @@ console.log(right);</code></pre>
 }</code></pre>
 </div>
 </div>
-<div class="colist arabic data-line-404">
+<div class="colist arabic">
 <table>
 <tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
@@ -4135,46 +4121,46 @@ console.log(right);</code></pre>
 </tr>
 </table>
 </div>
-<div class="listingblock data-line-410">
+<div class="listingblock">
 <div class="title">Console</div>
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="js" class="language-js hljs">[ 3, 5, 7 ]
+<pre class="highlightjs highlight"><code class="language-js hljs" data-lang="js">[ 3, 5, 7 ]
 [ 3, 5, 7 ]</code></pre>
 </div>
 </div>
-<div class="paragraph data-line-415">
+<div class="paragraph">
 <p>というか、実はこれ <a href="#howto">リストモナド(List Monad)のつかいかた</a>の<a href="#monadfunction">モナド関数を設計する</a>で、やっていたことの繰り返しで、とっくに検証は終わっています。
 <strong>モナドの結合法則とは、モナド関数の合成のこと</strong>だったんですね。</p>
 </div>
 </div>
 </div>
-<div class="sect2 data-line-418">
+<div class="sect2">
 <h3 id="_クライスリトリプルkleisli_triple">8.4. クライスリトリプル（Kleisli triple）</h3>
-<div class="paragraph data-line-420">
+<div class="paragraph">
 <p>このように、</p>
 </div>
-<div class="quoteblock data-line-422">
+<div class="quoteblock">
 <blockquote>
-<div class="paragraph data-line-1">
+<div class="paragraph">
 <p><a href="https://stackoverflow.com/questions/3870088/a-monad-is-just-a-monoid-in-the-category-of-endofunctors-whats-the-problem">
 A monad is just a monoid in the category of endofunctors, what&#8217;s the problem?</a></p>
 </div>
 </blockquote>
 </div>
-<div class="paragraph data-line-425">
+<div class="paragraph">
 <p><strong>「モナドっていうのは、ただ単に、自己関手(endofunctor)の圏の中におけるモノイドのことなんだよ、なにか問題でも？」</strong>
 などと時折言われるわけですが、モナドをモノイドの性質を備える特殊なendofunctorであると捉え、<br>
 (オブジェクト、左右単位元、二項演算)の３つ組（トリプル）にしたもの</p>
 </div>
-<div class="stemblock data-line-430">
+<div class="stemblock">
 <div class="content">
 \[(endofunctor,unit,flatMap)\]
 </div>
 </div>
-<div class="paragraph data-line-434">
+<div class="paragraph">
 <p>を、<a href="https://ja.wikipedia.org/wiki/%E3%82%AF%E3%83%A9%E3%82%A4%E3%82%B9%E3%83%AA%E5%9C%8F#%E3%82%AF%E3%83%A9%E3%82%A4%E3%82%B9%E3%83%AA%E3%83%88%E3%83%AA%E3%83%97%E3%83%AB%EF%BC%88Kleisli_triple%EF%BC%89">クライスリトリプル（Kleisli triple）</a>と呼びます。</p>
 </div>
-<div class="admonitionblock tip data-line-439">
+<div class="admonitionblock tip">
 <table>
 <tr>
 <td class="icon">
@@ -4182,18 +4168,18 @@ A monad is just a monoid in the category of endofunctors, what&#8217;s the probl
 </td>
 <td class="content">
 <div class="title">比較してみよう　ふたつのトリプル</div>
-<div class="paragraph data-line-440">
+<div class="paragraph">
 <p>圏論で一般的に定義されるモナド（monad）/トリプル</p>
 </div>
-<div class="stemblock data-line-443">
+<div class="stemblock">
 <div class="content">
 \[(endofunctor, unit, flat)\]
 </div>
 </div>
-<div class="paragraph data-line-447">
+<div class="paragraph">
 <p>クライスリトリプル（Kleisli triple）</p>
 </div>
-<div class="stemblock data-line-449">
+<div class="stemblock">
 <div class="content">
 \[(endofunctor,unit,flatMap)\]
 </div>
@@ -4203,30 +4189,30 @@ A monad is just a monoid in the category of endofunctors, what&#8217;s the probl
 </table>
 </div>
 </div>
-<div class="sect2 data-line-457">
+<div class="sect2">
 <h3 id="_モナド則monad_laws">8.5. モナド則(Monad Laws)</h3>
-<div class="paragraph data-line-458">
+<div class="paragraph">
 <p>さらに推し進め、モノイド則の用語をまるまる踏襲した上でモナドの法則として列挙したのがモナド則(Monad Laws)です。</p>
 </div>
-<div class="paragraph data-line-460">
+<div class="paragraph">
 <p>すでに書いていますが、再掲すると、</p>
 </div>
-<div class="stemblock data-line-465">
+<div class="stemblock">
 <div class="title">左右の単位元</div>
 <div class="content">
 \[unit(a)*f = f(a) = f(a)*unit\]
 </div>
 </div>
-<div class="stemblock data-line-472">
+<div class="stemblock">
 <div class="title">結合法則</div>
 <div class="content">
 \[(a * f) * g = a * f * g = a * (a \Rightarrow a * f * g)\]
 </div>
 </div>
-<div class="paragraph data-line-476">
+<div class="paragraph">
 <p>ですね。</p>
 </div>
-<div class="admonitionblock warning data-line-480">
+<div class="admonitionblock warning">
 <table>
 <tr>
 <td class="icon">
@@ -4234,81 +4220,83 @@ A monad is just a monoid in the category of endofunctors, what&#8217;s the probl
 </td>
 <td class="content">
 <div class="title">モナド則解読不能版</div>
-<div class="paragraph data-line-482">
+<div class="paragraph">
 <p>モナド則は、左単位元と右単位元にバラされた上で、右単位元の <code>f(a)</code> は 「どうせモナド値なのだから」と実用上の利点はあるにせよ、特に断りもなく単に <code>m</code> として簡約され、方程式の左右を入れ替えられたり、いろいろした結果、</p>
 </div>
-<div class="ulist data-line-484">
+<div class="ulist">
 <ul>
-<li class="data-line-484">
+<li>
 <p>左単位元(LEFT IDENTITY)　　\(unit(a)*f = f(a)\)</p>
 </li>
-<li class="data-line-486">
+<li>
 <p>右単位元(RIGHT IDENTITY)　\(m*unit = m\)</p>
 </li>
-<li class="data-line-488">
+<li>
 <p>結合法則(ASSOCIATIVITY)　 \((m * f) * g = m * (x \Rightarrow x * f * g)\)</p>
 </li>
 </ul>
 </div>
-<div class="paragraph data-line-490">
+<div class="paragraph">
 <p>という感じでエンドユーザに提供されることが多いようです。</p>
 </div>
-<div class="paragraph data-line-492">
+<div class="paragraph">
 <p>とりあえず、モノイドのことを知らない人、知っててもモナドとの関連がわからない人には、特に上のように式変形された結果、対称性も読み取りにくい左右の単位元とか解読不能でしょう。</p>
 </div>
-<div class="paragraph data-line-494">
+<div class="paragraph">
 <p>あとモナドがプログラミングに導入された例の歴史的経緯により、Haskell特有の二項演算子の表記と、Syntaxで提示されることが多いので、HaskellのSyntaxがわからない人はお手上げとなる可能性が高いです。</p>
 </div>
 </td>
 </tr>
 </table>
 </div>
-<div class="paragraph data-line-498">
+<div class="paragraph">
 <p>モナドの二項演算 <code>*</code> を　<code>Array.flatMap</code> メソッドとして具体化して書き直すと、</p>
 </div>
-<div class="listingblock data-line-504">
+<div class="listingblock">
 <div class="title">Array Monad 左右単位元</div>
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="js" class="language-js hljs">const left = unit(a).flatMap(f);
+<pre class="highlightjs highlight"><code class="language-js hljs" data-lang="js">const left = unit(a).flatMap(f);
 const center = f(a);
 const right = f(a).flatMap(unit);</code></pre>
 </div>
 </div>
-<div class="paragraph data-line-510">
+<div class="paragraph">
 <p>となりますが、これは <code>Array.flatMap</code> に限った構造ではなく、他のモナド実装でも同じ様相になります。もちろん、<code>unit</code> <code>flatMap</code> などの関数名は実装者の好み、さじ加減１つなので、ケースバイケースです。</p>
 </div>
 </div>
-<div class="sect2 data-line-512">
+<div class="sect2">
 <h3 id="_まとめ_5">8.6. まとめ</h3>
-<div class="paragraph data-line-59">
+<div class="paragraph">
 <p>モナドを知るときは、同時にモノイドのことも知っておこう。</p>
 </div>
 </div>
 </div>
 </div>
-<div class="sect1 data-line-6">
+<div class="sect1">
 <h2 id="_promise_es6_はモナドか">9. Promise (ES6+) はモナドか？</h2>
 <div class="sectionbody">
 <style type="text/css">
+p>code {background-color: #aaaaaa};
+
 th,td {
     border: solid 0px;
 }
-p>code {background-color: #aaaaaa};
 td>code {background-color: #aaaaaa};
+}
 </style>
-<div class="paragraph data-line-19">
+<div class="paragraph">
 <p>ES6+ Promiseがモナドだ、としばしば言われますが、モナドではありません。</p>
 </div>
-<div class="paragraph data-line-21">
+<div class="paragraph">
 <p>Promiseは事前想定の多すぎるAPIで使いにくいと思うのですが、事前想定が多い１つの弊害として、構造が限定されてしまっている、ということがあります。</p>
 </div>
-<div class="paragraph data-line-23">
+<div class="paragraph">
 <p>Promiseで <code>unit</code> に相当するのは、<code>Promise.of</code> ですが、<a href="https://stackoverflow.com/questions/45210122/why-cant-promise-resolve-be-called-as-a-function/45210249">そのまま置き換えることは出来ない</a>ようなので、  <code>Promise.resolve.bind(Promise)</code> として、</p>
 </div>
-<div class="listingblock data-line-29">
+<div class="listingblock">
 <div class="title">Promise 構造テスト</div>
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="js" class="language-js hljs">const unit = Promise.resolve.bind(Promise);
+<pre class="highlightjs highlight"><code class="language-js hljs" data-lang="js">const unit = Promise.resolve.bind(Promise);
 
 const p = unit(3); <i class="conum" data-value="1"></i><b>(1)</b>
 const pp = unit(p); <i class="conum" data-value="2"></i><b>(2)</b>
@@ -4319,7 +4307,7 @@ console.log(pp);
 console.log(ppp);</code></pre>
 </div>
 </div>
-<div class="colist arabic data-line-43">
+<div class="colist arabic">
 <table>
 <tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
@@ -4335,41 +4323,41 @@ console.log(ppp);</code></pre>
 </tr>
 </table>
 </div>
-<div class="listingblock data-line-48">
+<div class="listingblock">
 <div class="title">Console</div>
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="js" class="language-js hljs">Promise { 3 }
+<pre class="highlightjs highlight"><code class="language-js hljs" data-lang="js">Promise { 3 }
 Promise { 3 }
 Promise { 3 }</code></pre>
 </div>
 </div>
-<div class="paragraph data-line-54">
+<div class="paragraph">
 <p>おっと、全部同じ値になってしまいました。</p>
 </div>
-<div class="paragraph data-line-56">
+<div class="paragraph">
 <p>Promiseは、ネストしたPromiseオブジェクトを許容しておらず、ぜんぶ平坦化してしまうようです。</p>
 </div>
-<div class="paragraph data-line-58">
+<div class="paragraph">
 <p>つまり、Promiseは、これ</p>
 </div>
-<div class="imageblock text-center data-line-60">
+<div class="imageblock" style="text-align: center">
 <div class="content">
 <img src="https://kentutorialbook.github.io/30minLearningJavaScriptMonad/img/unitflat1.svg" alt="unitflat1">
 </div>
 </div>
-<div class="paragraph data-line-62">
+<div class="paragraph">
 <p>をやっているわけですが、問題は、endofunctor の <code>map</code> に相当する　<code>then</code> をする <strong>前</strong> に、問答無用で <code>flat</code> かましてるんですね。</p>
 </div>
-<div class="paragraph data-line-64">
+<div class="paragraph">
 <p>結果、裸の値 or Promise１階層の二択しかありません。Promiseでネストした構造をもつことは出来ません。</p>
 </div>
-<div class="paragraph data-line-66">
+<div class="paragraph">
 <p>本稿で何度も例に出てくる数字や文字列は、モノイドでありモナドですが、これらもご存知の通り、内部構造を持てません。</p>
 </div>
-<div class="listingblock data-line-70">
+<div class="listingblock">
 <div class="title">Number String 構造テスト</div>
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="js" class="language-js hljs">{
+<pre class="highlightjs highlight"><code class="language-js hljs" data-lang="js">{
  const unit = Number;
 
  const n = unit(1);
@@ -4389,57 +4377,59 @@ Promise { 3 }</code></pre>
 }</code></pre>
 </div>
 </div>
-<div class="listingblock data-line-93">
+<div class="listingblock">
 <div class="title">Console</div>
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="js" class="language-js hljs">1
+<pre class="highlightjs highlight"><code class="language-js hljs" data-lang="js">1
 1
 Hello
 Hello</code></pre>
 </div>
 </div>
-<div class="paragraph data-line-100">
+<div class="paragraph">
 <p>しかし、数字と文字列がPromiseと違うのは、構造が自分自身の１種類だけなんですね。Promiseは、別のタイプの裸の値かPromiseの値か２種類。</p>
 </div>
-<div class="paragraph data-line-102">
+<div class="paragraph">
 <p>ネストした数字や文字列っていうのは、（ここで扱っているものに限れば）はなっから存在せず、構造持たない１種類で整合性が取れてますが、Promiseはそうではないので整合性が取れません。</p>
 </div>
-<div class="paragraph data-line-104">
+<div class="paragraph">
 <p>モナドというのは、このように、</p>
 </div>
-<div class="imageblock text-center data-line-106">
+<div class="imageblock" style="text-align: center">
 <div class="content">
 <img src="https://kentutorialbook.github.io/30minLearningJavaScriptMonad/img/unitflat5.svg" alt="unitflat5">
 </div>
 </div>
-<div class="paragraph data-line-108">
+<div class="paragraph">
 <p>自由に階層と構造を指定できる（それか数や文字列のようにそもそも階層が存在しない）ので、ここであえてモナド則を持ち出すまでもなく、Promiseがモナドではない、というのは明らかです。</p>
 </div>
-<div class="paragraph data-line-110">
+<div class="paragraph">
 <p>ネストできるだろうと想定してPromise自身を受け渡す <code>Promise.then</code> メソッドを無理やり組むと、それ以前に即座に <code>flat</code> かまされているわけですから、タイプエラーが出るでしょう。モナド則（モノイド則）で言うと、Promiseオブジェクトをモナド値としたときの結合法則が成り立ちません。</p>
 </div>
-<div class="paragraph data-line-112">
+<div class="paragraph">
 <p>Promiseがネスト構造の操作を許容しない、ということで得られるメリットとは？ちょっと思いつかないですね。</p>
 </div>
-<div class="sect2 data-line-114">
+<div class="sect2">
 <h3 id="_まとめ_6">9.1. まとめ</h3>
-<div class="paragraph data-line-61">
+<div class="paragraph">
 <p>自由に内部構造（ネスト構造）を持てないオブジェクトはモナドではない。ただし、数字、文字列などは最初から自身でネストしてるような構造(JavaScriptのPrimitive)は除く。それ以外にもさらに何か特別な例外がある可能性までは厳密に検証はしていないが、少なくともPromiseがモナドでないことは明らか。</p>
 </div>
 </div>
 </div>
 </div>
-<div class="sect1 data-line-6">
+<div class="sect1">
 <h2 id="_ミュータブルな状態ioそしてモナド">10. ミュータブルな状態、IO、そしてモナド</h2>
 <div class="sectionbody">
 <style type="text/css">
+p>code {background-color: #aaaaaa};
+
 th,td {
     border: solid 0px;
 }
-p>code {background-color: #aaaaaa};
 td>code {background-color: #aaaaaa};
+}
 </style>
-<div class="paragraph data-line-63">
+<div class="paragraph">
 <p>これについては、一大別テーマなので、「後編」として別に書きます。長いし。</p>
 </div>
 <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -4456,11 +4446,11 @@ td>code {background-color: #aaaaaa};
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2020-07-06 16:15:30 +0900
+Last updated 2019-03-10 02:09:56 JST
 </div>
 </div>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/tomorrow-night.min.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/solarized-dark.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
 <script>hljs.initHighlighting()</script>
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
@@ -4475,16 +4465,8 @@ MathJax.Hub.Config({
     ignoreClass: "nostem|noasciimath"
   },
   TeX: { equationNumbers: { autoNumber: "none" } }
-})
-MathJax.Hub.Register.StartupHook("AsciiMath Jax Ready", function () {
-  MathJax.InputJax.AsciiMath.postfilterHooks.Add(function (data, node) {
-    if ((node = data.script.parentNode) && (node = node.parentNode) && node.classList.contains('stemblock')) {
-      data.math.root.display = "block"
-    }
-    return data
-  })
-})
+});
 </script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_HTMLorMML"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_HTMLorMML"></script>
 </body>
 </html>

@@ -1,6 +1,19 @@
 = モナドが難しい？
 ifndef::stem[:stem: latexmath]
+ifndef::icons[:icons: font]
 ifndef::imagesdir[:imagesdir: ./img/]
+ifndef::source-highlighter[:source-highlighter: highlightjs]
+ifndef::highlightjs-theme:[:highlightjs-theme: tomorrow-night]
+
+++++
+<style type="text/css">
+th,td {
+    border: solid 0px;  
+}　
+p>code {background-color: #aaaaaa};
+td>code {background-color: #aaaaaa};
+</style>
+++++
 
 巷の解説が混乱に満ちあふれている・・・
 
